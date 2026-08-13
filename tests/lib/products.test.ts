@@ -5,7 +5,7 @@ it("exposes exactly the two public products", () => {
   expect(products.map(({ name }) => name)).toEqual(["Bebilog", "Nautilus"]);
 });
 
-it("returns a product only for a supported slug", () => {
+it("routes each card to its integrated product site", () => {
   expect(getProduct("bebilog")?.route).toBe("/apps/bebilog");
-  expect(getProduct("missing")).toBeUndefined();
+  expect(getProduct("nautilus")?.route).toBe("/apps/nautilus");
 });

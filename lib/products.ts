@@ -1,7 +1,7 @@
 export type Product = {
   slug: "bebilog" | "nautilus";
   name: string;
-  route: `/apps/${string}`;
+  route: "/apps/bebilog" | "/apps/nautilus";
   appStoreUrl: string;
   platform: "Native iOS" | "Native iOS & iPadOS";
   tagline: string;

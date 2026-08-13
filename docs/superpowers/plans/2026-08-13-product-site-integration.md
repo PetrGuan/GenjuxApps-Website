@@ -69,7 +69,7 @@ tests/
 - Consumes: the existing Genjux home card links.
 - Produces: browser expectations that remain red until the product sites in Tasks 2–3 replace the simplified pages.
 
-- [ ] **Step 1: Add failing integrated-product browser cases**
+- [x] **Step 1: Add failing integrated-product browser cases**
 
 Add these cases to `tests/e2e/site.spec.ts`:
 
@@ -92,7 +92,7 @@ test("Nautilus card opens the complete Nautilus site and its Editions route", as
 });
 ```
 
-- [ ] **Step 2: Run the browser contract to verify it fails**
+- [x] **Step 2: Run the browser contract to verify it fails**
 
 Run: `npm run test:e2e`
 
@@ -119,7 +119,7 @@ Expected: both new cases fail because Genjux currently renders simplified produc
 - Consumes: `SiteHeader`, `SiteFooter`, and the existing `Product` catalog.
 - Produces: `(studio)` pages with shared chrome and product catalog routes `"/apps/bebilog" | "/apps/nautilus"` for Tasks 2–3.
 
-- [ ] **Step 1: Write the failing studio-shell test**
+- [x] **Step 1: Write the failing studio-shell test**
 
 Create `tests/components/studio-layout.test.tsx`:
 
@@ -134,13 +134,13 @@ it("keeps Genjux chrome inside the studio route group", () => {
 });
 ```
 
-- [ ] **Step 2: Run the studio-shell test to verify it fails**
+- [x] **Step 2: Run the studio-shell test to verify it fails**
 
 Run: `npm run test -- tests/components/studio-layout.test.tsx`
 
 Expected: FAIL because `app/(studio)/layout.tsx` does not exist.
 
-- [ ] **Step 3: Move studio routes and remove duplicate detail-page ownership**
+- [x] **Step 3: Move studio routes and remove duplicate detail-page ownership**
 
 Create `app/(studio)/layout.tsx`:
 
@@ -161,13 +161,13 @@ export default function StudioLayout({ children }: Readonly<{ children: React.Re
 
 Move the four studio pages into `(studio)` without changing their JSX. Reduce `app/layout.tsx` to document metadata, fonts, `<html>`, `<body>`, and `{children}`. Update `Product["route"]` to `"/apps/bebilog" | "/apps/nautilus"`, keep the catalog records at those exact values, update the catalog/card tests to assert both exact routes, and delete the previous generic `[slug]` detail page/component/test.
 
-- [ ] **Step 4: Run route and static-export checks**
+- [x] **Step 4: Run route and static-export checks**
 
 Run: `npm run test -- tests/components/studio-layout.test.tsx tests/lib/products.test.ts tests/components/product-card.test.tsx && npm run lint && npm run build`
 
 Expected: all tests pass; `out/index.html`, `out/about.html`, `out/changelog.html`, and `out/contact.html` still exist; no `out/apps/bebilog/index.html` is required yet.
 
-- [ ] **Step 5: Commit the shell boundary**
+- [x] **Step 5: Commit the shell boundary**
 
 ```bash
 git add app lib/products.ts tests/lib/products.test.ts tests/components/product-card.test.tsx tests/components/studio-layout.test.tsx
