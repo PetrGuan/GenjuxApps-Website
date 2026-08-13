@@ -365,7 +365,7 @@ git commit -m "feat: build product studio homepage"
 - Consumes: `products` from `lib/products.ts`.
 - Produces: `CommandPalette({ open, onOpenChange })`, `MotionSafe`, `AtmosphereCanvas`, and `Constellation`; all enhancements leave the static content from Tasks 3–4 available.
 
-- [ ] **Step 1: Write failing interaction tests**
+- [x] **Step 1: Write failing interaction tests**
 
 Create `tests/components/command-palette.test.tsx`:
 
@@ -389,31 +389,31 @@ it("opens, focuses product choices, and closes with Escape", async () => {
 });
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 Run: `npm run test -- tests/components/command-palette.test.tsx`
 
 Expected: FAIL because `CommandPalette` does not exist.
 
-- [ ] **Step 3: Implement keyboard-safe command navigation**
+- [x] **Step 3: Implement keyboard-safe command navigation**
 
 Implement a client `CommandPalette` with `role="dialog"`, `aria-modal="true"`, accessible name `Product explorer`, focus moved to the first product link when opened, and Escape calling `onOpenChange(false)`. `⌘ K` or `Ctrl K` opens the palette when the event target is not an `input`, `textarea`, or `contenteditable` element. The `1` and `2` keys navigate only while the palette is open and focus is within the dialog. Product links use their routes and close the palette on click.
 
 Wire a single `open` state into `SiteHeader`; provide it to the palette rather than creating duplicate dialogs on pages.
 
-- [ ] **Step 4: Implement progressive ambient effects**
+- [x] **Step 4: Implement progressive ambient effects**
 
 Implement `MotionSafe` with `useReducedMotion()` and render its children with zero-duration variants when motion is reduced. Implement `AtmosphereCanvas` as a client component that creates a low-density WebGL canvas only when `matchMedia("(prefers-reduced-motion: reduce)").matches` is false and `canvas.getContext("webgl")` succeeds; otherwise return `null` and rely on the CSS radial gradients and grid.
 
 Implement `Constellation` with `@react-three/fiber` as a dynamically imported desktop-only hero island: two rounded planes, one coral and one amber/ivory, connected by a faint curve. Use `frameloop="demand"` under reduced motion and avoid loading it on viewports below `1024px`. The canvas has `aria-hidden="true"` and never contains required text or controls.
 
-- [ ] **Step 5: Run interaction and accessibility checks**
+- [x] **Step 5: Run interaction and accessibility checks**
 
 Run: `npm run test -- tests/components/command-palette.test.tsx && npm run lint && npm run build`
 
 Expected: interactions pass, lint exits `0`, and the static export succeeds when client-only components are present.
 
-- [ ] **Step 6: Commit the enhancement layer**
+- [x] **Step 6: Commit the enhancement layer**
 
 ```bash
 git add components app tests/components package.json package-lock.json app/globals.css

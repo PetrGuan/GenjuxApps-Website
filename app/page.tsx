@@ -1,4 +1,5 @@
 import HomeHero from "@/components/home-hero";
+import AtmosphereCanvas from "@/components/atmosphere-canvas";
 import ProductCard from "@/components/product-card";
 import { products } from "@/lib/products";
 
@@ -7,6 +8,7 @@ const intent = ["Native-first", "On-device AI", "Privacy by design", "No tracker
 export default function HomePage() {
   return (
     <div className="home-page">
+      <AtmosphereCanvas />
       <HomeHero />
       <section className="product-selector page-shell" aria-label="Product selector">
         <p className="eyebrow">SELECT A PRODUCT — 2 AVAILABLE</p>

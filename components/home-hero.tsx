@@ -1,9 +1,11 @@
 import Link from "next/link";
+import Constellation from "@/components/constellation";
+import MotionSafe from "@/components/motion-safe";
 
 export default function HomeHero() {
   return (
     <section className="home-hero page-shell" aria-labelledby="home-title">
-      <div className="hero-copy">
+      <MotionSafe className="hero-copy">
         <p className="eyebrow">INDEPENDENT PRODUCT STUDIO</p>
         <h1 id="home-title">
           Small apps.
@@ -17,14 +19,15 @@ export default function HomeHero() {
         <Link href="#products" className="hero-cta">
           Explore products <span aria-hidden="true">↓</span>
         </Link>
-      </div>
-      <div className="hero-visual" aria-hidden="true">
+      </MotionSafe>
+      <MotionSafe className="hero-visual" delay={0.12}>
+        <Constellation />
         <span className="hero-orbit hero-orbit--outer" />
         <span className="hero-orbit hero-orbit--inner" />
         <span className="hero-signal hero-signal--coral" />
         <span className="hero-signal hero-signal--amber" />
         <span className="hero-coordinate">SYS / 02</span>
-      </div>
+      </MotionSafe>
     </section>
   );
 }
