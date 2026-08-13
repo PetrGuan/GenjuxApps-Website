@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 
-import Link from "next/link";
 import type { Product } from "@/lib/products";
 
 type ProductCardProps = {
@@ -34,9 +33,9 @@ export default function ProductCard({ product, prominent = false }: ProductCardP
         <div className="artwork-grid" aria-hidden="true" />
         <img src={product.assets.hero} alt={`${product.name} app screen`} />
       </div>
-      <Link href={product.route} className="product-card-link">
+      <a href={product.route} className="product-card-link">
         Explore {product.name} <span aria-hidden="true">→</span>
-      </Link>
+      </a>
     </article>
   );
 }
