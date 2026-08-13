@@ -693,6 +693,185 @@ a {
   gap: 1.5rem;
 }
 
+.product-page {
+  overflow: clip;
+}
+
+.product-page-hero {
+  display: grid;
+  min-height: min(760px, calc(100svh - 4.5rem));
+  grid-template-columns: minmax(0, 1fr) minmax(22rem, 0.9fr);
+  align-items: center;
+  gap: clamp(3rem, 8vw, 8rem);
+  padding-block: clamp(5rem, 10vw, 9rem);
+}
+
+.product-page-copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: start;
+  gap: 1.4rem;
+}
+
+.product-page-identity {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.product-page-identity img {
+  width: clamp(4.5rem, 8vw, 6.25rem);
+  height: clamp(4.5rem, 8vw, 6.25rem);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1.5rem;
+  box-shadow: 0 1.25rem 2.6rem rgba(0, 0, 0, 0.32);
+}
+
+.product-page-identity h1 {
+  margin: 0;
+  font-size: clamp(3.8rem, 8vw, 8rem);
+  letter-spacing: -0.09em;
+  line-height: 0.8;
+}
+
+.product-page-tagline {
+  margin: 0;
+  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+}
+
+.product-page-description {
+  max-width: 38rem;
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: clamp(1rem, 1.3vw, 1.16rem);
+  line-height: 1.7;
+}
+
+.store-link {
+  display: inline-flex;
+  border-radius: 0.55rem;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.store-link:hover {
+  filter: brightness(1.12);
+  transform: translateY(-0.2rem);
+}
+
+.store-link img {
+  display: block;
+  height: 3rem;
+  width: auto;
+}
+
+.product-page-artwork {
+  position: relative;
+  transform: rotate(5deg);
+}
+
+.product-page-artwork::before {
+  position: absolute;
+  z-index: -1;
+  top: 6%;
+  right: 8%;
+  width: 80%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  content: "";
+  filter: blur(4rem);
+  opacity: 0.32;
+}
+
+.product-page[data-accent="coral"] .product-page-artwork::before {
+  background: var(--coral);
+}
+
+.product-page[data-accent="amber"] .product-page-artwork::before {
+  background: var(--amber);
+}
+
+.product-page-artwork > img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 1.9rem;
+  box-shadow: 0 2rem 3.5rem rgba(0, 0, 0, 0.35);
+}
+
+.product-page-grid {
+  position: absolute;
+  z-index: 0;
+  inset: -2rem;
+  opacity: 0.4;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+  background-size: 1.2rem 1.2rem;
+  mask-image: linear-gradient(135deg, black, transparent 78%);
+}
+
+.product-capabilities {
+  display: grid;
+  grid-template-columns: minmax(0, 0.75fr) minmax(18rem, 1.25fr);
+  align-items: start;
+  gap: 2rem;
+  border-top: 1px solid var(--line);
+  padding-block: clamp(4rem, 8vw, 7rem);
+}
+
+.product-capabilities h2 {
+  max-width: 12ch;
+  margin: 1rem 0 0;
+  font-size: clamp(2.1rem, 4vw, 4rem);
+  letter-spacing: -0.06em;
+  line-height: 0.95;
+}
+
+.product-capabilities ul {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.product-capabilities li {
+  display: flex;
+  gap: 1rem;
+  border-bottom: 1px solid var(--line);
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  padding: 1.25rem 0;
+}
+
+.product-capabilities li span {
+  color: var(--ink-muted);
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+}
+
+.product-privacy {
+  display: grid;
+  justify-items: start;
+  gap: 1.5rem;
+  border-top: 1px solid var(--line);
+  padding-block: clamp(4rem, 8vw, 7rem);
+}
+
+.product-privacy > p:not(.eyebrow) {
+  max-width: 26ch;
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 4.2rem);
+  letter-spacing: -0.06em;
+  line-height: 0.96;
+}
+
 .palette-layer {
   position: fixed;
   z-index: 100;
@@ -834,6 +1013,20 @@ a {
   .home-hero {
     grid-template-columns: 1fr;
     padding-block: 4rem 2rem;
+  }
+
+  .product-page-hero,
+  .product-capabilities {
+    grid-template-columns: 1fr;
+  }
+
+  .product-page-hero {
+    padding-block: 4rem 5rem;
+  }
+
+  .product-page-artwork {
+    width: min(100%, 28rem);
+    justify-self: center;
   }
 
   .hero-visual {

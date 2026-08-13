@@ -431,7 +431,7 @@ git commit -m "feat: add accessible product palette and ambient motion"
 - Consumes: `Product`, `getProduct`, `productSlugs`, and shared shell from previous tasks.
 - Produces: pre-rendered `/apps/bebilog` and `/apps/nautilus` pages and `ProductPageContent({ product }: { product: Product })`.
 
-- [ ] **Step 1: Write failing detail-page tests**
+- [x] **Step 1: Write failing detail-page tests**
 
 Create `tests/components/product-page-content.test.tsx`:
 
@@ -447,25 +447,25 @@ it("uses the product facts and App Store destination", () => {
 });
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 Run: `npm run test -- tests/components/product-page-content.test.tsx`
 
 Expected: FAIL because `ProductPageContent` does not exist.
 
-- [ ] **Step 3: Implement the reusable product content and static params**
+- [x] **Step 3: Implement the reusable product content and static params**
 
 Implement `ProductPageContent` with product icon and hero image, an `h1`, tagline, description, capability list, privacy/independence supporting copy, a local App Store badge image within an external link named `Download ${product.name} on the App Store`, and a link back to `/`.
 
 Implement `app/apps/[slug]/page.tsx` with `export const dynamicParams = false`, `generateStaticParams()` returning `productSlugs.map((slug) => ({ slug }))`, and `notFound()` when `getProduct(params.slug)` returns undefined. Set route metadata from the selected product and render `ProductPageContent`.
 
-- [ ] **Step 4: Run detail-route checks**
+- [x] **Step 4: Run detail-route checks**
 
 Run: `npm run test -- tests/components/product-page-content.test.tsx tests/lib/products.test.ts && npm run lint && npm run build && test -f out/apps/bebilog/index.html && test -f out/apps/nautilus/index.html`
 
 Expected: tests and lint pass; both expected static route files exist.
 
-- [ ] **Step 5: Commit the product pages**
+- [x] **Step 5: Commit the product pages**
 
 ```bash
 git add app/apps components/product-page-content.tsx tests/components/product-page-content.test.tsx
