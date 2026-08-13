@@ -16,7 +16,7 @@ export default function SelectedWork() {
         <div className="studio-work-grid">
           {selectedWork.map((work) => (
             <article className="studio-glass-card studio-work-card" key={work.code}>
-              <div className="studio-work-art" data-has-image={Boolean(work.image)}>
+              <div className="studio-work-art">
                 {work.image ? (
                   <img src={work.image} alt={work.imageAlt ?? ""} />
                 ) : (
@@ -30,6 +30,9 @@ export default function SelectedWork() {
               </div>
               <div className="studio-work-copy">
                 <p className="studio-code">{work.code}</p>
+                {work.contextLabel ? (
+                  <p className="studio-work-context">{work.contextLabel}</p>
+                ) : null}
                 <h3>{work.title}</h3>
                 <p>{work.description}</p>
                 <ul className="studio-tags" aria-label={`${work.title} technologies`}>

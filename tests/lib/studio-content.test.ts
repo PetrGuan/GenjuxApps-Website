@@ -19,3 +19,9 @@ it("contains the approved studio records without personal identity", () => {
     }),
   ).not.toMatch(/Petr|Guan|petrguan/i);
 });
+
+it("identifies Outlook as Microsoft experience behind Genjux", () => {
+  const outlook = selectedWork.find((work) => work.code === "OUTLOOK_MOBILE");
+
+  expect(outlook?.contextLabel).toBe("Microsoft experience behind Genjux");
+});

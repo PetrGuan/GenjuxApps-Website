@@ -470,6 +470,18 @@ a {
   padding: clamp(1.4rem, 3vw, 2.25rem);
 }
 
+.studio-work-copy > .studio-work-context {
+  padding-left: 0.75rem;
+  border-left: 2px solid var(--coral);
+  color: var(--ink);
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
 .studio-work-copy .studio-text-link {
   margin-top: auto;
 }

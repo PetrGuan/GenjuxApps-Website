@@ -18,6 +18,12 @@ it("describes supplied work artwork as app icons", () => {
   expect(screen.getByRole("img", { name: "Bebilog app icon" })).toBeInTheDocument();
 });
 
+it("visibly frames Outlook as Microsoft experience behind Genjux", () => {
+  render(<SelectedWork />);
+
+  expect(screen.getByText("Microsoft experience behind Genjux")).toBeInTheDocument();
+});
+
 it("sends the studio closing CTA to contact", () => {
   render(<StudioContactCta />);
 

@@ -6,6 +6,7 @@ export type StudioRecord = {
   href: string;
   image?: string;
   imageAlt?: string;
+  contextLabel?: string;
 };
 
 export const studioCapabilities: readonly StudioRecord[] = [
@@ -55,6 +56,7 @@ export const selectedWork: readonly StudioRecord[] = [
   {
     code: "OUTLOOK_MOBILE",
     title: "Outlook Mobile",
+    contextLabel: "Microsoft experience behind Genjux",
     description:
       "Background experience on the core C++ engine behind cross-platform email, calendar, and search experiences.",
     tags: ["C++", "Objective-C", "iOS", "Android"],
