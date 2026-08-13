@@ -17,6 +17,7 @@ npm run dev
 npm run lint
 npm run test
 npm run build
+npm run test:e2e
 ```
 
 `npm run build` writes the static production site to `out/`.
@@ -25,11 +26,18 @@ npm run build
 
 The project uses Next.js static export, so deploy the generated `out/` directory to a static host such as GitHub Pages, Cloudflare Pages, or Vercel.
 
-## Product assets
+## Product routes
 
-The committed assets in `public/products/` originate from these sibling projects:
+- `/apps/bebilog` — Bebilog’s English site.
+- `/apps/bebilog/en` and `/apps/bebilog/zh` — Bebilog locale routes.
+- `/apps/nautilus/index.html` — Nautilus’s original static site.
+- `/apps/nautilus/editions.html` — Nautilus’s original Editions page.
+
+## Product source and assets
+
+The two product sites are copied from these sibling projects:
 
 - `/Users/petr/Documents/GitHub/bebilog-website`
 - `/Users/petr/Documents/GitHub/nautilus-website`
 
-They are first-party product artwork; update them deliberately when the source product marketing sites change.
+The Genjux product-card previews live in `public/products/`. Bebilog’s migrated source and media are in `components/bebilog/` and `public/apps/bebilog/`; Nautilus’s original static documents and media are in `public/apps/nautilus/`. Update these copies deliberately when their source marketing sites change.

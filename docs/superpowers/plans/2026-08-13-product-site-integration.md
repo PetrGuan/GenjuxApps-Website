@@ -262,7 +262,7 @@ Create `[locale]/page.tsx` with `dynamicParams = false`, `generateStaticParams()
 
 - [x] **Step 5: Run Bebilog verification**
 
-Run: `npm run test -- tests/lib/bebilog-locale.test.ts && npm run lint && npm run build && test -f out/apps/bebilog/index.html && test -f out/apps/bebilog/en/index.html && test -f out/apps/bebilog/zh/index.html`
+Run: `npm run test -- tests/lib/bebilog-locale.test.ts && npm run lint && npm run build && test -f out/apps/bebilog.html && test -f out/apps/bebilog/en.html && test -f out/apps/bebilog/zh.html`
 
 Expected: locale test passes; all three Bebilog paths are statically generated.
 
@@ -336,17 +336,17 @@ git commit -m "feat: integrate Nautilus product site"
 - Consumes: the static routes and components completed in Tasks 1–3.
 - Produces: browser coverage for default-English Bebilog, Nautilus handoff, scoped pages, and updated local-project documentation.
 
-- [ ] **Step 1: Update developer documentation**
+- [x] **Step 1: Update developer documentation**
 
 Replace the README product-assets section with explicit source-to-destination mappings for `public/apps/bebilog` and `public/apps/nautilus`. Add the English-default product paths and the `npm run test:e2e` verification command.
 
-- [ ] **Step 2: Run the full final verification suite after Tasks 2–3 are complete**
+- [x] **Step 2: Run the full final verification suite after Tasks 2–3 are complete**
 
 Run: `npm run lint && npm run test && npm run build && npm run test:e2e && git status --short`
 
 Expected: lint has no errors, unit tests pass, static output includes studio and all product routes, browser tests pass, and status lists only README/test files before commit.
 
-- [ ] **Step 3: Commit final integration verification**
+- [x] **Step 3: Commit final integration verification**
 
 ```bash
 git add README.md tests/e2e/site.spec.ts
