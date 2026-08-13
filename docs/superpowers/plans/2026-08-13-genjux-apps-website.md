@@ -73,7 +73,7 @@ tests/
 - Consumes: none.
 - Produces: `npm run dev`, `npm run lint`, `npm run test`, `npm run test:e2e`, and `npm run build`; all later tasks use the `@/*` alias and App Router layout.
 
-- [ ] **Step 1: Initialize dependencies and scripts**
+- [x] **Step 1: Initialize dependencies and scripts**
 
 Create `package.json` with these scripts and dependency families:
 
@@ -93,7 +93,7 @@ Create `package.json` with these scripts and dependency families:
 
 Install `next@16`, `react@19`, `react-dom@19`, `framer-motion`, `three`, `@react-three/fiber`, and `@react-three/drei` as runtime dependencies. Install `typescript`, `tailwindcss`, `@tailwindcss/postcss`, `eslint`, `eslint-config-next`, `vitest`, `jsdom`, `@testing-library/react`, `@testing-library/jest-dom`, `@testing-library/user-event`, `playwright`, and their matching type packages as development dependencies.
 
-- [ ] **Step 2: Configure static export and test environments**
+- [x] **Step 2: Configure static export and test environments**
 
 Set `next.config.ts` to the exact production constraint:
 
@@ -110,7 +110,7 @@ export default nextConfig;
 
 Configure Vitest with `environment: "jsdom"`, `setupFiles: ["./tests/setup.ts"]`, and the `@` alias resolving to the repository root. Configure Playwright with `baseURL: "http://127.0.0.1:3000"` and a `webServer` command of `npm run dev`.
 
-- [ ] **Step 3: Add the failing shell smoke test**
+- [x] **Step 3: Add the failing shell smoke test**
 
 Create `tests/components/site-shell.test.tsx` before implementing the layout:
 
@@ -124,25 +124,25 @@ it("identifies the studio in the shared footer", () => {
 });
 ```
 
-- [ ] **Step 4: Run the test to verify it fails**
+- [x] **Step 4: Run the test to verify it fails**
 
 Run: `npm run test -- tests/components/site-shell.test.tsx`
 
 Expected: FAIL because `@/components/site-footer` does not exist.
 
-- [ ] **Step 5: Implement the minimal application shell**
+- [x] **Step 5: Implement the minimal application shell**
 
 Create `app/layout.tsx` with the `Geist` and `JetBrains_Mono` font exports from `next/font/google`, a dark `body`, `lang="en"`, viewport metadata, and site metadata titled `Genjux — Independent Apps`. Create `app/globals.css` with CSS variables for `--void: #090a0d`, glass surfaces, coral, ivory, amber, blueprint grid rules, focus styles, and a `@media (prefers-reduced-motion: reduce)` rule that removes nonessential animation.
 
 Create a minimal `components/site-footer.tsx` that renders `<footer aria-label="Site footer">© 2026 Genjux. Independent software.</footer>`, then create a semantic `app/not-found.tsx` with a link back to `/`.
 
-- [ ] **Step 6: Run quality checks**
+- [x] **Step 6: Run quality checks**
 
 Run: `npm run test -- tests/components/site-shell.test.tsx && npm run lint && npm run build`
 
 Expected: all commands exit with status `0`, and `out/` exists after the build.
 
-- [ ] **Step 7: Commit the foundation**
+- [x] **Step 7: Commit the foundation**
 
 ```bash
 git add package.json package-lock.json next.config.ts tsconfig.json postcss.config.mjs eslint.config.mjs vitest.config.ts playwright.config.ts tests app components .gitignore
@@ -166,7 +166,7 @@ git commit -m "chore: scaffold static Next.js site"
 - Consumes: the TypeScript alias created in Task 1 and public assets from the existing product sites.
 - Produces: `Product`, `products`, `getProduct(slug)`, `productSlugs`, and `studioRoutes`, used by every page and product UI component.
 
-- [ ] **Step 1: Write failing catalog tests**
+- [x] **Step 1: Write failing catalog tests**
 
 Create `tests/lib/products.test.ts`:
 
@@ -184,13 +184,13 @@ it("returns a product only for a supported slug", () => {
 });
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 Run: `npm run test -- tests/lib/products.test.ts`
 
 Expected: FAIL because `@/lib/products` does not exist.
 
-- [ ] **Step 3: Implement the typed catalog and navigation data**
+- [x] **Step 3: Implement the typed catalog and navigation data**
 
 Define the following interface in `lib/products.ts` and implement both records with their true URLs and approved copy:
 
@@ -211,7 +211,7 @@ export type Product = {
 
 Use the Bebilog App Store URL `https://apps.apple.com/us/app/bebilog-baby-tracker/id6759827652` and Nautilus App Store URL `https://apps.apple.com/us/app/nautilus-tech-news-reader/id6787639053`. Export `productSlugs`, `products`, and `getProduct(slug: string): Product | undefined`. In `lib/routes.ts`, export the four studio routes `/about`, `/changelog`, and `/contact` plus a `Products` anchor that points to `/#products`.
 
-- [ ] **Step 4: Copy the approved first-party artwork**
+- [x] **Step 4: Copy the approved first-party artwork**
 
 Run these explicit copies:
 
@@ -224,13 +224,13 @@ cp /Users/petr/Documents/GitHub/nautilus-website/assets/shots/home.jpg public/pr
 cp /Users/petr/Documents/GitHub/nautilus-website/assets/app-store-badge.svg public/products/nautilus/app-store-badge.svg
 ```
 
-- [ ] **Step 5: Run the catalog checks**
+- [x] **Step 5: Run the catalog checks**
 
 Run: `npm run test -- tests/lib/products.test.ts && npm run lint`
 
 Expected: all assertions pass and lint exits `0`.
 
-- [ ] **Step 6: Commit the content model**
+- [x] **Step 6: Commit the content model**
 
 ```bash
 git add lib/products.ts lib/routes.ts tests/lib/products.test.ts public/products
@@ -252,7 +252,7 @@ git commit -m "feat: add product catalog and assets"
 - Consumes: `studioRoutes` from `lib/routes.ts`.
 - Produces: `SiteHeader` and a complete `SiteShell` layout; home and product pages receive shared navigation, palette trigger, and footer.
 
-- [ ] **Step 1: Write the failing header test**
+- [x] **Step 1: Write the failing header test**
 
 Create `tests/components/site-header.test.tsx`:
 
@@ -267,13 +267,13 @@ it("renders each studio route", () => {
 });
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 Run: `npm run test -- tests/components/site-header.test.tsx`
 
 Expected: FAIL because `SiteHeader` does not exist.
 
-- [ ] **Step 3: Implement the shared shell**
+- [x] **Step 3: Implement the shared shell**
 
 Implement `SiteHeader` as a fixed `<header>` with a `<nav aria-label="Primary navigation">`, wordmark link to `/`, and desktop links from `studioRoutes`. Use a menu disclosure at mobile widths rather than hiding navigation permanently. Task 5 adds the stateful product-explorer control.
 
@@ -281,13 +281,13 @@ Update `app/layout.tsx` to render `<SiteHeader />`, `<main id="main-content">{ch
 
 Create the three simple static pages with an `<h1>`, a concise truthful paragraph, and relevant internal links. The Changelog lists `Bebilog — iOS launch` and `Nautilus — iOS and iPadOS launch`; Contact links to the GitHub repository and an email `mailto:hello@genjux.com`.
 
-- [ ] **Step 4: Run component and build checks**
+- [x] **Step 4: Run component and build checks**
 
 Run: `npm run test -- tests/components/site-shell.test.tsx tests/components/site-header.test.tsx && npm run lint && npm run build`
 
 Expected: the test suite and static export pass, with `/about`, `/changelog`, and `/contact` present in `out/`.
 
-- [ ] **Step 5: Commit shared pages and shell**
+- [x] **Step 5: Commit shared pages and shell**
 
 ```bash
 git add app components tests/components
@@ -306,7 +306,7 @@ git commit -m "feat: add studio navigation and static pages"
 - Consumes: `Product` and `products` from `lib/products.ts`.
 - Produces: `ProductCard({ product }: { product: Product })` and `HomeHero`, used only by `app/page.tsx` in this release.
 
-- [ ] **Step 1: Write the failing product card test**
+- [x] **Step 1: Write the failing product card test**
 
 Create `tests/components/product-card.test.tsx`:
 
@@ -322,13 +322,13 @@ it("links each card to its product route and labels its artwork", () => {
 });
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 Run: `npm run test -- tests/components/product-card.test.tsx`
 
 Expected: FAIL because `ProductCard` does not exist.
 
-- [ ] **Step 3: Implement product card and hero composition**
+- [x] **Step 3: Implement product card and hero composition**
 
 Implement `ProductCard` as an `<article>` with `data-accent={product.accent}`, product icon, platform metadata, title, description, three capability tags, local hero artwork, and a visible `Explore ${product.name}` link. Use an `<img>` for public artwork with exact alt text `${product.name} app screen`; its card remains functional without client JavaScript.
 
@@ -336,13 +336,13 @@ Implement `HomeHero` with the approved headline `Small apps. Deeply considered.`
 
 Compose `app/page.tsx` with a hero, an `id="products"` two-card 12-column grid, the four-item intent strip (`Native-first`, `On-device AI`, `Privacy by design`, `No trackers`), and no duplicate visible product title.
 
-- [ ] **Step 4: Run home UI tests**
+- [x] **Step 4: Run home UI tests**
 
 Run: `npm run test -- tests/components/product-card.test.tsx && npm run lint && npm run build`
 
 Expected: tests pass and `out/index.html` contains both product route links.
 
-- [ ] **Step 5: Commit the home composition**
+- [x] **Step 5: Commit the home composition**
 
 ```bash
 git add app/page.tsx components/home-hero.tsx components/product-card.tsx tests/components/product-card.test.tsx app/globals.css
@@ -365,7 +365,7 @@ git commit -m "feat: build product studio homepage"
 - Consumes: `products` from `lib/products.ts`.
 - Produces: `CommandPalette({ open, onOpenChange })`, `MotionSafe`, `AtmosphereCanvas`, and `Constellation`; all enhancements leave the static content from Tasks 3–4 available.
 
-- [ ] **Step 1: Write failing interaction tests**
+- [x] **Step 1: Write failing interaction tests**
 
 Create `tests/components/command-palette.test.tsx`:
 
@@ -389,31 +389,31 @@ it("opens, focuses product choices, and closes with Escape", async () => {
 });
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 Run: `npm run test -- tests/components/command-palette.test.tsx`
 
 Expected: FAIL because `CommandPalette` does not exist.
 
-- [ ] **Step 3: Implement keyboard-safe command navigation**
+- [x] **Step 3: Implement keyboard-safe command navigation**
 
 Implement a client `CommandPalette` with `role="dialog"`, `aria-modal="true"`, accessible name `Product explorer`, focus moved to the first product link when opened, and Escape calling `onOpenChange(false)`. `⌘ K` or `Ctrl K` opens the palette when the event target is not an `input`, `textarea`, or `contenteditable` element. The `1` and `2` keys navigate only while the palette is open and focus is within the dialog. Product links use their routes and close the palette on click.
 
 Wire a single `open` state into `SiteHeader`; provide it to the palette rather than creating duplicate dialogs on pages.
 
-- [ ] **Step 4: Implement progressive ambient effects**
+- [x] **Step 4: Implement progressive ambient effects**
 
 Implement `MotionSafe` with `useReducedMotion()` and render its children with zero-duration variants when motion is reduced. Implement `AtmosphereCanvas` as a client component that creates a low-density WebGL canvas only when `matchMedia("(prefers-reduced-motion: reduce)").matches` is false and `canvas.getContext("webgl")` succeeds; otherwise return `null` and rely on the CSS radial gradients and grid.
 
 Implement `Constellation` with `@react-three/fiber` as a dynamically imported desktop-only hero island: two rounded planes, one coral and one amber/ivory, connected by a faint curve. Use `frameloop="demand"` under reduced motion and avoid loading it on viewports below `1024px`. The canvas has `aria-hidden="true"` and never contains required text or controls.
 
-- [ ] **Step 5: Run interaction and accessibility checks**
+- [x] **Step 5: Run interaction and accessibility checks**
 
 Run: `npm run test -- tests/components/command-palette.test.tsx && npm run lint && npm run build`
 
 Expected: interactions pass, lint exits `0`, and the static export succeeds when client-only components are present.
 
-- [ ] **Step 6: Commit the enhancement layer**
+- [x] **Step 6: Commit the enhancement layer**
 
 ```bash
 git add components app tests/components package.json package-lock.json app/globals.css
@@ -431,7 +431,7 @@ git commit -m "feat: add accessible product palette and ambient motion"
 - Consumes: `Product`, `getProduct`, `productSlugs`, and shared shell from previous tasks.
 - Produces: pre-rendered `/apps/bebilog` and `/apps/nautilus` pages and `ProductPageContent({ product }: { product: Product })`.
 
-- [ ] **Step 1: Write failing detail-page tests**
+- [x] **Step 1: Write failing detail-page tests**
 
 Create `tests/components/product-page-content.test.tsx`:
 
@@ -447,25 +447,25 @@ it("uses the product facts and App Store destination", () => {
 });
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 Run: `npm run test -- tests/components/product-page-content.test.tsx`
 
 Expected: FAIL because `ProductPageContent` does not exist.
 
-- [ ] **Step 3: Implement the reusable product content and static params**
+- [x] **Step 3: Implement the reusable product content and static params**
 
 Implement `ProductPageContent` with product icon and hero image, an `h1`, tagline, description, capability list, privacy/independence supporting copy, a local App Store badge image within an external link named `Download ${product.name} on the App Store`, and a link back to `/`.
 
 Implement `app/apps/[slug]/page.tsx` with `export const dynamicParams = false`, `generateStaticParams()` returning `productSlugs.map((slug) => ({ slug }))`, and `notFound()` when `getProduct(params.slug)` returns undefined. Set route metadata from the selected product and render `ProductPageContent`.
 
-- [ ] **Step 4: Run detail-route checks**
+- [x] **Step 4: Run detail-route checks**
 
 Run: `npm run test -- tests/components/product-page-content.test.tsx tests/lib/products.test.ts && npm run lint && npm run build && test -f out/apps/bebilog/index.html && test -f out/apps/nautilus/index.html`
 
 Expected: tests and lint pass; both expected static route files exist.
 
-- [ ] **Step 5: Commit the product pages**
+- [x] **Step 5: Commit the product pages**
 
 ```bash
 git add app/apps components/product-page-content.tsx tests/components/product-page-content.test.tsx
@@ -483,7 +483,7 @@ git commit -m "feat: add static product detail pages"
 - Consumes: built static routes and all interactive components.
 - Produces: repeatable browser coverage, GitHub Actions validation, and local development/deployment instructions.
 
-- [ ] **Step 1: Write failing browser coverage**
+- [x] **Step 1: Write failing browser coverage**
 
 Create `tests/e2e/site.spec.ts`:
 
@@ -507,17 +507,17 @@ test("the home page exposes all primary landmark destinations", async ({ page })
 });
 ```
 
-- [ ] **Step 2: Run browser tests to identify defects**
+- [x] **Step 2: Run browser tests to identify defects**
 
 Run: `npm run test:e2e`
 
 Expected: initial failures identify any missing accessible names, route transitions, or test-server configuration gaps.
 
-- [ ] **Step 3: Correct discovered production defects without expanding scope**
+- [x] **Step 3: Correct discovered production defects without expanding scope**
 
 Adjust markup, aria labels, test configuration, or route construction only where needed for the two stated browser scenarios. Keep the command palette and 3D/canvas effects as enhancements; do not add data collection, a backend, or unapproved UI libraries.
 
-- [ ] **Step 4: Add continuous integration and user documentation**
+- [x] **Step 4: Add continuous integration and user documentation**
 
 Create `.github/workflows/ci.yml` that runs on `push` and `pull_request` for `main`, uses Node 22, runs `npm ci`, `npm run lint`, `npm run test`, and `npm run build`.
 
@@ -533,13 +533,13 @@ npm run build
 
 Document that deployment uses the generated `out/` directory and that product assets originate from the sibling Bebilog and Nautilus website projects.
 
-- [ ] **Step 5: Run the full verification suite**
+- [x] **Step 5: Run the full verification suite**
 
 Run: `npm run lint && npm run test && npm run build && npm run test:e2e && git status --short`
 
 Expected: all four verification commands exit `0`; `git status --short` lists only the CI workflow and README changes intended for this task before commit.
 
-- [ ] **Step 6: Commit final verification and documentation**
+- [x] **Step 6: Commit final verification and documentation**
 
 ```bash
 git add tests/e2e README.md .github/workflows/ci.yml
