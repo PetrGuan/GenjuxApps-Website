@@ -37,3 +37,13 @@ test("Nautilus card opens the complete Nautilus site and its Editions route", as
   await page.getByRole("link", { name: /full editions design language/i }).click();
   await expect(page).toHaveURL(/\/apps\/nautilus\/editions\.html$/);
 });
+
+test("each product site offers a return path to Genjux", async ({ page }) => {
+  await page.goto("/apps/bebilog");
+  await page.getByRole("link", { name: /back to genjux/i }).click();
+  await expect(page).toHaveURL(/\/$/);
+
+  await page.goto("/apps/nautilus/index.html");
+  await page.getByRole("link", { name: /back to genjux/i }).click();
+  await expect(page).toHaveURL(/\/$/);
+});

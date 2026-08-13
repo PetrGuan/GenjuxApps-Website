@@ -51,6 +51,8 @@
   nav.top{padding:30px 0;display:flex;align-items:center;justify-content:space-between}
   .brand{display:flex;align-items:center;gap:12px;font-family:"Fraunces",serif;font-weight:600;font-size:19px;letter-spacing:-.01em}
   .brand img{width:30px;height:30px;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.5)}
+  .back-genjux{color:var(--spec-ink-soft);font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.04em;text-decoration:none;transition:color .2s}
+  .back-genjux:hover{color:var(--spec-accent)}
   .navlinks{display:flex;gap:30px;font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.04em}
   .navlinks a{color:var(--spec-ink-soft);text-decoration:none;transition:color .2s}
   .navlinks a:hover{color:var(--spec-accent)}
@@ -238,7 +240,7 @@
 <div class="wrap">
 
   <nav class="top">
-    <div class="brand"><img src="assets/icon-180.png" alt="Nautilus icon" />Nautilus</div>
+    <div class="brand"><a class="back-genjux" href="/" aria-label="Back to Genjux">← Genjux</a><span aria-hidden="true">/</span><img src="assets/icon-180.png" alt="Nautilus icon" />Nautilus</div>
     <div class="navlinks">
       <a href="#features">Features</a>
       <a href="#editions">Editions</a>
