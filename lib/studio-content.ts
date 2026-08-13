@@ -5,6 +5,7 @@ export type StudioRecord = {
   tags: readonly string[];
   href: string;
   image?: string;
+  imageAlt?: string;
 };
 
 export const studioCapabilities: readonly StudioRecord[] = [
@@ -59,6 +60,7 @@ export const selectedWork: readonly StudioRecord[] = [
     tags: ["C++", "Objective-C", "iOS", "Android"],
     href: "https://apps.apple.com/us/app/microsoft-outlook/id951937596",
     image: "/studio/outlook.webp",
+    imageAlt: "Outlook app icon",
   },
   {
     code: "BEBILOG",
@@ -68,6 +70,7 @@ export const selectedWork: readonly StudioRecord[] = [
     tags: ["Swift", "SwiftUI", "watchOS"],
     href: "/apps/bebilog",
     image: "/studio/bebilog.webp",
+    imageAlt: "Bebilog app icon",
   },
   {
     code: "MARKVERSE",

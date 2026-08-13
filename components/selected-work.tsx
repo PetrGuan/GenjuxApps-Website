@@ -16,7 +16,7 @@ export default function SelectedWork() {
             <article className="studio-glass-card studio-work-card" key={work.code}>
               <div className="studio-work-art" data-has-image={Boolean(work.image)}>
                 {work.image ? (
-                  <img src={work.image} alt={`${work.title} product interface`} />
+                  <img src={work.image} alt={work.imageAlt ?? ""} />
                 ) : (
                   <div className="studio-native-panel" aria-hidden="true">
                     <span>{work.code}</span>

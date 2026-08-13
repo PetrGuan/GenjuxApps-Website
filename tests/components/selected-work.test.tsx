@@ -11,6 +11,13 @@ it("routes Bebilog work to its integrated product site", () => {
   );
 });
 
+it("describes supplied work artwork as app icons", () => {
+  render(<SelectedWork />);
+
+  expect(screen.getByRole("img", { name: "Outlook app icon" })).toBeInTheDocument();
+  expect(screen.getByRole("img", { name: "Bebilog app icon" })).toBeInTheDocument();
+});
+
 it("sends the studio closing CTA to contact", () => {
   render(<StudioContactCta />);
 
