@@ -1,27 +1,18 @@
 import {
   openSourceContributions,
-  selectedWork,
   studioCapabilities,
   studioExperience,
 } from "@/lib/studio-content";
 
-it("contains the approved studio records without personal identity", () => {
+it("contains focused studio records without personal identity", () => {
   expect(studioCapabilities).toHaveLength(5);
-  expect(selectedWork).toHaveLength(4);
   expect(studioExperience).toHaveLength(3);
   expect(openSourceContributions).toHaveLength(3);
   expect(
     JSON.stringify({
       studioCapabilities,
-      selectedWork,
       studioExperience,
       openSourceContributions,
     }),
   ).not.toMatch(/Petr|Guan|petrguan/i);
-});
-
-it("identifies Outlook as Microsoft experience behind Genjux", () => {
-  const outlook = selectedWork.find((work) => work.code === "OUTLOOK_MOBILE");
-
-  expect(outlook?.contextLabel).toBe("Microsoft experience behind Genjux");
 });

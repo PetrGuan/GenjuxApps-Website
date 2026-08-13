@@ -1,10 +1,10 @@
 import { expect, test } from "@playwright/test";
 
-test("home page presents Genjux studio content without personal identity", async ({ page }) => {
+test("home page presents focused Genjux studio content without selected work", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: /studio capabilities/i })).toBeVisible();
-  await expect(page.getByRole("heading", { name: /selected work/i })).toBeVisible();
-  await expect(page.getByText("Microsoft experience behind Genjux", { exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /selected work/i })).toHaveCount(0);
+  await expect(page.getByText("Microsoft experience behind Genjux", { exact: true })).toHaveCount(0);
   await expect(page.getByRole("heading", { name: /experience behind genjux/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /open-source contributions/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /work with genjux/i })).toBeVisible();

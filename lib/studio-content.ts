@@ -4,9 +4,6 @@ export type StudioRecord = {
   description: string;
   tags: readonly string[];
   href: string;
-  image?: string;
-  imageAlt?: string;
-  contextLabel?: string;
 };
 
 export const studioCapabilities: readonly StudioRecord[] = [
@@ -48,46 +45,6 @@ export const studioCapabilities: readonly StudioRecord[] = [
     description:
       "Private-by-design tools with clear, polished everyday interactions.",
     tags: ["Privacy", "UX", "Native apps"],
-    href: "/contact",
-  },
-];
-
-export const selectedWork: readonly StudioRecord[] = [
-  {
-    code: "OUTLOOK_MOBILE",
-    title: "Outlook Mobile",
-    contextLabel: "Microsoft experience behind Genjux",
-    description:
-      "Background experience on the core C++ engine behind cross-platform email, calendar, and search experiences.",
-    tags: ["C++", "Objective-C", "iOS", "Android"],
-    href: "https://apps.apple.com/us/app/microsoft-outlook/id951937596",
-    image: "/studio/outlook.webp",
-    imageAlt: "Outlook app icon",
-  },
-  {
-    code: "BEBILOG",
-    title: "Bebilog",
-    description:
-      "A privacy-first baby tracker for iOS and watchOS, with local data storage and no ads.",
-    tags: ["Swift", "SwiftUI", "watchOS"],
-    href: "/apps/bebilog",
-    image: "/studio/bebilog.webp",
-    imageAlt: "Bebilog app icon",
-  },
-  {
-    code: "MARKVERSE",
-    title: "MarkVerse",
-    description:
-      "An AI-native Markdown content runtime for macOS that routes and renders content from everyday sources.",
-    tags: ["Swift", "AppKit", "WKWebView", "cmark-gfm"],
-    href: "/contact",
-  },
-  {
-    code: "MUYE_FRESH_PET_FOOD",
-    title: "MuYe Fresh Pet Food",
-    description:
-      "A WeChat Mini Program for fresh pet food storefronts, orders, and merchant operations.",
-    tags: ["WeChat Mini Program", "E-commerce"],
     href: "/contact",
   },
 ];

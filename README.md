@@ -9,7 +9,7 @@ The public product studio for Genjux’s independent Apple-platform apps.
 
 ## Studio content
 
-The home page also presents Genjux’s capabilities, selected work, experience, open-source contributions, and an invitation to work with the studio. Its factual material is adapted from a local source portfolio and expressed in Genjux’s own visual language without personal identity or original-site styling.
+The home page also presents Genjux’s capabilities, experience, open-source contributions, and an invitation to work with the studio. Its factual material is adapted from a local source portfolio and expressed in Genjux’s own visual language without personal identity or original-site styling.
 
 ## Local development
 
