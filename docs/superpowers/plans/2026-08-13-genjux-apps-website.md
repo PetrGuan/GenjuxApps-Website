@@ -252,7 +252,7 @@ git commit -m "feat: add product catalog and assets"
 - Consumes: `studioRoutes` from `lib/routes.ts`.
 - Produces: `SiteHeader` and a complete `SiteShell` layout; home and product pages receive shared navigation, palette trigger, and footer.
 
-- [ ] **Step 1: Write the failing header test**
+- [x] **Step 1: Write the failing header test**
 
 Create `tests/components/site-header.test.tsx`:
 
@@ -267,13 +267,13 @@ it("renders each studio route", () => {
 });
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 Run: `npm run test -- tests/components/site-header.test.tsx`
 
 Expected: FAIL because `SiteHeader` does not exist.
 
-- [ ] **Step 3: Implement the shared shell**
+- [x] **Step 3: Implement the shared shell**
 
 Implement `SiteHeader` as a fixed `<header>` with a `<nav aria-label="Primary navigation">`, wordmark link to `/`, and desktop links from `studioRoutes`. Use a menu disclosure at mobile widths rather than hiding navigation permanently. Task 5 adds the stateful product-explorer control.
 
@@ -281,13 +281,13 @@ Update `app/layout.tsx` to render `<SiteHeader />`, `<main id="main-content">{ch
 
 Create the three simple static pages with an `<h1>`, a concise truthful paragraph, and relevant internal links. The Changelog lists `Bebilog — iOS launch` and `Nautilus — iOS and iPadOS launch`; Contact links to the GitHub repository and an email `mailto:hello@genjux.com`.
 
-- [ ] **Step 4: Run component and build checks**
+- [x] **Step 4: Run component and build checks**
 
 Run: `npm run test -- tests/components/site-shell.test.tsx tests/components/site-header.test.tsx && npm run lint && npm run build`
 
 Expected: the test suite and static export pass, with `/about`, `/changelog`, and `/contact` present in `out/`.
 
-- [ ] **Step 5: Commit shared pages and shell**
+- [x] **Step 5: Commit shared pages and shell**
 
 ```bash
 git add app components tests/components

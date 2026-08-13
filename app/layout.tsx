@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, JetBrains_Mono } from "next/font/google";
 import SiteFooter from "@/components/site-footer";
+import SiteHeader from "@/components/site-header";
 import "./globals.css";
 
 const geist = Geist({
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <body className={`${geist.variable} ${jetBrainsMono.variable}`}>
         <div className="site-frame">
+          <SiteHeader />
           <main id="main-content">{children}</main>
           <SiteFooter />
         </div>
