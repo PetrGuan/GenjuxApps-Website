@@ -166,7 +166,7 @@ git commit -m "chore: scaffold static Next.js site"
 - Consumes: the TypeScript alias created in Task 1 and public assets from the existing product sites.
 - Produces: `Product`, `products`, `getProduct(slug)`, `productSlugs`, and `studioRoutes`, used by every page and product UI component.
 
-- [ ] **Step 1: Write failing catalog tests**
+- [x] **Step 1: Write failing catalog tests**
 
 Create `tests/lib/products.test.ts`:
 
@@ -184,13 +184,13 @@ it("returns a product only for a supported slug", () => {
 });
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 Run: `npm run test -- tests/lib/products.test.ts`
 
 Expected: FAIL because `@/lib/products` does not exist.
 
-- [ ] **Step 3: Implement the typed catalog and navigation data**
+- [x] **Step 3: Implement the typed catalog and navigation data**
 
 Define the following interface in `lib/products.ts` and implement both records with their true URLs and approved copy:
 
@@ -211,7 +211,7 @@ export type Product = {
 
 Use the Bebilog App Store URL `https://apps.apple.com/us/app/bebilog-baby-tracker/id6759827652` and Nautilus App Store URL `https://apps.apple.com/us/app/nautilus-tech-news-reader/id6787639053`. Export `productSlugs`, `products`, and `getProduct(slug: string): Product | undefined`. In `lib/routes.ts`, export the four studio routes `/about`, `/changelog`, and `/contact` plus a `Products` anchor that points to `/#products`.
 
-- [ ] **Step 4: Copy the approved first-party artwork**
+- [x] **Step 4: Copy the approved first-party artwork**
 
 Run these explicit copies:
 
@@ -224,13 +224,13 @@ cp /Users/petr/Documents/GitHub/nautilus-website/assets/shots/home.jpg public/pr
 cp /Users/petr/Documents/GitHub/nautilus-website/assets/app-store-badge.svg public/products/nautilus/app-store-badge.svg
 ```
 
-- [ ] **Step 5: Run the catalog checks**
+- [x] **Step 5: Run the catalog checks**
 
 Run: `npm run test -- tests/lib/products.test.ts && npm run lint`
 
 Expected: all assertions pass and lint exits `0`.
 
-- [ ] **Step 6: Commit the content model**
+- [x] **Step 6: Commit the content model**
 
 ```bash
 git add lib/products.ts lib/routes.ts tests/lib/products.test.ts public/products
