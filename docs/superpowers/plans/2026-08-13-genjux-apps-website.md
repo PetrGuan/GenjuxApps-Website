@@ -73,7 +73,7 @@ tests/
 - Consumes: none.
 - Produces: `npm run dev`, `npm run lint`, `npm run test`, `npm run test:e2e`, and `npm run build`; all later tasks use the `@/*` alias and App Router layout.
 
-- [ ] **Step 1: Initialize dependencies and scripts**
+- [x] **Step 1: Initialize dependencies and scripts**
 
 Create `package.json` with these scripts and dependency families:
 
@@ -93,7 +93,7 @@ Create `package.json` with these scripts and dependency families:
 
 Install `next@16`, `react@19`, `react-dom@19`, `framer-motion`, `three`, `@react-three/fiber`, and `@react-three/drei` as runtime dependencies. Install `typescript`, `tailwindcss`, `@tailwindcss/postcss`, `eslint`, `eslint-config-next`, `vitest`, `jsdom`, `@testing-library/react`, `@testing-library/jest-dom`, `@testing-library/user-event`, `playwright`, and their matching type packages as development dependencies.
 
-- [ ] **Step 2: Configure static export and test environments**
+- [x] **Step 2: Configure static export and test environments**
 
 Set `next.config.ts` to the exact production constraint:
 
@@ -110,7 +110,7 @@ export default nextConfig;
 
 Configure Vitest with `environment: "jsdom"`, `setupFiles: ["./tests/setup.ts"]`, and the `@` alias resolving to the repository root. Configure Playwright with `baseURL: "http://127.0.0.1:3000"` and a `webServer` command of `npm run dev`.
 
-- [ ] **Step 3: Add the failing shell smoke test**
+- [x] **Step 3: Add the failing shell smoke test**
 
 Create `tests/components/site-shell.test.tsx` before implementing the layout:
 
@@ -124,25 +124,25 @@ it("identifies the studio in the shared footer", () => {
 });
 ```
 
-- [ ] **Step 4: Run the test to verify it fails**
+- [x] **Step 4: Run the test to verify it fails**
 
 Run: `npm run test -- tests/components/site-shell.test.tsx`
 
 Expected: FAIL because `@/components/site-footer` does not exist.
 
-- [ ] **Step 5: Implement the minimal application shell**
+- [x] **Step 5: Implement the minimal application shell**
 
 Create `app/layout.tsx` with the `Geist` and `JetBrains_Mono` font exports from `next/font/google`, a dark `body`, `lang="en"`, viewport metadata, and site metadata titled `Genjux — Independent Apps`. Create `app/globals.css` with CSS variables for `--void: #090a0d`, glass surfaces, coral, ivory, amber, blueprint grid rules, focus styles, and a `@media (prefers-reduced-motion: reduce)` rule that removes nonessential animation.
 
 Create a minimal `components/site-footer.tsx` that renders `<footer aria-label="Site footer">© 2026 Genjux. Independent software.</footer>`, then create a semantic `app/not-found.tsx` with a link back to `/`.
 
-- [ ] **Step 6: Run quality checks**
+- [x] **Step 6: Run quality checks**
 
 Run: `npm run test -- tests/components/site-shell.test.tsx && npm run lint && npm run build`
 
 Expected: all commands exit with status `0`, and `out/` exists after the build.
 
-- [ ] **Step 7: Commit the foundation**
+- [x] **Step 7: Commit the foundation**
 
 ```bash
 git add package.json package-lock.json next.config.ts tsconfig.json postcss.config.mjs eslint.config.mjs vitest.config.ts playwright.config.ts tests app components .gitignore
