@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nautilus — a quiet, beautiful reading room for Hacker News</title>
+<meta name="description" content="Nautilus is a free, native iOS reader for Hacker News. On-device AI thread summaries, a private briefing, Story Rules, Radar watchlists, offline reading, and hand-tuned Editions — no ads, no tracking, no account required." />
+<meta property="og:title" content="Nautilus — a quiet, beautiful reading room for Hacker News" />
+<meta property="og:description" content="On-device AI thread summaries, a private briefing, Story Rules, Radar, offline reading, hand-tuned Editions. Free, native iOS &amp; iPadOS." />
+<meta property="og:image" content="assets/icon-512.png" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+<link rel="apple-touch-icon" href="assets/icon-180.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..600&family=Hanken+Grotesk:wght@300..800&family=IBM+Plex+Mono:ital,wght@0,300..600;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --page:#1a140c;
+    --spec-ink:#efe3c8;
+    --spec-ink-soft:#b8a67f;
+    --spec-ink-faint:#7c6c4c;
+    --spec-accent:#e8631a;
+    --spec-rule:#3a2e1c;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(1200px 700px at 12% -10%, #2a2013 0%, transparent 55%),
+      radial-gradient(1000px 800px at 105% 8%, #241a10 0%, transparent 50%),
+      var(--page);
+    color:var(--spec-ink);
+    font-family:"Hanken Grotesk",system-ui,sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+  }
+  a{color:inherit}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px;position:relative;z-index:2}
+  ::selection{background:var(--spec-accent);color:#1a1206}
+
+  /* ---------- Nav ---------- */
+  nav.top{padding:30px 0;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:12px;font-family:"Fraunces",serif;font-weight:600;font-size:19px;letter-spacing:-.01em}
+  .brand img{width:30px;height:30px;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.5)}
+  .navlinks{display:flex;gap:30px;font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.04em}
+  .navlinks a{color:var(--spec-ink-soft);text-decoration:none;transition:color .2s}
+  .navlinks a:hover{color:var(--spec-accent)}
+  @media (max-width:760px){.navlinks{display:none}}
+
+  /* ---------- Hero ---------- */
+  header.mast{padding:56px 0 30px;display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+  .kicker{
+    font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.42em;
+    text-transform:uppercase;color:var(--spec-accent);margin-bottom:26px;
+    display:flex;align-items:center;gap:14px;
+  }
+  .kicker::after{content:"";height:1px;width:80px;background:linear-gradient(90deg,var(--spec-accent),transparent)}
+  h1.title{
+    font-family:"Fraunces",serif;font-weight:600;font-size:clamp(40px,5.6vw,72px);
+    line-height:1.03;letter-spacing:-.02em;color:var(--spec-ink);
+  }
+  h1.title em{font-style:italic;font-weight:340;color:var(--spec-accent)}
+  .lede{
+    margin-top:28px;max-width:520px;font-size:19px;line-height:1.62;color:var(--spec-ink-soft);
+    font-family:"Newsreader",serif;
+  }
+  .lede b{color:var(--spec-ink);font-weight:600}
+  .ctarow{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .cta{
+    font-family:"Hanken Grotesk",sans-serif;font-weight:700;font-size:14.5px;letter-spacing:.01em;
+    color:#1a1206;background:var(--spec-accent);padding:14px 24px;border-radius:100px;border:none;
+    text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:transform .2s,box-shadow .2s;
+  }
+  .cta:hover{transform:translateY(-2px);box-shadow:0 12px 26px -8px rgba(232,99,26,.55)}
+  .cta.ghost{background:transparent;color:var(--spec-ink);border:1px solid var(--spec-rule)}
+  .cta.ghost:hover{border-color:var(--spec-accent);box-shadow:none}
+  .freenote{margin-top:18px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--spec-ink-faint);letter-spacing:.03em}
+
+  .hero-shot{position:relative;display:flex;justify-content:center}
+  .hero-shot img{
+    width:100%;max-width:300px;border-radius:26px;
+    box-shadow:0 50px 90px -30px rgba(0,0,0,.85), 0 0 0 1px rgba(255,255,255,.06);
+    transform:rotate(2.2deg);
+  }
+  .hero-shot::after{
+    content:"";position:absolute;top:8%;left:50%;translate:-50% 0;width:340px;height:340px;
+    background:radial-gradient(circle,rgba(232,99,26,.22),transparent 65%);z-index:-1;filter:blur(4px);
+  }
+
+  .manifesto{margin-top:0;display:flex;flex-wrap:wrap;gap:12px}
+  .tenet{
+    font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.02em;
+    color:var(--spec-ink-soft);border:1px solid var(--spec-rule);border-radius:100px;
+    padding:9px 16px;background:rgba(255,255,255,.02);
+  }
+  .tenet b{color:var(--spec-accent);font-weight:500}
+
+  @media (max-width:900px){
+    header.mast{grid-template-columns:1fr;text-align:left}
+    .hero-shot{margin-top:20px;justify-content:flex-start}
+    .hero-shot img{transform:none}
+  }
+
+  /* ---------- Section chrome ---------- */
+  .sec{padding:100px 0 0}
+  .sec-head{max-width:640px;margin-bottom:56px}
+  .sec-no{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.3em;color:var(--spec-accent);text-transform:uppercase;margin-bottom:14px}
+  .sec-title{font-family:"Fraunces",serif;font-weight:560;font-size:clamp(30px,3.8vw,46px);letter-spacing:-.01em;color:var(--spec-ink)}
+  .sec-note{margin-top:16px;font-size:16px;color:var(--spec-ink-soft);font-family:"Newsreader",serif;line-height:1.6}
+
+  .tenets-bar{margin-top:56px;display:flex;flex-wrap:wrap;gap:12px}
+
+  /* ---------- Feature rows ---------- */
+  .feat{display:grid;grid-template-columns:.86fr 1.14fr;gap:64px;align-items:center;margin-bottom:120px}
+  .feat.rev{grid-template-columns:1.14fr .86fr}
+  .feat.rev .feat-copy{order:2}
+  .feat.rev .feat-shot{order:1}
+  .feat-shot{position:relative;display:flex;justify-content:center}
+  .feat-shot img{
+    width:100%;max-width:280px;border-radius:22px;
+    box-shadow:0 40px 80px -28px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.06);
+    transition:transform .5s cubic-bezier(.2,.8,.2,1);
+  }
+  .feat-shot:hover img{transform:translateY(-8px)}
+  .feat-no{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--spec-accent);margin-bottom:16px}
+  .feat-h{font-family:"Fraunces",serif;font-weight:560;font-size:clamp(24px,2.8vw,34px);letter-spacing:-.01em;line-height:1.1}
+  .feat-p{margin-top:16px;font-size:15.5px;color:var(--spec-ink-soft);font-family:"Newsreader",serif;line-height:1.65;max-width:440px}
+  .feat-p b{color:var(--spec-ink);font-weight:600}
+  .feat-tags{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
+  .feat-tag{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;color:var(--spec-ink-faint);border:1px solid var(--spec-rule);border-radius:6px;padding:4px 9px}
+
+  @media (max-width:880px){
+    .feat, .feat.rev{grid-template-columns:1fr;gap:36px}
+    .feat.rev .feat-copy, .feat.rev .feat-shot{order:initial}
+    .feat-shot img{max-width:220px}
+  }
+
+  /* ---------- Dense grid strip ---------- */
+  .stripgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .strip{border:1px solid var(--spec-rule);border-radius:16px;padding:22px 20px;background:linear-gradient(180deg,rgba(255,255,255,.025),transparent)}
+  .strip h4{font-family:"Hanken Grotesk",sans-serif;font-weight:700;font-size:14.5px;color:var(--spec-ink);margin-bottom:8px}
+  .strip p{font-size:12.5px;color:var(--spec-ink-soft);line-height:1.5;font-family:"Newsreader",serif}
+  @media (max-width:880px){.stripgrid{grid-template-columns:repeat(2,1fr)}}
+
+  /* ---------- Editions swatch gallery ---------- */
+  .ed-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .ed-card{border:1px solid var(--spec-rule);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.015)}
+  .ed-swatch{height:74px;position:relative}
+  .ed-swatch .pro-badge{position:absolute;top:9px;right:9px;font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;background:rgba(0,0,0,.35);color:#fff;padding:3px 7px;border-radius:100px}
+  .ed-info{padding:13px 15px 16px}
+  .ed-info .n{font-family:"Fraunces",serif;font-weight:600;font-size:15.5px}
+  .ed-info .t{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--spec-ink-faint);margin-top:4px}
+  @media (max-width:880px){.ed-grid{grid-template-columns:repeat(2,1fr)}}
+  .ed-more{margin-top:24px;font-family:"IBM Plex Mono",monospace;font-size:12.5px}
+  .ed-more a{color:var(--spec-accent);text-decoration:none;border-bottom:1px dashed var(--spec-accent)}
+
+  /* ---------- Open source panel ---------- */
+  .oss{
+    margin-top:120px;border:1px solid var(--spec-rule);border-radius:26px;overflow:hidden;
+    background:linear-gradient(135deg,#241a0f,#1b140c);position:relative;
+  }
+  .oss::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 100% 0,rgba(232,99,26,.14),transparent 60%)}
+  .oss-inner{position:relative;padding:56px 52px;display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start}
+  .oss h2{font-family:"Fraunces",serif;font-weight:560;font-size:clamp(28px,3.6vw,42px);line-height:1.06;letter-spacing:-.02em}
+  .oss h2 em{font-style:italic;color:var(--spec-accent)}
+  .oss p{margin-top:18px;color:var(--spec-ink-soft);font-family:"Newsreader",serif;font-size:16.5px;line-height:1.62;max-width:480px}
+  .oss code{font-family:"IBM Plex Mono",monospace;font-size:13.5px;background:rgba(255,255,255,.06);padding:2px 7px;border-radius:5px;color:var(--spec-ink)}
+  .stackrow{margin-top:26px;display:flex;gap:10px;flex-wrap:wrap}
+  .stackpill{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--spec-ink);border:1px solid var(--spec-rule);border-radius:100px;padding:7px 14px;background:rgba(255,255,255,.03)}
+  .oss-links{list-style:none;display:flex;flex-direction:column;gap:16px}
+  .oss-links li{display:flex;gap:13px;align-items:flex-start;font-size:14.5px;color:var(--spec-ink)}
+  .oss-links li::before{content:"◆";color:var(--spec-accent);font-size:11px;margin-top:4px}
+  .oss-links a{font-weight:600;text-decoration:none;border-bottom:1px solid var(--spec-rule);flex:0 0 172px}
+  .oss-links a:hover{border-color:var(--spec-accent);color:var(--spec-accent)}
+  .oss-links span{color:var(--spec-ink-soft);display:block;font-size:12.5px;margin-top:2px;font-family:"Newsreader",serif}
+  @media (max-width:880px){.oss-inner{grid-template-columns:1fr;padding:40px 30px}}
+
+  /* ---------- Pricing ---------- */
+  .price-row{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px}
+  .price-card{flex:1;min-width:220px;border:1px solid var(--spec-rule);border-radius:16px;padding:24px 22px;background:rgba(255,255,255,.02)}
+  .price-card.hi{border-color:var(--spec-accent);background:linear-gradient(180deg,rgba(232,99,26,.08),transparent)}
+  .price-card .amt{font-family:"Fraunces",serif;font-weight:600;font-size:30px;color:var(--spec-ink)}
+  .price-card .lbl{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--spec-ink-faint);margin-top:8px}
+  .price-card p{margin-top:10px;font-size:13.5px;color:var(--spec-ink-soft);font-family:"Newsreader",serif;line-height:1.5}
+
+  footer{
+    margin-top:100px;padding:40px 0 60px;border-top:1px solid var(--spec-rule);
+    display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  }
+  .foot-l{max-width:520px}
+  .foot-l p{font-size:12.5px;color:var(--spec-ink-faint);line-height:1.6;font-family:"Newsreader",serif}
+  .foot-links{display:flex;align-items:center;gap:22px;flex-wrap:wrap;font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.04em;align-content:flex-start}
+  .foot-links a{color:var(--spec-ink-soft);text-decoration:none}
+  .foot-links a:hover{color:var(--spec-accent)}
+
+  /* ---------- App Store badge ---------- */
+  .store-badge{height:44px;width:auto;display:block;transition:transform .2s,filter .2s}
+  a.cta.store{background:none;padding:0;border-radius:0;box-shadow:none}
+  a.cta.store:hover{transform:translateY(-2px);box-shadow:none}
+  a.cta.store:hover .store-badge{filter:brightness(1.15)}
+  .foot-links .store-badge{height:30px}
+
+  /* ---------- Mid-page repeat CTA ---------- */
+  .midcta{
+    margin:70px 0;padding:44px 40px;border-radius:22px;
+    background:linear-gradient(135deg,rgba(232,99,26,.14),rgba(232,99,26,.03));
+    border:1px solid var(--spec-rule);
+    display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  }
+  .midcta h3{font-family:"Fraunces",serif;font-weight:600;font-size:24px;color:var(--spec-ink)}
+  .midcta p{margin-top:8px;font-size:14px;color:var(--spec-ink-soft);font-family:"Newsreader",serif}
+  @media (max-width:640px){.midcta{padding:32px 26px}}
+
+  /* ---------- Sticky floating CTA ---------- */
+  .sticky-cta{
+    position:fixed;right:20px;bottom:20px;z-index:50;
+    display:flex;align-items:center;gap:12px;padding:10px 16px 10px 14px;border-radius:100px;
+    background:rgba(20,16,9,.92);backdrop-filter:blur(8px);border:1px solid var(--spec-rule);
+    box-shadow:0 18px 40px -14px rgba(0,0,0,.7);
+    opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .25s,transform .25s;
+  }
+  .sticky-cta.show{opacity:1;transform:translateY(0);pointer-events:auto}
+  .sticky-cta span{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--spec-ink-soft);white-space:nowrap}
+  .sticky-cta .store-badge{height:34px}
+  @media (max-width:520px){.sticky-cta span{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="top">
+    <div class="brand"><img src="assets/icon-180.png" alt="Nautilus icon" />Nautilus</div>
+    <div class="navlinks">
+      <a href="#features">Features</a>
+      <a href="#editions">Editions</a>
+      <a href="#underhood">Under the Hood</a>
+      <a href="#pricing">Pricing</a>
+      <a href="https://apps.apple.com/us/app/nautilus-tech-news-reader/id6787639053">App Store ↗</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="mast">
+    <div>
+      <div class="kicker">Free · Native iOS &amp; iPadOS</div>
+      <h1 class="title">A quiet, beautiful<br>reading room for<br><em>Hacker&nbsp;News.</em></h1>
+      <p class="lede">Nautilus is an independent native reader built around three ideas: <b>remember what you've read</b>, <b>understand what matters</b>, and give you a <b>private research layer</b> around the discussions you care about — all on-device, nothing uploaded.</p>
+      <div class="ctarow">
+        <a class="cta store" href="https://apps.apple.com/us/app/nautilus-tech-news-reader/id6787639053"><img class="store-badge" src="assets/app-store-badge.svg" alt="Download on the App Store" /></a>
+        <a class="cta ghost" href="#features">Explore the features</a>
+      </div>
+      <div class="freenote">Free, forever · no ads, no trackers, no account required</div>
+    </div>
+    <div class="hero-shot">
+      <img src="assets/shots/home.jpg" alt="Nautilus running on several iPads, showing the Top feed" />
+    </div>
+  </header>
+
+  <div class="tenets-bar">
+    <div class="tenet"><b>01</b>&nbsp; On-device AI — nothing is ever uploaded</div>
+    <div class="tenet"><b>02</b>&nbsp; Every feature is free, forever</div>
+    <div class="tenet"><b>03</b>&nbsp; Rust core + native UIKit — no Electron, no WebViews</div>
+    <div class="tenet"><b>04</b>&nbsp; Not affiliated with Hacker News or Y Combinator</div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="sec" id="features">
+    <div class="sec-head">
+      <div class="sec-no">01 — What it does</div>
+      <div class="sec-title">Every deep thread, understood in 30 seconds</div>
+      <p class="sec-note">The core reading experience — every feed, your full HN account, on-device AI, offline reading, and every research tool below — is entirely free. No ads, no tracking.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-copy">
+        <div class="feat-no">Understand the Discussion</div>
+        <h3 class="feat-h">The camps, the crux, and the one comment worth reading.</h3>
+        <p class="feat-p">Apple's on-device Foundation Models cluster a thread's arguments into agreeing and disagreeing camps, surface the crux of the debate, and cite every claim back to a real comment — distilled from the <b>whole</b> discussion, not just the top reply.</p>
+        <div class="feat-tags"><span class="feat-tag">ON-DEVICE AI</span><span class="feat-tag">NOTHING UPLOADED</span><span class="feat-tag">FREE</span></div>
+      </div>
+      <div class="feat-shot"><img src="assets/shots/understand.jpg" alt="Understand the Discussion — Opinion Map screen" /></div>
+    </div>
+
+    <div class="feat rev">
+      <div class="feat-copy">
+        <div class="feat-no">Private Briefing</div>
+        <h3 class="feat-h">A reading queue built from what you actually read.</h3>
+        <p class="feat-p">Quick (5m), Standard (15m), or Deep (30m) — Nautilus assembles a short queue from the stories you've read, saved, and followed, and refreshes it privately, on your own schedule. Built entirely on-device.</p>
+        <div class="feat-tags"><span class="feat-tag">SETTINGS &gt; PRIVATE BRIEFING</span><span class="feat-tag">LOCAL-ONLY</span></div>
+      </div>
+      <div class="feat-shot"><img src="assets/shots/briefing.jpg" alt="Private Briefing time-budget queue" /></div>
+    </div>
+
+    <div class="feat">
+      <div class="feat-copy">
+        <div class="feat-no">Story Rules</div>
+        <h3 class="feat-h">Shape your feed. See exactly why.</h3>
+        <p class="feat-p">Hide, dim, or highlight stories automatically by keyword, domain, author, score, and more — or collect matches, get notified, or exclude them from your Briefing. Every rule shows a live test preview before you save it.</p>
+        <div class="feat-tags"><span class="feat-tag">SETTINGS &gt; STORY RULES</span><span class="feat-tag">TRANSPARENT MATCHING</span></div>
+      </div>
+      <div class="feat-shot"><img src="assets/shots/rules.jpg" alt="Story Rules feed filtering screen" /></div>
+    </div>
+
+    <div class="feat rev">
+      <div class="feat-copy">
+        <div class="feat-no">Radar</div>
+        <h3 class="feat-h">Evidence-backed watchlists, not vibes.</h3>
+        <p class="feat-p">Track a technology, company, keyword, domain, GitHub repository, or recurring idea. Radar evaluates new stories and comments locally and surfaces matches over time — every claim cited back to its source. No reputation or karma scoring, ever.</p>
+        <div class="feat-tags"><span class="feat-tag">SETTINGS &gt; RADAR</span><span class="feat-tag">CITED EVIDENCE</span></div>
+      </div>
+      <div class="feat-shot"><img src="assets/shots/radar.jpg" alt="Radar watchlists screen" /></div>
+    </div>
+
+    <div class="feat">
+      <div class="feat-copy">
+        <div class="feat-no">Offline Library</div>
+        <h3 class="feat-h">Save it. Tag it. Read it anywhere.</h3>
+        <p class="feat-p">Save any story or article as an offline pack, attach personal notes and tags, and search your own library — all stored on-device. Optional private iCloud sync keeps it current across your devices, using your own iCloud database.</p>
+        <div class="feat-tags"><span class="feat-tag">OFFLINE PACKS</span><span class="feat-tag">OPTIONAL ICLOUD SYNC</span></div>
+      </div>
+      <div class="feat-shot"><img src="assets/shots/saved.jpg" alt="Saved offline library screen" /></div>
+    </div>
+
+    <div class="feat rev">
+      <div class="feat-copy">
+        <div class="feat-no">Opinion Map</div>
+        <h3 class="feat-h">See where a thread's camps disagree.</h3>
+        <p class="feat-p">A visual map of the strongest arguments on each side of a debate, generated fresh from the current comment tree. Floating paper, not floating opinions — every position is traceable to who actually said it.</p>
+        <div class="feat-tags"><span class="feat-tag">ON-DEVICE AI</span></div>
+      </div>
+      <div class="feat-shot"><img src="assets/shots/opinionmap.jpg" alt="Opinion Map, the camps" /></div>
+    </div>
+  </section>
+
+  <!-- DENSE GRID -->
+  <div class="midcta">
+    <div>
+      <h3>Still reading? You could be scrolling the real thing.</h3>
+      <p>Free, forever · no ads, no trackers, no account required</p>
+    </div>
+    <a class="cta store" href="https://apps.apple.com/us/app/nautilus-tech-news-reader/id6787639053"><img class="store-badge" src="assets/app-store-badge.svg" alt="Download on the App Store" /></a>
+  </div>
+
+  <section class="sec">
+    <div class="sec-head">
+      <div class="sec-no">02 — Built for iOS</div>
+      <div class="sec-title">Small native details, everywhere</div>
+      <p class="sec-note">The parts that don't fit in a screenshot, but you'll notice within a day of using it.</p>
+    </div>
+    <div class="stripgrid">
+      <div class="strip"><h4>Command Palette</h4><p>Full keyboard shortcuts and a searchable command palette with a hardware keyboard.</p></div>
+      <div class="strip"><h4>iPad Research Workspace</h4><p>Expands to three panes when space allows — reading, notes, and context side by side.</p></div>
+      <div class="strip"><h4>Home Screen Widget</h4><p>The front page, styled by your active Edition, right on your Home Screen.</p></div>
+      <div class="strip"><h4>Live Activities</h4><p>Track a story's score and comment count on the Lock Screen and in the Dynamic Island.</p></div>
+      <div class="strip"><h4>Thread Explorer</h4><p>Maps huge threads visually — new comments, OP replies, saved comments, and search matches at a glance.</p></div>
+      <div class="strip"><h4>Discussion Lineage</h4><p>Traces earlier submissions and closely related prior threads, so you never miss the real conversation.</p></div>
+      <div class="strip"><h4>Safari Extension</h4><p>Finds the Hacker News discussion for the page you're currently reading.</p></div>
+      <div class="strip"><h4>Spotlight &amp; Siri</h4><p>Search your library and jump back into threads system-wide.</p></div>
+    </div>
+  </section>
+
+  <!-- EDITIONS -->
+  <section class="sec" id="editions">
+    <div class="sec-head">
+      <div class="sec-no">03 — The Wardrobe</div>
+      <div class="sec-title">Restyle the entire app, instantly</div>
+      <p class="sec-note">Every screen reads from one set of design tokens. Swap the table of values and the whole app re-dresses live. Three Editions are free forever; a one-time purchase unlocks the rest of the gallery.</p>
+    </div>
+    <div class="ed-grid">
+      <div class="ed-card">
+        <div class="ed-swatch" style="background:#F3EAD4"></div>
+        <div class="ed-info"><div class="n">Almanac</div><div class="t">Free · Default</div></div>
+      </div>
+      <div class="ed-card">
+        <div class="ed-swatch" style="background:#0A0E0B"></div>
+        <div class="ed-info"><div class="n">Terminal</div><div class="t">Free</div></div>
+      </div>
+      <div class="ed-card">
+        <div class="ed-swatch" style="background:#ECEBE4"></div>
+        <div class="ed-info"><div class="n">Newsprint</div><div class="t">Free</div></div>
+      </div>
+      <div class="ed-card">
+        <div class="ed-swatch" style="background:#EADCC0"><span class="pro-badge">Pro</span></div>
+        <div class="ed-info"><div class="n">Sepia</div><div class="t">Unlock Editions</div></div>
+      </div>
+      <div class="ed-card">
+        <div class="ed-swatch" style="background:#EBEADB"><span class="pro-badge">Pro</span></div>
+        <div class="ed-info"><div class="n">Meadow</div><div class="t">Unlock Editions</div></div>
+      </div>
+      <div class="ed-card">
+        <div class="ed-swatch" style="background:#F5E7E4"><span class="pro-badge">Pro</span></div>
+        <div class="ed-info"><div class="n">Rose</div><div class="t">Unlock Editions</div></div>
+      </div>
+      <div class="ed-card">
+        <div class="ed-swatch" style="background:#0F1420"><span class="pro-badge">Pro</span></div>
+        <div class="ed-info"><div class="n">Midnight</div><div class="t">Unlock Editions</div></div>
+      </div>
+      <div class="ed-card">
+        <div class="ed-swatch" style="background:#16181C"><span class="pro-badge">Pro</span></div>
+        <div class="ed-info"><div class="n">Slate</div><div class="t">Unlock Editions</div></div>
+      </div>
+    </div>
+    <div class="ed-more"><a href="editions.html">Read the full Editions design language →</a></div>
+  </section>
+
+  <!-- UNDER THE HOOD -->
+  <section class="sec" id="underhood">
+    <div class="oss">
+      <div class="oss-inner">
+        <div>
+          <div class="sec-no" style="margin-bottom:16px">04 — Under the Hood</div>
+          <h2>Native UIKit.<br><em>Private</em> by construction.</h2>
+          <p>The reading engine is a shared Rust core — HTTP, caching, parsing, and the HN/Algolia clients — compiled to a native library via UniFFI and called directly from Swift. No Electron, no WebViews for the reading surface, and no server Nautilus operates that could see what you read.</p>
+          <div class="stackrow">
+            <span class="stackpill">Swift · UIKit</span>
+            <span class="stackpill">Rust · UniFFI</span>
+            <span class="stackpill">Apple Foundation Models</span>
+            <span class="stackpill">CloudKit</span>
+            <span class="stackpill">WidgetKit · ActivityKit</span>
+          </div>
+        </div>
+        <ul class="oss-links">
+          <li><a href="https://github.com/HackerNews/API">Official HN API</a><span>Nautilus reads Firebase + Algolia wherever it can</span></li>
+          <li><a href="https://petrguan.github.io/nautilus-privacy/">Privacy Policy</a><span>No ads, no analytics, no server that can see what you read</span></li>
+          <li><a href="editions.html">Editions Design Language</a><span>How the token system behind every theme works</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="sec" id="pricing">
+    <div class="sec-head">
+      <div class="sec-no">05 — Pricing</div>
+      <div class="sec-title">Free means free</div>
+      <p class="sec-note">Reading, on-device AI, offline packs, Story Rules, Radar, Private Briefing, and your own Hacker News account — every feature above is free forever. No subscriptions, anywhere.</p>
+    </div>
+    <div class="price-row">
+      <div class="price-card">
+        <div class="amt">$0</div>
+        <div class="lbl">Nautilus</div>
+        <p>Every feed, on-device AI, offline reading, Story Rules, Radar, Private Briefing, three Editions, your own HN account.</p>
+      </div>
+      <div class="price-card hi">
+        <div class="amt">$1.99</div>
+        <div class="lbl">Unlock Editions · one time</div>
+        <p>Unlocks the remaining five Editions forever. A single purchase, restored free across your devices. No subscription.</p>
+      </div>
+      <div class="price-card">
+        <div class="amt">$1.99–$9.99</div>
+        <div class="lbl">Tips · optional</div>
+        <p>Nice, Generous, or Legend — a separate, optional thank-you to support development. Never required.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-l">
+      <p>Nautilus is an independent app. It is not affiliated with, endorsed by, or operated by Hacker News or Y Combinator.</p>
+    </div>
+    <div class="foot-links">
+      <a href="https://apps.apple.com/us/app/nautilus-tech-news-reader/id6787639053"><img class="store-badge" src="assets/app-store-badge.svg" alt="Download on the App Store" /></a>
+      <a href="editions.html">Design Language</a>
+      <a href="https://petrguan.github.io/nautilus-privacy/">Privacy</a>
+    </div>
+  </footer>
+
+  <a class="sticky-cta" id="stickyCta" href="https://apps.apple.com/us/app/nautilus-tech-news-reader/id6787639053">
+    <span>Free, forever · no account required</span>
+    <img class="store-badge" src="assets/app-store-badge.svg" alt="Download on the App Store" />
+  </a>
+
+</div>
+<script>
+  (function(){
+    var sticky=document.getElementById('stickyCta');
+    var hero=document.querySelector('header.mast');
+    if(!sticky||!hero) return;
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ sticky.classList.toggle('show', !e.isIntersecting); });
+    }, {threshold:0});
+    io.observe(hero);
+  })();
+</script>
+</body>
+</html>

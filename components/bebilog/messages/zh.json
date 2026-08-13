@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "title": "Bebilog — 宝宝记录，化繁为简",
+    "description": "喂奶、睡眠、成长、疫苗……一个精心设计的 App，全部搞定。"
+  },
+  "nav": {
+    "features": "功能",
+    "pricing": "价格",
+    "download": "下载"
+  },
+  "hero": {
+    "badge": "iOS 已上线",
+    "badgeAndroid": "Android 即将推出",
+    "titleLine1": "宝宝记录，",
+    "titleLine2": "化繁为简。",
+    "subtitle": "喂奶、睡眠、成长、疫苗……一个精心设计的 App，全部搞定。数据洞察，助你从容育儿。",
+    "downloadIOS": "下载 iOS 版",
+    "androidComingSoon": "Android — 即将推出"
+  },
+  "features": {
+    "smartLog": {
+      "label": "智能记录",
+      "title": "说一句话，",
+      "titleHighlight": "全部搞定。",
+      "description": "Apple Intelligence 驱动。语音、文字或拍照托儿所日报——Smart Log 瞬间解析成多条记录。无需填表，无需反复点击。全部在设备端完成。"
+    },
+    "tracking": {
+      "label": "一站式追踪",
+      "title": "宝宝所需，",
+      "titleHighlight": "一键记录。",
+      "description": "12 种记录类型，由父母为父母设计。喂奶、睡眠、换尿布、成长……几秒搞定。"
+    },
+    "insights": {
+      "label": "数据洞察",
+      "title": "全貌，",
+      "titleHighlight": "尽在掌握。",
+      "description": "实时睡眠窗口和喂奶窗口，精准告知宝宝的最佳时机——不再猜测。六维成长分析、趋势追踪，还能生成专业报告与儿科医生分享。"
+    },
+    "predictions": {
+      "label": "智能预测",
+      "title": "未卜先知，",
+      "titleHighlight": "从容应对。",
+      "description": "Bebilog 学习宝宝的作息规律，智能预测下次喂奶和睡眠窗口。不再猜测——准时提醒。"
+    },
+    "growth": {
+      "label": "生长曲线",
+      "title": "医疗级别的",
+      "titleHighlight": "成长追踪。",
+      "description": "WHO 标准生长曲线 + z 值参考线。早产宝宝？INTERGROWTH-21st 早产儿专属曲线自动激活，显示矫正年龄。"
+    },
+    "vaccine": {
+      "label": "疫苗排程",
+      "title": "疫苗接种，",
+      "titleHighlight": "绝不遗漏。",
+      "description": "支持中国（NIP）、美国（CDC）、日本、欧洲疫苗计划。自动追踪剂次、最小间隔和减毒活疫苗规则。"
+    },
+    "food": {
+      "label": "辅食管理",
+      "title": "添加辅食，",
+      "titleHighlight": "信心满满。",
+      "description": "AI 生成 7 天分龄餐单。追踪过敏原引入状态，安全间隔提醒，让辅食添加有据可循。"
+    }
+  },
+  "grid": {
+    "title": "Bebilog 还能做什么？",
+    "subtitle": "远不止这些——全部包含。",
+    "items": {
+      "multiBaby": { "title": "多宝宝", "description": "独立管理每个宝宝" },
+      "appleWatch": { "title": "Apple Watch", "description": "抬腕即可记录" },
+      "siri": { "title": "Siri 快捷指令", "description": "解放双手" },
+      "widget": { "title": "桌面小组件", "description": "主屏幕快速记录" },
+      "wholeBrain": { "title": "全脑育儿", "description": "科学育儿策略" },
+      "earlyEd": { "title": "早教中心", "description": "分龄活动推荐" },
+      "doctorReport": { "title": "医生报告", "description": "导出 PDF 摘要" },
+      "languages": { "title": "31 种语言", "description": "全球本地化支持" },
+      "preterm": { "title": "早产模式", "description": "矫正月龄 + 专属曲线" },
+      "alerts": { "title": "智能提醒", "description": "及时提醒 & 预设方案" },
+      "icloud": { "title": "iCloud 同步", "description": "跨设备备份同步" },
+      "piggyBank": { "title": "存钱罐", "description": "宝宝储蓄追踪" }
+    }
+  },
+  "privacy": {
+    "title": "宝宝的数据，",
+    "titleHighlight": "只属于你。",
+    "subtitle": "无需注册。没有服务器。没有追踪。只有你和宝宝的数据。",
+    "local": {
+      "title": "100% 本地存储",
+      "description": "所有数据存储在你的设备上。无需注册，不依赖云端。随时离线可用。"
+    },
+    "icloud": {
+      "title": "iCloud 同步",
+      "description": "可选通过 iCloud 在你的 Apple 设备间同步。Apple 端到端加密——我们永远看不到你的数据。"
+    },
+    "noTracking": {
+      "title": "零追踪",
+      "description": "没有分析埋点，没有广告，没有第三方 SDK。我们不收集、不出售、不分享任何个人信息。"
+    },
+    "onDevice": {
+      "title": "端侧 AI",
+      "description": "Smart Log 使用 Apple Intelligence，完全在设备端处理。宝宝的数据绝不离开你的手机。"
+    }
+  },
+  "pricing": {
+    "title": "简单透明的定价。",
+    "subtitle": "免费开始，随时升级。",
+    "free": {
+      "name": "免费版",
+      "price": "$0",
+      "period": "永久免费",
+      "features": [
+        "全部 12 种记录类型",
+        "WHO 生长曲线",
+        "疫苗排程",
+        "智能预测",
+        "医生 PDF 报告导出",
+        "多宝宝支持",
+        "Apple Watch"
+      ]
+    },
+    "pro": {
+      "name": "专业版",
+      "badge": "最超值",
+      "price": "$5.99",
+      "period": "终身买断",
+      "altPricing": "或 $0.99/月 · $2.99/年",
+      "features": [
+        "包含免费版全部功能",
+        "辅食管理 + AI 餐单",
+        "Siri 快捷指令",
+        "桌面小组件",
+        "自定义 App 图标",
+        "无限照片与媒体",
+        "iCloud 同步与备份"
+      ]
+    }
+  },
+  "footerCTA": {
+    "title": "今天就开始记录。",
+    "subtitle": "免费使用，无需注册。"
+  },
+  "midCTA": {
+    "title": "还在犹豫？",
+    "subtitle": "免费使用，无需注册 —— 今天就试试。"
+  },
+  "footer": {
+    "privacy": "隐私政策",
+    "terms": "使用条款",
+    "support": "技术支持",
+    "copyright": "© 2026 Bebilog. 保留所有权利。"
+  }
+}

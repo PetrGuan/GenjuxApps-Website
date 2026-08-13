@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "title": "Bebilog — Baby Tracking, Simplified",
+    "description": "Track feeding, sleep, growth, vaccines, and more — all in one beautifully designed app."
+  },
+  "nav": {
+    "features": "Features",
+    "pricing": "Pricing",
+    "download": "Download"
+  },
+  "hero": {
+    "badge": "Available on iOS",
+    "badgeAndroid": "Android coming soon",
+    "titleLine1": "Baby tracking,",
+    "titleLine2": "simplified.",
+    "subtitle": "Track feeding, sleep, growth, vaccines, and more — all in one beautifully designed app. Insights that help you care with confidence.",
+    "downloadIOS": "Download for iOS",
+    "androidComingSoon": "Android — Coming Soon"
+  },
+  "features": {
+    "smartLog": {
+      "label": "Smart Log",
+      "title": "Just say it.",
+      "titleHighlight": "Done.",
+      "description": "Powered by Apple Intelligence. Speak, type, or snap a photo of a daycare note — Smart Log parses it into multiple records instantly. No forms, no tapping. All processed on-device."
+    },
+    "tracking": {
+      "label": "All-in-One Tracking",
+      "title": "Everything your baby needs,",
+      "titleHighlight": "one tap away.",
+      "description": "12 record types designed by parents, for parents. Log feeds, sleep, diapers, growth, and more in seconds — not minutes."
+    },
+    "insights": {
+      "label": "Insights",
+      "title": "See the",
+      "titleHighlight": "full picture.",
+      "description": "Real-time Sleep Window and Feed Window tell you when your baby is ready — no guessing. Plus six-dimension growth analysis, trend spotting, and professional reports for your pediatrician."
+    },
+    "predictions": {
+      "label": "Smart Predictions",
+      "title": "Know when,",
+      "titleHighlight": "before it happens.",
+      "description": "Bebilog learns your baby's rhythm and predicts the next feed and sleep window. No more guessing — just timely notifications when it's time."
+    },
+    "growth": {
+      "label": "Growth Charts",
+      "title": "Medical-grade",
+      "titleHighlight": "growth tracking.",
+      "description": "WHO standard growth charts with z-score references. Born early? INTERGROWTH-21st preterm charts activate automatically with corrected age display."
+    },
+    "vaccine": {
+      "label": "Vaccine Schedule",
+      "title": "Never miss",
+      "titleHighlight": "a shot.",
+      "description": "Smart scheduling for China (NIP), US (CDC), Japan, and Europe. Tracks doses, minimum intervals, and live-vaccine rules automatically."
+    },
+    "food": {
+      "label": "Baby Food Hub",
+      "title": "Introduce food",
+      "titleHighlight": "with confidence.",
+      "description": "AI-powered 7-day meal plans by age stage. Track allergen introduction with clear status indicators and safety cooldown windows."
+    }
+  },
+  "grid": {
+    "title": "What else can Bebilog do?",
+    "subtitle": "And so much more — all included.",
+    "items": {
+      "multiBaby": { "title": "Multi-Baby", "description": "Manage siblings independently" },
+      "appleWatch": { "title": "Apple Watch", "description": "Log from your wrist" },
+      "siri": { "title": "Siri Shortcuts", "description": "Hands-free logging" },
+      "widget": { "title": "Home Widget", "description": "Quick-add from home screen" },
+      "wholeBrain": { "title": "Whole Brain", "description": "Parenting strategies" },
+      "earlyEd": { "title": "Early Education", "description": "Age-specific activities" },
+      "doctorReport": { "title": "Doctor Reports", "description": "Export PDF summaries" },
+      "languages": { "title": "31 Languages", "description": "Localized worldwide" },
+      "preterm": { "title": "Preterm Mode", "description": "Corrected age + special charts" },
+      "alerts": { "title": "Smart Alerts", "description": "Timely reminders & presets" },
+      "icloud": { "title": "iCloud Sync", "description": "Backup & sync across devices" },
+      "piggyBank": { "title": "Piggy Bank", "description": "Savings tracker for baby" }
+    }
+  },
+  "privacy": {
+    "title": "Your baby's data stays",
+    "titleHighlight": "yours.",
+    "subtitle": "No accounts. No servers. No tracking. Just you and your baby's data.",
+    "local": {
+      "title": "100% Local Storage",
+      "description": "All data lives on your device. No sign-up, no cloud dependency. Works offline, always."
+    },
+    "icloud": {
+      "title": "iCloud Sync",
+      "description": "Optionally sync across your Apple devices via iCloud. End-to-end encrypted by Apple — we never see your data."
+    },
+    "noTracking": {
+      "title": "Zero Tracking",
+      "description": "No analytics, no ads, no third-party SDKs. We don't collect, sell, or share any personal information."
+    },
+    "onDevice": {
+      "title": "On-Device AI",
+      "description": "Smart Log uses Apple Intelligence processed entirely on your device. Your baby's data never leaves your phone."
+    }
+  },
+  "pricing": {
+    "title": "Simple, honest pricing.",
+    "subtitle": "Start free. Upgrade when you're ready.",
+    "free": {
+      "name": "Free",
+      "price": "$0",
+      "period": "Forever free",
+      "features": [
+        "All 12 record types",
+        "WHO growth charts",
+        "Vaccine scheduling",
+        "Smart predictions",
+        "Doctor PDF export",
+        "Multi-baby support",
+        "Apple Watch"
+      ]
+    },
+    "pro": {
+      "name": "Pro",
+      "badge": "BEST VALUE",
+      "price": "$5.99",
+      "period": "lifetime",
+      "altPricing": "Or $0.99/mo · $2.99/yr",
+      "features": [
+        "Everything in Free",
+        "Baby Food Hub + AI meals",
+        "Siri Shortcuts",
+        "Home Widget",
+        "Custom app icons",
+        "Unlimited photos & media",
+        "iCloud sync & backup"
+      ]
+    }
+  },
+  "footerCTA": {
+    "title": "Start tracking today.",
+    "subtitle": "Free to use. No account needed."
+  },
+  "midCTA": {
+    "title": "Still deciding?",
+    "subtitle": "Free to use, no account needed — try it today."
+  },
+  "footer": {
+    "privacy": "Privacy Policy",
+    "terms": "Terms",
+    "support": "Support",
+    "copyright": "© 2026 Bebilog. All rights reserved."
+  }
+}

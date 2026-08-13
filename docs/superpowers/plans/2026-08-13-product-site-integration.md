@@ -69,7 +69,7 @@ tests/
 - Consumes: the existing Genjux home card links.
 - Produces: browser expectations that remain red until the product sites in Tasks 2–3 replace the simplified pages.
 
-- [ ] **Step 1: Add failing integrated-product browser cases**
+- [x] **Step 1: Add failing integrated-product browser cases**
 
 Add these cases to `tests/e2e/site.spec.ts`:
 
@@ -92,7 +92,7 @@ test("Nautilus card opens the complete Nautilus site and its Editions route", as
 });
 ```
 
-- [ ] **Step 2: Run the browser contract to verify it fails**
+- [x] **Step 2: Run the browser contract to verify it fails**
 
 Run: `npm run test:e2e`
 
@@ -119,7 +119,7 @@ Expected: both new cases fail because Genjux currently renders simplified produc
 - Consumes: `SiteHeader`, `SiteFooter`, and the existing `Product` catalog.
 - Produces: `(studio)` pages with shared chrome and product catalog routes `"/apps/bebilog" | "/apps/nautilus"` for Tasks 2–3.
 
-- [ ] **Step 1: Write the failing studio-shell test**
+- [x] **Step 1: Write the failing studio-shell test**
 
 Create `tests/components/studio-layout.test.tsx`:
 
@@ -134,13 +134,13 @@ it("keeps Genjux chrome inside the studio route group", () => {
 });
 ```
 
-- [ ] **Step 2: Run the studio-shell test to verify it fails**
+- [x] **Step 2: Run the studio-shell test to verify it fails**
 
 Run: `npm run test -- tests/components/studio-layout.test.tsx`
 
 Expected: FAIL because `app/(studio)/layout.tsx` does not exist.
 
-- [ ] **Step 3: Move studio routes and remove duplicate detail-page ownership**
+- [x] **Step 3: Move studio routes and remove duplicate detail-page ownership**
 
 Create `app/(studio)/layout.tsx`:
 
@@ -161,13 +161,13 @@ export default function StudioLayout({ children }: Readonly<{ children: React.Re
 
 Move the four studio pages into `(studio)` without changing their JSX. Reduce `app/layout.tsx` to document metadata, fonts, `<html>`, `<body>`, and `{children}`. Update `Product["route"]` to `"/apps/bebilog" | "/apps/nautilus"`, keep the catalog records at those exact values, update the catalog/card tests to assert both exact routes, and delete the previous generic `[slug]` detail page/component/test.
 
-- [ ] **Step 4: Run route and static-export checks**
+- [x] **Step 4: Run route and static-export checks**
 
 Run: `npm run test -- tests/components/studio-layout.test.tsx tests/lib/products.test.ts tests/components/product-card.test.tsx && npm run lint && npm run build`
 
 Expected: all tests pass; `out/index.html`, `out/about.html`, `out/changelog.html`, and `out/contact.html` still exist; no `out/apps/bebilog/index.html` is required yet.
 
-- [ ] **Step 5: Commit the shell boundary**
+- [x] **Step 5: Commit the shell boundary**
 
 ```bash
 git add app lib/products.ts tests/lib/products.test.ts tests/components/product-card.test.tsx tests/components/studio-layout.test.tsx
@@ -218,7 +218,7 @@ git commit -m "refactor: isolate product routes from studio shell"
 - Consumes: original Bebilog components, feature visualizations, `en.json`, `zh.json`, source constants, and images from `/Users/petr/Documents/GitHub/bebilog-website`.
 - Produces: `BebilogSite({ locale }: { locale: "en" | "zh" })`, rendered by `/apps/bebilog` with `locale="en"` and by generated locale routes.
 
-- [ ] **Step 1: Write failing locale-data tests**
+- [x] **Step 1: Write failing locale-data tests**
 
 Create `tests/lib/bebilog-locale.test.ts`:
 
@@ -232,13 +232,13 @@ it("keeps English as the default product language", () => {
 });
 ```
 
-- [ ] **Step 2: Run the locale-data test to verify it fails**
+- [x] **Step 2: Run the locale-data test to verify it fails**
 
 Run: `npm run test -- tests/lib/bebilog-locale.test.ts`
 
 Expected: FAIL because `components/bebilog/data.ts` does not exist.
 
-- [ ] **Step 3: Copy the Bebilog implementation into a scoped component boundary**
+- [x] **Step 3: Copy the Bebilog implementation into a scoped component boundary**
 
 Install `next-intl` with `npm install next-intl`. Copy the listed source components/features and `i18n/messages/en.json`, `i18n/messages/zh.json`, and `lib/constants.ts` into `components/bebilog`; replace their source aliases so internal imports begin with `@/components/bebilog/`. Export `bebilogMessages` and `supportedBebilogLocales` from `data.ts`.
 
@@ -246,7 +246,7 @@ Create `BebilogSite` with a `NextIntlClientProvider` receiving the selected mess
 
 Copy the four listed public files into `public/apps/bebilog/images/`, then change migrated image paths from `/images/` to `/apps/bebilog/images/`. Scope the copied body variables and selection rules beneath `.bebilog-site`; do not emit nested `<html>` or `<body>` elements.
 
-- [ ] **Step 4: Create static default and locale routes**
+- [x] **Step 4: Create static default and locale routes**
 
 Create the direct default page:
 
@@ -260,28 +260,24 @@ export default function BebilogDefaultPage() {
 
 Create `[locale]/page.tsx` with `dynamicParams = false`, `generateStaticParams()` returning `{ locale: "en" }` and `{ locale: "zh" }`, and `notFound()` for any locale other than those two. Use Bebilog’s existing English and Chinese metadata content with route-local canonical paths.
 
-- [ ] **Step 5: Run Bebilog verification**
+- [x] **Step 5: Run Bebilog verification**
 
-Run: `npm run test -- tests/lib/bebilog-locale.test.ts && npm run lint && npm run build && test -f out/apps/bebilog/index.html && test -f out/apps/bebilog/en/index.html && test -f out/apps/bebilog/zh/index.html`
+Run: `npm run test -- tests/lib/bebilog-locale.test.ts && npm run lint && npm run build && test -f out/apps/bebilog.html && test -f out/apps/bebilog/en.html && test -f out/apps/bebilog/zh.html`
 
 Expected: locale test passes; all three Bebilog paths are statically generated.
 
-- [ ] **Step 6: Commit the Bebilog migration**
+- [x] **Step 6: Commit the Bebilog migration**
 
 ```bash
 git add app/apps/bebilog components/bebilog public/apps/bebilog app/globals.css package.json package-lock.json tests/lib/bebilog-locale.test.ts
 git commit -m "feat: integrate Bebilog product site"
 ```
 
-### Task 3: Migrate Nautilus’s home and Editions pages
+### Task 3: Copy Nautilus’s original static site unchanged
 
 **Files:**
-- Create: `components/nautilus/NautilusSite.tsx`
-- Create: `components/nautilus/NautilusEditions.tsx`
-- Create: `components/nautilus/NautilusStickyCta.tsx`
-- Create: `components/nautilus/nautilus.module.css`
-- Create: `app/apps/nautilus/page.tsx`
-- Create: `app/apps/nautilus/editions/page.tsx`
+- Create: `public/apps/nautilus/index.html`
+- Create: `public/apps/nautilus/editions.html`
 - Create: `public/apps/nautilus/assets/app-store-badge.svg`
 - Create: `public/apps/nautilus/assets/favicon-32.png`
 - Create: `public/apps/nautilus/assets/icon-180.png`
@@ -295,55 +291,39 @@ git commit -m "feat: integrate Bebilog product site"
 - Create: `public/apps/nautilus/assets/shots/rules.jpg`
 - Create: `public/apps/nautilus/assets/shots/saved.jpg`
 - Create: `public/apps/nautilus/assets/shots/understand.jpg`
-- Create: `tests/components/nautilus-site.test.tsx`
+- Modify: `lib/products.ts`
+- Modify: `tests/lib/products.test.ts`
+- Modify: `tests/components/product-card.test.tsx`
+- Modify: `tests/e2e/site.spec.ts`
 
 **Interfaces:**
 - Consumes: `/Users/petr/Documents/GitHub/nautilus-website/index.html`, `editions.html`, and all listed assets.
-- Produces: `NautilusSite`, `NautilusEditions`, and `NautilusStickyCta`; static routes at `/apps/nautilus` and `/apps/nautilus/editions`.
+- Produces: the original Nautilus documents at `/apps/nautilus/index.html` and `/apps/nautilus/editions.html`; `Product.route` changes to `"/apps/nautilus/index.html"`.
 
-- [ ] **Step 1: Write failing Nautilus navigation tests**
+- [x] **Step 1: Update the existing failing Nautilus browser expectation**
 
-Create `tests/components/nautilus-site.test.tsx`:
+In `tests/e2e/site.spec.ts`, change the Nautilus destination assertion to `/\/apps\/nautilus\/index\.html$/` and the Editions assertion to `/\/apps\/nautilus\/editions\.html$/`. Update the catalog and card assertions to expect `/apps/nautilus/index.html`.
 
-```tsx
-import { render, screen } from "@testing-library/react";
-import NautilusSite from "@/components/nautilus/NautilusSite";
+- [x] **Step 2: Run the Nautilus browser contract to verify it still fails**
 
-it("keeps Nautilus Editions inside Genjux", () => {
-  render(<NautilusSite />);
-  expect(screen.getByRole("link", { name: /editions/i })).toHaveAttribute("href", "/apps/nautilus/editions");
-  expect(screen.getByRole("heading", { name: /quiet, beautiful reading room/i })).toBeInTheDocument();
-});
-```
+Run: `npm run test:e2e`
 
-- [ ] **Step 2: Run the Nautilus test to verify it fails**
+Expected: the Bebilog case passes after Task 2, while the Nautilus case fails because the original static files are absent.
 
-Run: `npm run test -- tests/components/nautilus-site.test.tsx`
+- [x] **Step 3: Copy the source document and assets without translation**
 
-Expected: FAIL because `NautilusSite` does not exist.
+Copy `index.html`, `editions.html`, and the complete `assets/` directory from `/Users/petr/Documents/GitHub/nautilus-website` to `public/apps/nautilus/`. Do not alter the copied HTML: relative `assets/` URLs and `editions.html` navigation remain correct under this directory. Update the Nautilus catalog route and its unit/component assertions to `/apps/nautilus/index.html`.
 
-- [ ] **Step 3: Translate the source HTML into scoped components without changing its content**
+- [x] **Step 4: Run static-document verification**
 
-Copy all listed assets to `public/apps/nautilus/assets/`. Transcribe `index.html` into semantic React markup in `NautilusSite`: top navigation, masthead, all source sections, pricing, footer, and the sticky CTA. Transcribe `editions.html` into `NautilusEditions`.
+Run: `npm run test -- tests/lib/products.test.ts tests/components/product-card.test.tsx && npm run lint && npm run build && test -f out/apps/nautilus/index.html && test -f out/apps/nautilus/editions.html && npm run test:e2e`
 
-Move source CSS into `nautilus.module.css` and prefix every root selector with `.nautilusSite` or `.nautilusEditions`; replace every `assets/` reference with `/apps/nautilus/assets/`. Replace only the original `editions.html` destinations with `/apps/nautilus/editions`. Keep App Store and privacy links unchanged.
+Expected: the unchanged Nautilus title and Editions navigation pass the browser contract, and both source documents appear in the static output.
 
-Implement `NautilusStickyCta` as a client component that toggles a `data-visible` attribute after the user scrolls beyond the masthead. Its static anchor remains visible in the page markup when JavaScript is absent.
-
-- [ ] **Step 4: Add static Nautilus routes**
-
-Create `app/apps/nautilus/page.tsx` and `app/apps/nautilus/editions/page.tsx`; each exports truthful source-derived metadata and renders the corresponding component without `SiteHeader` or `SiteFooter`.
-
-- [ ] **Step 5: Run Nautilus verification**
-
-Run: `npm run test -- tests/components/nautilus-site.test.tsx && npm run lint && npm run build && test -f out/apps/nautilus/index.html && test -f out/apps/nautilus/editions/index.html`
-
-Expected: the navigation test passes and both Nautilus routes exist in the static output.
-
-- [ ] **Step 6: Commit the Nautilus migration**
+- [x] **Step 5: Commit the Nautilus source copy**
 
 ```bash
-git add app/apps/nautilus components/nautilus public/apps/nautilus tests/components/nautilus-site.test.tsx
+git add public/apps/nautilus lib/products.ts tests/lib/products.test.ts tests/components/product-card.test.tsx tests/e2e/site.spec.ts
 git commit -m "feat: integrate Nautilus product site"
 ```
 
@@ -356,17 +336,17 @@ git commit -m "feat: integrate Nautilus product site"
 - Consumes: the static routes and components completed in Tasks 1–3.
 - Produces: browser coverage for default-English Bebilog, Nautilus handoff, scoped pages, and updated local-project documentation.
 
-- [ ] **Step 1: Update developer documentation**
+- [x] **Step 1: Update developer documentation**
 
 Replace the README product-assets section with explicit source-to-destination mappings for `public/apps/bebilog` and `public/apps/nautilus`. Add the English-default product paths and the `npm run test:e2e` verification command.
 
-- [ ] **Step 2: Run the full final verification suite after Tasks 2–3 are complete**
+- [x] **Step 2: Run the full final verification suite after Tasks 2–3 are complete**
 
 Run: `npm run lint && npm run test && npm run build && npm run test:e2e && git status --short`
 
 Expected: lint has no errors, unit tests pass, static output includes studio and all product routes, browser tests pass, and status lists only README/test files before commit.
 
-- [ ] **Step 3: Commit final integration verification**
+- [x] **Step 3: Commit final integration verification**
 
 ```bash
 git add README.md tests/e2e/site.spec.ts

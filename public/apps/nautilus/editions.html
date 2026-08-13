@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nautilus — Editions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..600&family=Hanken+Grotesk:wght@300..800&family=IBM+Plex+Mono:ital,wght@0,300..600;1,400&family=Libre+Franklin:wght@300..900&family=Archivo:wght@400..900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --page:#1a140c;
+    --page-panel:#221a10;
+    --spec-ink:#efe3c8;
+    --spec-ink-soft:#b8a67f;
+    --spec-accent:#e8631a;
+    --spec-rule:#3a2e1c;
+    --maxw:1240px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(1200px 700px at 15% -10%, #2a2013 0%, transparent 55%),
+      radial-gradient(1000px 800px at 110% 10%, #241a10 0%, transparent 50%),
+      var(--page);
+    color:var(--spec-ink);
+    font-family:"Hanken Grotesk",system-ui,sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    padding:0 0 120px;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px;position:relative;z-index:2}
+
+  /* ---------- Masthead ---------- */
+  header.mast{padding:88px 0 40px;border-bottom:1px solid var(--spec-rule)}
+  .kicker{
+    font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.42em;
+    text-transform:uppercase;color:var(--spec-accent);margin-bottom:26px;
+    display:flex;align-items:center;gap:14px;
+  }
+  .kicker::after{content:"";height:1px;width:120px;background:linear-gradient(90deg,var(--spec-accent),transparent)}
+  h1.title{
+    font-family:"Fraunces",serif;font-weight:600;font-size:clamp(52px,8vw,116px);
+    line-height:.92;letter-spacing:-.02em;color:var(--spec-ink);
+  }
+  h1.title em{font-style:italic;font-weight:340;color:var(--spec-accent)}
+  .lede{
+    margin-top:34px;max-width:720px;font-size:20px;line-height:1.62;color:var(--spec-ink-soft);
+    font-family:"Newsreader",serif;
+  }
+  .lede b{color:var(--spec-ink);font-weight:600}
+  .manifesto{
+    margin-top:40px;display:flex;flex-wrap:wrap;gap:14px;
+  }
+  .tenet{
+    font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.02em;
+    color:var(--spec-ink-soft);border:1px solid var(--spec-rule);border-radius:100px;
+    padding:9px 16px;background:rgba(255,255,255,.02);
+  }
+  .tenet b{color:var(--spec-accent);font-weight:500}
+
+  /* ---------- Section chrome ---------- */
+  .sec{padding:74px 0 0}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:24px;margin-bottom:36px;flex-wrap:wrap}
+  .sec-no{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.3em;color:var(--spec-accent);text-transform:uppercase}
+  .sec-title{font-family:"Fraunces",serif;font-weight:520;font-size:clamp(28px,3.6vw,44px);letter-spacing:-.01em;color:var(--spec-ink)}
+  .sec-note{font-size:15px;color:var(--spec-ink-soft);max-width:440px;font-family:"Newsreader",serif}
+
+  /* ---------- Tokens anatomy ---------- */
+  .tokens{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .tok{border:1px solid var(--spec-rule);border-radius:16px;padding:22px 20px;background:linear-gradient(180deg,rgba(255,255,255,.025),transparent)}
+  .tok h4{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--spec-accent);margin-bottom:16px}
+  .tok p{font-size:13.5px;color:var(--spec-ink-soft);line-height:1.55}
+  .swz{display:flex;gap:7px;margin-bottom:14px}
+  .swz span{width:26px;height:26px;border-radius:7px;border:1px solid rgba(255,255,255,.12)}
+  .scale{display:flex;align-items:baseline;gap:10px;color:var(--spec-ink)}
+  .scale i{font-style:normal;font-family:"Fraunces",serif}
+  .rhythm{display:flex;flex-direction:column;gap:6px}
+  .rhythm span{height:6px;border-radius:3px;background:var(--spec-accent);opacity:.85}
+  .motion{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--spec-ink);letter-spacing:.02em}
+
+  /* ---------- Editions gallery ---------- */
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:start}
+  .ed{position:relative}
+  .ed-tag{
+    position:absolute;top:-12px;right:14px;z-index:5;
+    font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+    padding:6px 12px;border-radius:100px;font-weight:600;
+  }
+  .ed-tag.free{background:var(--spec-accent);color:#1a1206}
+  .ed-tag.pro{background:linear-gradient(120deg,#f6e7b8,#d9b25a);color:#241a10}
+
+  /* Phone frame */
+  .phone{
+    border-radius:38px;padding:12px;background:#05070a;
+    box-shadow:0 40px 80px -30px rgba(0,0,0,.85), 0 0 0 1px rgba(255,255,255,.06), inset 0 0 0 2px rgba(255,255,255,.03);
+    transition:transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s;
+  }
+  .ed:hover .phone{transform:translateY(-10px);box-shadow:0 55px 90px -28px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.09)}
+  .screen{border-radius:28px;overflow:hidden;position:relative;height:610px}
+
+  /* meta under phone */
+  .ed-meta{margin-top:22px;padding:0 4px}
+  .ed-name{font-family:"Fraunces",serif;font-weight:560;font-size:26px;letter-spacing:-.01em;display:flex;align-items:center;gap:12px}
+  .ed-name small{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;color:var(--spec-ink-soft);text-transform:uppercase;font-weight:400}
+  .ed-desc{margin-top:9px;font-size:14px;color:var(--spec-ink-soft);font-family:"Newsreader",serif;line-height:1.55}
+  .ed-swatches{display:flex;gap:6px;margin-top:15px}
+  .ed-swatches span{width:22px;height:22px;border-radius:6px;border:1px solid rgba(255,255,255,.14)}
+  .ed-type{margin-top:14px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.03em;color:var(--spec-ink-soft)}
+  .ed-type b{color:var(--spec-ink);font-weight:500}
+
+  /* ================================================================
+     THE THREAD SCREEN — identical markup for every edition.
+     Only the CSS custom properties below change per edition, which
+     is exactly how the app's token system will work.
+     ================================================================ */
+  .screen{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-ui);
+    display:flex;flex-direction:column;
+  }
+  .screen *{transition:none}
+  .nav{
+    display:flex;align-items:center;gap:12px;padding:16px 16px 12px;
+    border-bottom:1px solid var(--rule);
+  }
+  .nav .chev{color:var(--accent);font-size:18px;font-weight:700}
+  .nav .nav-t{font-family:var(--font-ui);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+  .nav .dots{margin-left:auto;color:var(--ink-soft);letter-spacing:2px}
+
+  .story{padding:16px 18px 14px}
+  .story h3{font-family:var(--font-read);font-weight:var(--read-wt,600);font-size:20px;line-height:1.22;letter-spacing:-.01em;color:var(--ink)}
+  .story .meta{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:var(--font-ui);font-size:11.5px;color:var(--ink-soft)}
+  .story .dom{color:var(--accent);font-weight:600}
+  .story .pts{margin-left:auto;display:flex;align-items:center;gap:5px;color:var(--accent);font-weight:700;font-size:12px}
+
+  /* Thread pulse — the 30-second overview */
+  .pulse{padding:6px 18px 14px}
+  .pulse-l{font-family:var(--font-ui);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .pulse-l::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent)}
+  .camps{display:flex;gap:8px;overflow:hidden}
+  .camp{
+    flex:1;min-width:0;border:1px solid var(--rule);border-radius:var(--radius);
+    padding:9px 10px;background:var(--panel);
+  }
+  .camp .who{font-family:var(--font-ui);font-size:10px;color:var(--accent);font-weight:700;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .camp .gist{font-family:var(--font-read);font-size:11.5px;line-height:1.28;color:var(--ink);margin-top:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .camp .rc{font-family:var(--font-ui);font-size:9.5px;color:var(--ink-soft);margin-top:5px}
+
+  .divider{height:1px;background:var(--rule);margin:2px 18px 6px}
+
+  /* Comment tree with depth rails */
+  .thread{padding:2px 16px 18px;overflow:hidden;flex:1}
+  .cmt{position:relative;padding:11px 0 11px 0;margin-left:0}
+  .cmt.d1{margin-left:16px}
+  .cmt.d2{margin-left:32px}
+  .cmt .rail{position:absolute;left:-9px;top:12px;bottom:6px;width:2px;border-radius:2px;background:var(--rail);opacity:.55}
+  .cmt.d2 .rail{background:var(--rail-2,var(--rail))}
+  .chead{display:flex;align-items:center;gap:8px}
+  .chead .au{font-family:var(--font-ui);font-weight:700;font-size:12px;color:var(--ink)}
+  .chead .op{font-family:var(--font-ui);font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:1px 4px;font-weight:700}
+  .chead .ag{font-family:var(--font-ui);font-size:10.5px;color:var(--ink-soft)}
+  .chead .fold{margin-left:auto;font-family:var(--font-ui);font-size:11px;color:var(--ink-soft)}
+  .cbody{font-family:var(--font-read);font-size:13px;line-height:1.5;color:var(--ink);margin-top:6px}
+  .cbody .lnk{color:var(--accent);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--accent) 45%,transparent);text-underline-offset:2px}
+  .cbody code{font-family:var(--font-mono,"IBM Plex Mono",monospace);font-size:12px;background:var(--panel);padding:1px 5px;border-radius:5px;border:1px solid var(--rule)}
+  .collapsed{
+    display:flex;align-items:center;gap:9px;padding:9px 12px;margin:6px 0 2px 16px;
+    border:1px dashed var(--rule);border-radius:var(--radius);background:var(--panel);
+    font-family:var(--font-ui);font-size:11.5px;color:var(--ink-soft);cursor:default;
+  }
+  .collapsed b{color:var(--accent);font-weight:700}
+  .collapsed .plus{margin-left:auto;color:var(--accent);font-weight:700}
+
+  /* ---- Edition token overrides ---- */
+  .almanac{
+    --paper:#f3ead4; --panel:#fbf5e2; --ink:#251d12; --ink-soft:#6f5c3c;
+    --accent:#e8631a; --rule:#e2d4af; --rail:#d8b25a; --rail-2:#c99a3f; --radius:10px;
+    --font-read:"Newsreader",serif; --font-ui:"Hanken Grotesk",sans-serif; --read-wt:560;
+  }
+  .terminal{
+    --paper:#0a0e0b; --panel:#111710; --ink:#cfe6ba; --ink-soft:#6f8b5c;
+    --accent:#84e24a; --rule:#213018; --rail:#3c5a26; --rail-2:#4d7233; --radius:6px;
+    --font-read:"IBM Plex Mono",monospace; --font-ui:"IBM Plex Mono",monospace; --read-wt:500;
+    --font-mono:"IBM Plex Mono",monospace;
+  }
+  .terminal .screen, .terminal.screen{background:
+    repeating-linear-gradient(0deg, rgba(132,226,74,.035) 0 1px, transparent 1px 3px), var(--paper);}
+  .terminal .story h3{letter-spacing:0}
+  .newsprint{
+    --paper:#ecebe4; --panel:#f7f6f1; --ink:#16130e; --ink-soft:#57524a;
+    --accent:#a5170d; --rule:#d3cfc3; --rail:#bd463c; --rail-2:#8f2f28; --radius:4px;
+    --font-read:"Libre Franklin",sans-serif; --font-ui:"Libre Franklin",sans-serif; --read-wt:450;
+  }
+  .newsprint .story h3{font-family:"Newsreader",serif;font-weight:640;letter-spacing:-.015em}
+  .newsprint .camp .gist{font-family:"Newsreader",serif}
+  .newsprint .cbody{font-family:"Newsreader",serif}
+
+  /* ---------- Pro panel ---------- */
+  .pro{
+    margin-top:96px;border:1px solid var(--spec-rule);border-radius:26px;overflow:hidden;
+    background:linear-gradient(135deg,#241a0f,#1b140c);position:relative;
+  }
+  .pro::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 100% 0,rgba(232,99,26,.16),transparent 60%)}
+  .pro-inner{position:relative;padding:56px 52px;display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
+  .pro h2{font-family:"Fraunces",serif;font-weight:560;font-size:clamp(30px,4vw,48px);line-height:1.02;letter-spacing:-.02em}
+  .pro h2 em{font-style:italic;color:var(--spec-accent)}
+  .pro p{margin-top:18px;color:var(--spec-ink-soft);font-family:"Newsreader",serif;font-size:17px;line-height:1.6;max-width:460px}
+  .plist{list-style:none;display:flex;flex-direction:column;gap:14px}
+  .plist li{display:flex;gap:13px;align-items:flex-start;font-size:14.5px;color:var(--spec-ink)}
+  .plist li::before{content:"◆";color:var(--spec-accent);font-size:11px;margin-top:4px}
+  .plist li b{font-weight:600}
+  .plist li span{color:var(--spec-ink-soft);display:block;font-size:12.5px;margin-top:2px;font-family:"Newsreader",serif}
+  .pricebar{margin-top:30px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .cta{font-family:"Hanken Grotesk",sans-serif;font-weight:700;font-size:15px;letter-spacing:.01em;color:#1a1206;background:var(--spec-accent);padding:14px 26px;border-radius:100px;border:none}
+  .cta.ghost{background:transparent;color:var(--spec-ink);border:1px solid var(--spec-rule)}
+  .free-note{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--spec-ink-soft);letter-spacing:.03em}
+
+  .comingsoon{margin-top:26px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .cs-l{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--spec-ink-soft)}
+  .cs{font-family:"Fraunces",serif;font-style:italic;font-size:15px;color:var(--spec-ink);opacity:.7;padding:4px 12px;border:1px solid var(--spec-rule);border-radius:100px}
+
+  footer{margin-top:80px;padding-top:26px;border-top:1px solid var(--spec-rule);display:flex;justify-content:space-between;color:var(--spec-ink-soft);font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.06em;flex-wrap:wrap;gap:10px}
+
+  @media (max-width:980px){
+    .gallery{grid-template-columns:1fr;max-width:420px;margin:0 auto}
+    .tokens{grid-template-columns:repeat(2,1fr)}
+    .pro-inner{grid-template-columns:1fr;padding:40px 30px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- MASTHEAD -->
+  <header class="mast">
+    <div class="kicker">Nautilus · Design Language</div>
+    <h1 class="title">The soul is free.<br><em>The atmosphere</em> is a choice.</h1>
+    <p class="lede">Nautilus is a quiet, beautiful reading room for the smartest conversation on the internet. One reading model — <b>understand any deep thread in 30 seconds, turn pages instead of scrolling mud</b> — dressed in a wardrobe of hand-made <b>Editions</b>.</p>
+    <div class="manifesto">
+      <div class="tenet"><b>01</b> &nbsp;Comprehension is never paywalled</div>
+      <div class="tenet"><b>02</b> &nbsp;The free default must be exquisite</div>
+      <div class="tenet"><b>03</b> &nbsp;Editions restyle the skin, never the structure</div>
+      <div class="tenet"><b>04</b> &nbsp;Every pixel comes from a token — no hardcoding</div>
+    </div>
+  </header>
+
+  <!-- TOKENS -->
+  <section class="sec">
+    <div class="sec-head">
+      <div>
+        <div class="sec-no">01 — The System</div>
+        <div class="sec-title">One set of tokens, many worlds</div>
+      </div>
+      <p class="sec-note">Each Edition is just a table of values. Swap the table, and the entire app re-dresses live — the same primitives every native component reads from.</p>
+    </div>
+    <div class="tokens">
+      <div class="tok">
+        <h4>Color roles</h4>
+        <div class="swz"><span style="background:#f3ead4"></span><span style="background:#fbf5e2"></span><span style="background:#251d12"></span><span style="background:#6f5c3c"></span><span style="background:#e8631a"></span></div>
+        <p>paper · panel · ink · ink-soft · accent · rule · depth-rail. Semantic, never literal.</p>
+      </div>
+      <div class="tok">
+        <h4>Type pairing</h4>
+        <div class="scale"><i style="font-size:26px">Aa</i><i style="font-size:18px">Aa</i><i style="font-size:13px">Aa</i></div>
+        <p style="margin-top:12px">A reading face + a UI face + a mono. Scale &amp; rhythm fixed by the system.</p>
+      </div>
+      <div class="tok">
+        <h4>Space &amp; radius</h4>
+        <div class="rhythm"><span style="width:100%"></span><span style="width:70%"></span><span style="width:45%"></span><span style="width:28%"></span></div>
+        <p style="margin-top:12px">4-pt rhythm, one radius family. Density is a token too.</p>
+      </div>
+      <div class="tok">
+        <h4>Motion &amp; texture</h4>
+        <div class="motion">fold ⟶ paper<br>collapse: 220ms<br>ease: (.2,.8,.2,1)</div>
+        <p style="margin-top:12px">Grain, glow, scanlines — atmosphere is a token, not an afterthought.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDITIONS -->
+  <section class="sec">
+    <div class="sec-head">
+      <div>
+        <div class="sec-no">02 — The Wardrobe</div>
+        <div class="sec-title">Three Editions, one thread</div>
+      </div>
+      <p class="sec-note">The exact same story &amp; comment tree, rendered three ways. Structure is constant; only the tokens differ.</p>
+    </div>
+
+    <div class="gallery">
+
+      <!-- ALMANAC (FREE) -->
+      <div class="ed">
+        <span class="ed-tag free">Free · Default</span>
+        <div class="phone"><div class="screen almanac">
+          <div class="nav"><span class="chev">‹</span><span class="nav-t">Comments</span><span class="dots">•••</span></div>
+          <div class="story">
+            <h3>Switzerland has 25 Gbit/s internet. Why doesn't the US?</h3>
+            <div class="meta"><span class="dom">tages­anzeiger.ch</span><span>· talonx · 3h</span><span class="pts">▲ 412</span></div>
+          </div>
+          <div class="pulse">
+            <div class="pulse-l">Top camps · 262 comments</div>
+            <div class="camps">
+              <div class="camp"><div class="who">Aurornis</div><div class="gist">Clickbait — density &amp; geography make the US harder.</div><div class="rc">12 replies</div></div>
+              <div class="camp"><div class="who">throwaway9</div><div class="gist">Lived in both. Swiss last-mile policy is the real story.</div><div class="rc">8 replies</div></div>
+              <div class="camp"><div class="who">neteng</div><div class="gist">25G is a marketing tier; median speeds are close.</div><div class="rc">6 replies</div></div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="thread">
+            <div class="cmt"><span class="rail"></span>
+              <div class="chead"><span class="au">Aurornis</span><span class="ag">3h</span><span class="fold">▾</span></div>
+              <div class="cbody">Heavy on the clickbait. Switzerland is the size of a small US state — covering the US is a different problem. Median <code>speedtest</code> results are actually similar.</div>
+            </div>
+            <div class="cmt d1"><span class="rail"></span>
+              <div class="chead"><span class="au">throwaway9</span><span class="op">OP</span><span class="ag">2h</span><span class="fold">▾</span></div>
+              <div class="cbody">Density is the honest variable. The <span class="lnk">last-mile subsidy</span> model is what actually differs.</div>
+            </div>
+            <div class="collapsed"><span>↳</span><b>12</b> replies folded <span class="plus">+</span></div>
+            <div class="cmt d2"><span class="rail"></span>
+              <div class="chead"><span class="au">neteng</span><span class="ag">1h</span><span class="fold">▾</span></div>
+              <div class="cbody">The 25G tier is available in some US metros too.</div>
+            </div>
+          </div>
+        </div></div>
+        <div class="ed-meta">
+          <div class="ed-name">Almanac <small>— naturalist warmth</small></div>
+          <div class="ed-desc">Ivory paper, walnut ink, a single ember of HN orange. The house style — timeless and calm.</div>
+          <div class="ed-swatches"><span style="background:#f3ead4"></span><span style="background:#251d12"></span><span style="background:#e8631a"></span><span style="background:#d8b25a"></span></div>
+          <div class="ed-type"><b>Newsreader</b> reading · <b>Hanken Grotesk</b> ui</div>
+        </div>
+      </div>
+
+      <!-- TERMINAL (PRO) -->
+      <div class="ed">
+        <span class="ed-tag pro">Pro</span>
+        <div class="phone"><div class="screen terminal">
+          <div class="nav"><span class="chev">‹</span><span class="nav-t">./comments</span><span class="dots">•••</span></div>
+          <div class="story">
+            <h3>Switzerland has 25 Gbit/s internet. Why doesn't the US?</h3>
+            <div class="meta"><span class="dom">tagesanzeiger.ch</span><span>· talonx · 3h</span><span class="pts">▲ 412</span></div>
+          </div>
+          <div class="pulse">
+            <div class="pulse-l">top camps · 262</div>
+            <div class="camps">
+              <div class="camp"><div class="who">Aurornis</div><div class="gist">clickbait — density &amp; geography.</div><div class="rc">12 replies</div></div>
+              <div class="camp"><div class="who">throwaway9</div><div class="gist">last-mile policy is the story.</div><div class="rc">8 replies</div></div>
+              <div class="camp"><div class="who">neteng</div><div class="gist">25G = marketing tier.</div><div class="rc">6 replies</div></div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="thread">
+            <div class="cmt"><span class="rail"></span>
+              <div class="chead"><span class="au">Aurornis</span><span class="ag">3h</span><span class="fold">[-]</span></div>
+              <div class="cbody">Heavy on the clickbait. CH is the size of a small US state. Median <code>speedtest</code> results are similar.</div>
+            </div>
+            <div class="cmt d1"><span class="rail"></span>
+              <div class="chead"><span class="au">throwaway9</span><span class="op">OP</span><span class="ag">2h</span><span class="fold">[-]</span></div>
+              <div class="cbody">Density is the honest variable. The <span class="lnk">last-mile subsidy</span> differs.</div>
+            </div>
+            <div class="collapsed"><span>↳</span><b>12</b> replies folded <span class="plus">+</span></div>
+            <div class="cmt d2"><span class="rail"></span>
+              <div class="chead"><span class="au">neteng</span><span class="ag">1h</span><span class="fold">[-]</span></div>
+              <div class="cbody">25G tier exists in some US metros too.</div>
+            </div>
+          </div>
+        </div></div>
+        <div class="ed-meta">
+          <div class="ed-name">Terminal <small>— the hacker soul</small></div>
+          <div class="ed-desc">Near-black, phosphor green, monospace, faint CRT scanlines. Focus mode for the true believers.</div>
+          <div class="ed-swatches"><span style="background:#0a0e0b"></span><span style="background:#cfe6ba"></span><span style="background:#84e24a"></span><span style="background:#3c5a26"></span></div>
+          <div class="ed-type"><b>IBM Plex Mono</b> everywhere</div>
+        </div>
+      </div>
+
+      <!-- NEWSPRINT (PRO) -->
+      <div class="ed">
+        <span class="ed-tag pro">Pro</span>
+        <div class="phone"><div class="screen newsprint">
+          <div class="nav"><span class="chev">‹</span><span class="nav-t">Discussion</span><span class="dots">•••</span></div>
+          <div class="story">
+            <h3>Switzerland has 25 Gbit/s internet. Why doesn't the US?</h3>
+            <div class="meta"><span class="dom">tagesanzeiger.ch</span><span>· talonx · 3h</span><span class="pts">▲ 412</span></div>
+          </div>
+          <div class="pulse">
+            <div class="pulse-l">The Room · 262 voices</div>
+            <div class="camps">
+              <div class="camp"><div class="who">Aurornis</div><div class="gist">Clickbait; geography makes the US harder.</div><div class="rc">12 replies</div></div>
+              <div class="camp"><div class="who">throwaway9</div><div class="gist">Swiss last-mile policy is the real story.</div><div class="rc">8 replies</div></div>
+              <div class="camp"><div class="who">neteng</div><div class="gist">Median speeds are closer than claimed.</div><div class="rc">6 replies</div></div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="thread">
+            <div class="cmt"><span class="rail"></span>
+              <div class="chead"><span class="au">Aurornis</span><span class="ag">3h</span><span class="fold">▾</span></div>
+              <div class="cbody">Heavy on the clickbait. Switzerland is the size of a small US state; covering the US is a different problem entirely.</div>
+            </div>
+            <div class="cmt d1"><span class="rail"></span>
+              <div class="chead"><span class="au">throwaway9</span><span class="op">OP</span><span class="ag">2h</span><span class="fold">▾</span></div>
+              <div class="cbody">Density is the honest variable. The <span class="lnk">last-mile subsidy</span> model is what differs.</div>
+            </div>
+            <div class="collapsed"><span>↳</span><b>12</b> replies folded <span class="plus">+</span></div>
+            <div class="cmt d2"><span class="rail"></span>
+              <div class="chead"><span class="au">neteng</span><span class="ag">1h</span><span class="fold">▾</span></div>
+              <div class="cbody">The 25G tier is available in some US metros too.</div>
+            </div>
+          </div>
+        </div></div>
+        <div class="ed-meta">
+          <div class="ed-name">Newsprint <small>— the broadsheet</small></div>
+          <div class="ed-desc">Cool gray stock, oxblood red, a Scotch serif headline. Reads like the front page of a serious paper.</div>
+          <div class="ed-swatches"><span style="background:#ecebe4"></span><span style="background:#16130e"></span><span style="background:#a5170d"></span><span style="background:#bd463c"></span></div>
+          <div class="ed-type"><b>Newsreader</b> heads · <b>Libre Franklin</b> body</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="comingsoon">
+      <span class="cs-l">In the gallery, coming:</span>
+      <span class="cs">Solar</span><span class="cs">Blueprint</span><span class="cs">Ivory</span><span class="cs">Vellum</span>
+    </div>
+  </section>
+
+  <!-- PRO -->
+  <section class="pro">
+    <div class="pro-inner">
+      <div>
+        <div class="sec-no" style="margin-bottom:16px">03 — The Offer</div>
+        <h2>Read for free.<br><em>Furnish</em> the room with Pro.</h2>
+        <p>The complete reading experience — feeds, threads, the Pulse, offline — is free forever, dressed in Almanac. Nautilus Pro unlocks the whole Editions gallery and the power tools.</p>
+        <div class="pricebar">
+          <button class="cta">Unlock Nautilus Pro</button>
+          <button class="cta ghost">Restore</button>
+          <span class="free-note">$24.99 lifetime · or $2.49/mo</span>
+        </div>
+      </div>
+      <ul class="plist">
+        <li><b>The Editions gallery</b><span>Every premium reading environment, forever</span></li>
+        <li><b>AI thread distillation</b><span>The camps, the crux, the one comment to read</span></li>
+        <li><b>Full offline library</b><span>Whole threads cached for the subway</span></li>
+        <li><b>Power navigation</b><span>Gestures, jump-to-signal, unlimited history</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <span>Nautilus · a reading room for Hacker News</span>
+    <span>Editions v0.1 — design language</span>
+  </footer>
+
+</div>
+</body>
+</html>
