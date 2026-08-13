@@ -15,7 +15,7 @@ Studio pages continue to use the Genjux shell:
 
 Product pages are isolated from that shell so they can retain their original visual systems:
 
-- `/apps/bebilog` redirects to `/apps/bebilog/en`.
+- `/apps/bebilog` renders the existing Bebilog English site directly; static export does not require a server redirect.
 - `/apps/bebilog/en` renders the existing Bebilog English site.
 - `/apps/bebilog/zh` preserves the existing Chinese Bebilog site as an optional language route; English remains the default.
 - `/apps/nautilus` renders the existing Nautilus site.
