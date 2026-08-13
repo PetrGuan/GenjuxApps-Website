@@ -1,7 +1,7 @@
 export type Product = {
   slug: "bebilog" | "nautilus";
   name: string;
-  route: "/apps/bebilog" | "/apps/nautilus";
+  route: "/apps/bebilog" | "/apps/nautilus/index.html";
   appStoreUrl: string;
   platform: "Native iOS" | "Native iOS & iPadOS";
   tagline: string;
@@ -36,7 +36,7 @@ export const products: readonly Product[] = [
   {
     slug: "nautilus",
     name: "Nautilus",
-    route: "/apps/nautilus",
+    route: "/apps/nautilus/index.html",
     appStoreUrl: "https://apps.apple.com/us/app/nautilus-tech-news-reader/id6787639053",
     platform: "Native iOS & iPadOS",
     tagline: "A quieter way to read Hacker News.",

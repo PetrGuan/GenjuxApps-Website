@@ -1,15 +1,12 @@
 import { expect, test } from "@playwright/test";
 
-test("visitors can open the product explorer and reach each product page", async ({ page }) => {
+test("Bebilog card opens the complete English Bebilog site", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: /open product command palette/i }).click();
-
-  const dialog = page.getByRole("dialog", { name: /product explorer/i });
-  await expect(dialog).toBeVisible();
-  await dialog.getByRole("link", { name: /bebilog/i }).click();
+  await page.getByRole("link", { name: /explore bebilog/i }).click();
 
   await expect(page).toHaveURL(/\/apps\/bebilog$/);
-  await expect(page.getByRole("heading", { name: "Bebilog" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /baby tracking/i })).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Primary navigation" })).not.toBeVisible();
 });
 
 test("the home page exposes all primary landmark destinations", async ({ page }) => {
@@ -29,4 +26,14 @@ test("the mobile navigation starts closed and can be opened", async ({ page }) =
 
   await page.getByText("Menu", { exact: true }).click();
   await expect(navigation.getByRole("link", { name: "Products" })).toBeVisible();
+});
+
+test("Nautilus card opens the complete Nautilus site and its Editions route", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("link", { name: /explore nautilus/i }).click();
+
+  await expect(page).toHaveURL(/\/apps\/nautilus\/index\.html$/);
+  await expect(page.getByRole("heading", { name: /quiet, beautiful reading room/i })).toBeVisible();
+  await page.getByRole("link", { name: /full editions design language/i }).click();
+  await expect(page).toHaveURL(/\/apps\/nautilus\/editions\.html$/);
 });

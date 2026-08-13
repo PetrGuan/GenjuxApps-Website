@@ -273,15 +273,11 @@ git add app/apps/bebilog components/bebilog public/apps/bebilog app/globals.css 
 git commit -m "feat: integrate Bebilog product site"
 ```
 
-### Task 3: Migrate Nautilus’s home and Editions pages
+### Task 3: Copy Nautilus’s original static site unchanged
 
 **Files:**
-- Create: `components/nautilus/NautilusSite.tsx`
-- Create: `components/nautilus/NautilusEditions.tsx`
-- Create: `components/nautilus/NautilusStickyCta.tsx`
-- Create: `components/nautilus/nautilus.module.css`
-- Create: `app/apps/nautilus/page.tsx`
-- Create: `app/apps/nautilus/editions/page.tsx`
+- Create: `public/apps/nautilus/index.html`
+- Create: `public/apps/nautilus/editions.html`
 - Create: `public/apps/nautilus/assets/app-store-badge.svg`
 - Create: `public/apps/nautilus/assets/favicon-32.png`
 - Create: `public/apps/nautilus/assets/icon-180.png`
@@ -295,55 +291,39 @@ git commit -m "feat: integrate Bebilog product site"
 - Create: `public/apps/nautilus/assets/shots/rules.jpg`
 - Create: `public/apps/nautilus/assets/shots/saved.jpg`
 - Create: `public/apps/nautilus/assets/shots/understand.jpg`
-- Create: `tests/components/nautilus-site.test.tsx`
+- Modify: `lib/products.ts`
+- Modify: `tests/lib/products.test.ts`
+- Modify: `tests/components/product-card.test.tsx`
+- Modify: `tests/e2e/site.spec.ts`
 
 **Interfaces:**
 - Consumes: `/Users/petr/Documents/GitHub/nautilus-website/index.html`, `editions.html`, and all listed assets.
-- Produces: `NautilusSite`, `NautilusEditions`, and `NautilusStickyCta`; static routes at `/apps/nautilus` and `/apps/nautilus/editions`.
+- Produces: the original Nautilus documents at `/apps/nautilus/index.html` and `/apps/nautilus/editions.html`; `Product.route` changes to `"/apps/nautilus/index.html"`.
 
-- [ ] **Step 1: Write failing Nautilus navigation tests**
+- [x] **Step 1: Update the existing failing Nautilus browser expectation**
 
-Create `tests/components/nautilus-site.test.tsx`:
+In `tests/e2e/site.spec.ts`, change the Nautilus destination assertion to `/\/apps\/nautilus\/index\.html$/` and the Editions assertion to `/\/apps\/nautilus\/editions\.html$/`. Update the catalog and card assertions to expect `/apps/nautilus/index.html`.
 
-```tsx
-import { render, screen } from "@testing-library/react";
-import NautilusSite from "@/components/nautilus/NautilusSite";
+- [x] **Step 2: Run the Nautilus browser contract to verify it still fails**
 
-it("keeps Nautilus Editions inside Genjux", () => {
-  render(<NautilusSite />);
-  expect(screen.getByRole("link", { name: /editions/i })).toHaveAttribute("href", "/apps/nautilus/editions");
-  expect(screen.getByRole("heading", { name: /quiet, beautiful reading room/i })).toBeInTheDocument();
-});
-```
+Run: `npm run test:e2e`
 
-- [ ] **Step 2: Run the Nautilus test to verify it fails**
+Expected: the Bebilog case passes after Task 2, while the Nautilus case fails because the original static files are absent.
 
-Run: `npm run test -- tests/components/nautilus-site.test.tsx`
+- [x] **Step 3: Copy the source document and assets without translation**
 
-Expected: FAIL because `NautilusSite` does not exist.
+Copy `index.html`, `editions.html`, and the complete `assets/` directory from `/Users/petr/Documents/GitHub/nautilus-website` to `public/apps/nautilus/`. Do not alter the copied HTML: relative `assets/` URLs and `editions.html` navigation remain correct under this directory. Update the Nautilus catalog route and its unit/component assertions to `/apps/nautilus/index.html`.
 
-- [ ] **Step 3: Translate the source HTML into scoped components without changing its content**
+- [x] **Step 4: Run static-document verification**
 
-Copy all listed assets to `public/apps/nautilus/assets/`. Transcribe `index.html` into semantic React markup in `NautilusSite`: top navigation, masthead, all source sections, pricing, footer, and the sticky CTA. Transcribe `editions.html` into `NautilusEditions`.
+Run: `npm run test -- tests/lib/products.test.ts tests/components/product-card.test.tsx && npm run lint && npm run build && test -f out/apps/nautilus/index.html && test -f out/apps/nautilus/editions.html && npm run test:e2e`
 
-Move source CSS into `nautilus.module.css` and prefix every root selector with `.nautilusSite` or `.nautilusEditions`; replace every `assets/` reference with `/apps/nautilus/assets/`. Replace only the original `editions.html` destinations with `/apps/nautilus/editions`. Keep App Store and privacy links unchanged.
+Expected: the unchanged Nautilus title and Editions navigation pass the browser contract, and both source documents appear in the static output.
 
-Implement `NautilusStickyCta` as a client component that toggles a `data-visible` attribute after the user scrolls beyond the masthead. Its static anchor remains visible in the page markup when JavaScript is absent.
-
-- [ ] **Step 4: Add static Nautilus routes**
-
-Create `app/apps/nautilus/page.tsx` and `app/apps/nautilus/editions/page.tsx`; each exports truthful source-derived metadata and renders the corresponding component without `SiteHeader` or `SiteFooter`.
-
-- [ ] **Step 5: Run Nautilus verification**
-
-Run: `npm run test -- tests/components/nautilus-site.test.tsx && npm run lint && npm run build && test -f out/apps/nautilus/index.html && test -f out/apps/nautilus/editions/index.html`
-
-Expected: the navigation test passes and both Nautilus routes exist in the static output.
-
-- [ ] **Step 6: Commit the Nautilus migration**
+- [x] **Step 5: Commit the Nautilus source copy**
 
 ```bash
-git add app/apps/nautilus components/nautilus public/apps/nautilus tests/components/nautilus-site.test.tsx
+git add public/apps/nautilus lib/products.ts tests/lib/products.test.ts tests/components/product-card.test.tsx tests/e2e/site.spec.ts
 git commit -m "feat: integrate Nautilus product site"
 ```
 

@@ -7,5 +7,5 @@ it("exposes exactly the two public products", () => {
 
 it("routes each card to its integrated product site", () => {
   expect(getProduct("bebilog")?.route).toBe("/apps/bebilog");
-  expect(getProduct("nautilus")?.route).toBe("/apps/nautilus");
+  expect(getProduct("nautilus")?.route).toBe("/apps/nautilus/index.html");
 });

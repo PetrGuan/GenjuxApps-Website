@@ -18,8 +18,8 @@ Product pages are isolated from that shell so they can retain their original vis
 - `/apps/bebilog` renders the existing Bebilog English site directly; static export does not require a server redirect.
 - `/apps/bebilog/en` renders the existing Bebilog English site.
 - `/apps/bebilog/zh` preserves the existing Chinese Bebilog site as an optional language route; English remains the default.
-- `/apps/nautilus` renders the existing Nautilus site.
-- `/apps/nautilus/editions` renders Nautilus’s existing Editions page.
+- `/apps/nautilus/index.html` serves the existing Nautilus site as its original static document.
+- `/apps/nautilus/editions.html` serves Nautilus’s existing Editions page as its original static document.
 
 The existing dynamic Genjux product-detail route (`/apps/[slug]`) is removed because it duplicates the sites it now hands off to.
 
@@ -37,9 +37,7 @@ The copied route does not create nested `html` or `body` elements. Instead, its 
 
 ## Nautilus Migration
 
-Nautilus’s existing `index.html`, `editions.html`, first-party screenshots, App Store badge, and icon are migrated into `components/nautilus` and `public/apps/nautilus`. Its visual CSS is scoped beneath `.nautilus-site`, preserving the quiet editorial layout and its own typography without leaking into the studio.
-
-The existing sticky CTA behavior becomes a small client component; all reading content, sections, links, and Edition navigation remain in the static initial HTML. The internal Editions link changes only to `/apps/nautilus/editions`.
+Nautilus’s existing `index.html`, `editions.html`, first-party screenshots, App Store badge, and icon are copied unchanged into `public/apps/nautilus`. They are served as complete static documents, which preserves their original CSS, typography, sticky CTA script, sections, and Editions navigation without a React translation layer or an iframe.
 
 ## Shared Data and Navigation
 
@@ -65,5 +63,5 @@ Product pages are generated during the existing Next static export. Animations r
 - Unit tests prove the product catalog points to `/apps/bebilog` and `/apps/nautilus`.
 - The static build emits the English and Chinese Bebilog paths plus both Nautilus paths.
 - Browser tests click both Genjux cards and verify the product page’s original title/content appears.
-- Browser tests verify Bebilog defaults to English and the Nautilus Editions link stays inside Genjux.
+- Browser tests verify Bebilog defaults to English and the Nautilus Editions link stays inside Genjux at `/apps/nautilus/editions.html`.
 - Visual review checks the product routes have no Genjux header/footer and preserve their source site’s intended hierarchy at desktop and mobile sizes.

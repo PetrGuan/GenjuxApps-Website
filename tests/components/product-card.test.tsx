@@ -12,5 +12,8 @@ it("links each card to its integrated product site and labels its artwork", () =
 it("links the Nautilus card to its integrated product site", () => {
   render(<ProductCard product={products[1]} />);
 
-  expect(screen.getByRole("link", { name: /explore nautilus/i })).toHaveAttribute("href", "/apps/nautilus");
+  expect(screen.getByRole("link", { name: /explore nautilus/i })).toHaveAttribute(
+    "href",
+    "/apps/nautilus/index.html",
+  );
 });
