@@ -9,7 +9,9 @@ export default function SelectedWork() {
       <MotionSafe>
         <div className="studio-section-heading">
           <p className="eyebrow">SELECTED WORK</p>
-          <h2 id="studio-work-title">Built close to the systems people rely on.</h2>
+          <h2 id="studio-work-title" aria-label="Selected work">
+            Built close to the systems people rely on.
+          </h2>
         </div>
         <div className="studio-work-grid">
           {selectedWork.map((work) => (

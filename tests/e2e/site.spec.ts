@@ -1,8 +1,18 @@
 import { expect, test } from "@playwright/test";
 
+test("home page presents Genjux studio content without personal identity", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByRole("heading", { name: /studio capabilities/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /selected work/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /experience behind genjux/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /open-source contributions/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /work with genjux/i })).toBeVisible();
+  await expect(page.locator("body")).not.toContainText(/Petr|Guan|petrguan/i);
+});
+
 test("Bebilog card opens the complete English Bebilog site", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("link", { name: /explore bebilog/i }).click();
+  await page.getByLabel("Products").getByRole("link", { name: /explore bebilog/i }).click();
 
   await expect(page).toHaveURL(/\/apps\/bebilog$/);
   await expect(page.getByRole("heading", { name: /baby tracking/i })).toBeVisible();

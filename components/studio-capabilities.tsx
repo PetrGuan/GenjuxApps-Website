@@ -7,7 +7,9 @@ export default function StudioCapabilities() {
       <MotionSafe>
         <div className="studio-section-heading">
           <p className="eyebrow">CAPABILITIES</p>
-          <h2 id="studio-capabilities-title">Engineering for useful, lasting software.</h2>
+          <h2 id="studio-capabilities-title" aria-label="Studio capabilities">
+            Engineering for useful, lasting software.
+          </h2>
         </div>
         <ul className="studio-capabilities-grid">
           {studioCapabilities.map((capability) => (

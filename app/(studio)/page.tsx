@@ -1,6 +1,11 @@
 import HomeHero from "@/components/home-hero";
+import OpenSourceContributions from "@/components/open-source-contributions";
 import AtmosphereCanvas from "@/components/atmosphere-canvas";
 import ProductCard from "@/components/product-card";
+import SelectedWork from "@/components/selected-work";
+import StudioCapabilities from "@/components/studio-capabilities";
+import StudioContactCta from "@/components/studio-contact-cta";
+import StudioExperience from "@/components/studio-experience";
 import { products } from "@/lib/products";
 
 const intent = ["Native-first", "On-device AI", "Privacy by design", "No trackers"];
@@ -37,6 +42,11 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+      <StudioCapabilities />
+      <SelectedWork />
+      <StudioExperience />
+      <OpenSourceContributions />
+      <StudioContactCta />
     </div>
   );
 }

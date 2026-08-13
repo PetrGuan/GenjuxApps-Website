@@ -7,7 +7,9 @@ export default function OpenSourceContributions() {
       <MotionSafe>
         <div className="studio-section-heading">
           <p className="eyebrow">OPEN SOURCE</p>
-          <h2 id="studio-contributions-title">Contributing to the foundations beneath the work.</h2>
+          <h2 id="studio-contributions-title" aria-label="Open-source contributions">
+            Contributing to the foundations beneath the work.
+          </h2>
         </div>
         <ul className="studio-contributions-grid">
           {openSourceContributions.map((contribution) => (
