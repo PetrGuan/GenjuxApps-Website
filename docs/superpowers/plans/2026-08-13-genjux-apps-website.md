@@ -306,7 +306,7 @@ git commit -m "feat: add studio navigation and static pages"
 - Consumes: `Product` and `products` from `lib/products.ts`.
 - Produces: `ProductCard({ product }: { product: Product })` and `HomeHero`, used only by `app/page.tsx` in this release.
 
-- [ ] **Step 1: Write the failing product card test**
+- [x] **Step 1: Write the failing product card test**
 
 Create `tests/components/product-card.test.tsx`:
 
@@ -322,13 +322,13 @@ it("links each card to its product route and labels its artwork", () => {
 });
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 Run: `npm run test -- tests/components/product-card.test.tsx`
 
 Expected: FAIL because `ProductCard` does not exist.
 
-- [ ] **Step 3: Implement product card and hero composition**
+- [x] **Step 3: Implement product card and hero composition**
 
 Implement `ProductCard` as an `<article>` with `data-accent={product.accent}`, product icon, platform metadata, title, description, three capability tags, local hero artwork, and a visible `Explore ${product.name}` link. Use an `<img>` for public artwork with exact alt text `${product.name} app screen`; its card remains functional without client JavaScript.
 
@@ -336,13 +336,13 @@ Implement `HomeHero` with the approved headline `Small apps. Deeply considered.`
 
 Compose `app/page.tsx` with a hero, an `id="products"` two-card 12-column grid, the four-item intent strip (`Native-first`, `On-device AI`, `Privacy by design`, `No trackers`), and no duplicate visible product title.
 
-- [ ] **Step 4: Run home UI tests**
+- [x] **Step 4: Run home UI tests**
 
 Run: `npm run test -- tests/components/product-card.test.tsx && npm run lint && npm run build`
 
 Expected: tests pass and `out/index.html` contains both product route links.
 
-- [ ] **Step 5: Commit the home composition**
+- [x] **Step 5: Commit the home composition**
 
 ```bash
 git add app/page.tsx components/home-hero.tsx components/product-card.tsx tests/components/product-card.test.tsx app/globals.css
