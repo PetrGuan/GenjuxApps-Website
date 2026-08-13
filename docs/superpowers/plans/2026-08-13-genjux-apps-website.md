@@ -483,7 +483,7 @@ git commit -m "feat: add static product detail pages"
 - Consumes: built static routes and all interactive components.
 - Produces: repeatable browser coverage, GitHub Actions validation, and local development/deployment instructions.
 
-- [ ] **Step 1: Write failing browser coverage**
+- [x] **Step 1: Write failing browser coverage**
 
 Create `tests/e2e/site.spec.ts`:
 
@@ -507,17 +507,17 @@ test("the home page exposes all primary landmark destinations", async ({ page })
 });
 ```
 
-- [ ] **Step 2: Run browser tests to identify defects**
+- [x] **Step 2: Run browser tests to identify defects**
 
 Run: `npm run test:e2e`
 
 Expected: initial failures identify any missing accessible names, route transitions, or test-server configuration gaps.
 
-- [ ] **Step 3: Correct discovered production defects without expanding scope**
+- [x] **Step 3: Correct discovered production defects without expanding scope**
 
 Adjust markup, aria labels, test configuration, or route construction only where needed for the two stated browser scenarios. Keep the command palette and 3D/canvas effects as enhancements; do not add data collection, a backend, or unapproved UI libraries.
 
-- [ ] **Step 4: Add continuous integration and user documentation**
+- [x] **Step 4: Add continuous integration and user documentation**
 
 Create `.github/workflows/ci.yml` that runs on `push` and `pull_request` for `main`, uses Node 22, runs `npm ci`, `npm run lint`, `npm run test`, and `npm run build`.
 
@@ -533,13 +533,13 @@ npm run build
 
 Document that deployment uses the generated `out/` directory and that product assets originate from the sibling Bebilog and Nautilus website projects.
 
-- [ ] **Step 5: Run the full verification suite**
+- [x] **Step 5: Run the full verification suite**
 
 Run: `npm run lint && npm run test && npm run build && npm run test:e2e && git status --short`
 
 Expected: all four verification commands exit `0`; `git status --short` lists only the CI workflow and README changes intended for this task before commit.
 
-- [ ] **Step 6: Commit final verification and documentation**
+- [x] **Step 6: Commit final verification and documentation**
 
 ```bash
 git add tests/e2e README.md .github/workflows/ci.yml

@@ -1,12 +1,28 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CommandPalette from "@/components/command-palette";
 import { studioRoutes } from "@/lib/routes";
 
 export default function SiteHeader() {
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const navigationDisclosureRef = useRef<HTMLDetailsElement>(null);
+
+  useEffect(() => {
+    if (typeof window.matchMedia !== "function") {
+      return;
+    }
+
+    const mobileQuery = window.matchMedia("(max-width: 700px)");
+    const syncDisclosure = () => {
+      navigationDisclosureRef.current?.toggleAttribute("open", !mobileQuery.matches);
+    };
+
+    syncDisclosure();
+    mobileQuery.addEventListener("change", syncDisclosure);
+    return () => mobileQuery.removeEventListener("change", syncDisclosure);
+  }, []);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -33,7 +49,7 @@ export default function SiteHeader() {
             <span className="wordmark-mark" aria-hidden="true" />
             GENJUX
           </Link>
-          <details className="nav-disclosure" open>
+          <details className="nav-disclosure" open ref={navigationDisclosureRef}>
             <summary>Menu</summary>
             <div className="nav-links">
               {studioRoutes.map((route) => (
