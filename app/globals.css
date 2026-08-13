@@ -273,6 +273,23 @@ a {
   overflow: clip;
 }
 
+.bebilog-site {
+  --bg: #0a0a0a;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.5);
+  --text-tertiary: rgba(255, 255, 255, 0.3);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --brand: #ff6b6b;
+  min-height: 100svh;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.bebilog-site ::selection {
+  background: rgba(255, 107, 107, 0.3);
+}
+
 .home-hero {
   display: grid;
   min-height: min(760px, calc(100svh - 4.5rem));

@@ -218,7 +218,7 @@ git commit -m "refactor: isolate product routes from studio shell"
 - Consumes: original Bebilog components, feature visualizations, `en.json`, `zh.json`, source constants, and images from `/Users/petr/Documents/GitHub/bebilog-website`.
 - Produces: `BebilogSite({ locale }: { locale: "en" | "zh" })`, rendered by `/apps/bebilog` with `locale="en"` and by generated locale routes.
 
-- [ ] **Step 1: Write failing locale-data tests**
+- [x] **Step 1: Write failing locale-data tests**
 
 Create `tests/lib/bebilog-locale.test.ts`:
 
@@ -232,13 +232,13 @@ it("keeps English as the default product language", () => {
 });
 ```
 
-- [ ] **Step 2: Run the locale-data test to verify it fails**
+- [x] **Step 2: Run the locale-data test to verify it fails**
 
 Run: `npm run test -- tests/lib/bebilog-locale.test.ts`
 
 Expected: FAIL because `components/bebilog/data.ts` does not exist.
 
-- [ ] **Step 3: Copy the Bebilog implementation into a scoped component boundary**
+- [x] **Step 3: Copy the Bebilog implementation into a scoped component boundary**
 
 Install `next-intl` with `npm install next-intl`. Copy the listed source components/features and `i18n/messages/en.json`, `i18n/messages/zh.json`, and `lib/constants.ts` into `components/bebilog`; replace their source aliases so internal imports begin with `@/components/bebilog/`. Export `bebilogMessages` and `supportedBebilogLocales` from `data.ts`.
 
@@ -246,7 +246,7 @@ Create `BebilogSite` with a `NextIntlClientProvider` receiving the selected mess
 
 Copy the four listed public files into `public/apps/bebilog/images/`, then change migrated image paths from `/images/` to `/apps/bebilog/images/`. Scope the copied body variables and selection rules beneath `.bebilog-site`; do not emit nested `<html>` or `<body>` elements.
 
-- [ ] **Step 4: Create static default and locale routes**
+- [x] **Step 4: Create static default and locale routes**
 
 Create the direct default page:
 
@@ -260,13 +260,13 @@ export default function BebilogDefaultPage() {
 
 Create `[locale]/page.tsx` with `dynamicParams = false`, `generateStaticParams()` returning `{ locale: "en" }` and `{ locale: "zh" }`, and `notFound()` for any locale other than those two. Use Bebilog’s existing English and Chinese metadata content with route-local canonical paths.
 
-- [ ] **Step 5: Run Bebilog verification**
+- [x] **Step 5: Run Bebilog verification**
 
 Run: `npm run test -- tests/lib/bebilog-locale.test.ts && npm run lint && npm run build && test -f out/apps/bebilog/index.html && test -f out/apps/bebilog/en/index.html && test -f out/apps/bebilog/zh/index.html`
 
 Expected: locale test passes; all three Bebilog paths are statically generated.
 
-- [ ] **Step 6: Commit the Bebilog migration**
+- [x] **Step 6: Commit the Bebilog migration**
 
 ```bash
 git add app/apps/bebilog components/bebilog public/apps/bebilog app/globals.css package.json package-lock.json tests/lib/bebilog-locale.test.ts
