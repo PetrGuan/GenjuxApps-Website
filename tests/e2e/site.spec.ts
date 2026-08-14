@@ -1,5 +1,14 @@
 import { expect, test } from "@playwright/test";
 
+test("Dark Precision portal presents categorized Bento products", async ({ page }) => {
+  await page.goto("/");
+
+  await expect(page.getByRole("heading", { name: "Genjux", exact: true })).toBeVisible();
+  await expect(page.getByRole("group", { name: "Product categories" })).toBeVisible();
+  await expect(page.locator(".precision-product-grid")).toBeVisible();
+  await expect(page.getByRole("heading", { name: /experience behind genjux/i })).toBeVisible();
+});
+
 test("home page presents focused Genjux studio content without selected work", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: /studio capabilities/i })).toBeVisible();
