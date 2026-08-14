@@ -3,13 +3,12 @@ import { openSourceContributions } from "@/lib/studio-content";
 
 export default function OpenSourceContributions() {
   return (
-    <section className="studio-section studio-contributions page-shell" aria-labelledby="studio-contributions-title">
+    <section className="studio-section studio-contributions page-shell" aria-label="Open source">
       <MotionSafe>
         <div className="studio-section-heading">
           <p className="eyebrow">OPEN SOURCE</p>
-          <h2 id="studio-contributions-title" aria-label="Open-source contributions">
-            Contributing to the foundations beneath the work.
-          </h2>
+          <h2 id="studio-contributions-title" aria-label="Open-source contributions">Open-source contributions</h2>
+          <p className="studio-section-intro">Contributing to the foundations beneath the work.</p>
         </div>
         <ul className="studio-contributions-grid">
           {openSourceContributions.map((contribution) => (

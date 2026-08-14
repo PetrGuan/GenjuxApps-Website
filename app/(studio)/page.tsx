@@ -24,13 +24,11 @@ export default function HomePage() {
         </div>
       </section>
       <ProductMatrix />
-      <section className="precision-studio-rail page-shell" aria-label="Studio information">
+      <section className="precision-studio-stack page-shell" aria-label="Studio information">
         <StudioCapabilities />
         <StudioExperience />
-        <div className="precision-studio-aside">
-          <OpenSourceContributions />
-          <StudioContactCta />
-        </div>
+        <OpenSourceContributions />
+        <StudioContactCta />
       </section>
     </div>
   );

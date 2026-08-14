@@ -22,6 +22,25 @@ test("contact panel uses a restrained tonal surface", async ({ page }) => {
   await expect(page.locator(".studio-contact-panel")).toHaveCSS("background-color", "rgb(19, 24, 30)");
 });
 
+test("studio information separates capabilities, experience, and open source", async ({ page }) => {
+  await page.goto("/");
+
+  const capabilities = page.getByRole("region", { name: "Capabilities" });
+  const experience = page.getByRole("region", { name: "Experience" });
+  const openSource = page.getByRole("region", { name: "Open source" });
+  const [capabilitiesBox, experienceBox, openSourceBox] = await Promise.all([
+    capabilities.boundingBox(),
+    experience.boundingBox(),
+    openSource.boundingBox(),
+  ]);
+
+  expect(capabilitiesBox).not.toBeNull();
+  expect(experienceBox).not.toBeNull();
+  expect(openSourceBox).not.toBeNull();
+  expect(capabilitiesBox!.y).toBeLessThan(experienceBox!.y);
+  expect(experienceBox!.y).toBeLessThan(openSourceBox!.y);
+});
+
 test("home page presents focused Genjux studio content without selected work", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: /studio capabilities/i })).toBeVisible();

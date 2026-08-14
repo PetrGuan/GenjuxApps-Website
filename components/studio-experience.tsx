@@ -3,7 +3,7 @@ import { studioExperience } from "@/lib/studio-content";
 
 export default function StudioExperience() {
   return (
-    <section className="studio-section studio-experience page-shell" aria-labelledby="studio-experience-title">
+    <section className="studio-section studio-experience page-shell" aria-label="Experience">
       <MotionSafe>
         <div className="studio-section-heading">
           <p className="eyebrow">EXPERIENCE</p>

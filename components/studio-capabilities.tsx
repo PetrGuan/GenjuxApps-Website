@@ -3,13 +3,12 @@ import { studioCapabilities } from "@/lib/studio-content";
 
 export default function StudioCapabilities() {
   return (
-    <section className="studio-section studio-capabilities page-shell" aria-labelledby="studio-capabilities-title">
+    <section className="studio-section studio-capabilities page-shell" aria-label="Capabilities">
       <MotionSafe>
         <div className="studio-section-heading">
           <p className="eyebrow">CAPABILITIES</p>
-          <h2 id="studio-capabilities-title" aria-label="Studio capabilities">
-            Engineering for useful, lasting software.
-          </h2>
+          <h2 id="studio-capabilities-title" aria-label="Studio capabilities">Capabilities</h2>
+          <p className="studio-section-intro">Engineering for useful, lasting software.</p>
         </div>
         <ul className="studio-capabilities-grid">
           {studioCapabilities.map((capability) => (
