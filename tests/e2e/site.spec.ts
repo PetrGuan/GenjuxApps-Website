@@ -22,7 +22,7 @@ test("home page presents focused Genjux studio content without selected work", a
 
 test("Bebilog card opens the complete English Bebilog site", async ({ page }) => {
   await page.goto("/");
-  await page.getByLabel("Products").getByRole("link", { name: /explore bebilog/i }).click();
+  await page.getByRole("link", { name: /explore bebilog/i }).click();
 
   await expect(page).toHaveURL(/\/apps\/bebilog$/);
   await expect(page.getByRole("heading", { name: /baby tracking/i })).toBeVisible();

@@ -32,7 +32,7 @@ export default function ProductMatrix() {
       <div aria-live="polite" className="precision-product-grid" id="products">
         {visibleProducts.length ? (
           visibleProducts.map((product) => (
-            <div className="precision-product-entry" id={product.slug} key={product.slug}>
+            <div className="precision-product-entry" data-product={product.slug} id={product.slug} key={product.slug}>
               <ProductCard product={product} prominent={product.slug === "bebilog"} />
             </div>
           ))
