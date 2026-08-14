@@ -1637,6 +1637,31 @@ body::before {
   transform: rotate(-4deg) scale(0.98);
 }
 
+.precision-product-entry[data-product="bebilog"] .product-card {
+  height: clamp(31rem, 45vw, 38rem);
+  min-height: 0;
+}
+
+.precision-product-entry[data-product="bebilog"] .product-artwork {
+  min-height: 0;
+}
+
+.precision-product-entry[data-product="bebilog"] .product-artwork img,
+.precision-product-entry[data-product="bebilog"] .product-card:hover .product-artwork img {
+  width: auto;
+  max-width: 86%;
+  max-height: calc(100% - 3rem);
+  transform: none;
+}
+
+.precision-product-entry[data-product="nautilus"] .product-card {
+  grid-template-columns: 1fr;
+}
+
+.precision-product-entry[data-product="nautilus"] .product-artwork {
+  display: none;
+}
+
 .artwork-grid {
   inset: 0;
   opacity: 0.22;

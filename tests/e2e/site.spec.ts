@@ -9,6 +9,13 @@ test("Dark Precision portal presents categorized Bento products", async ({ page 
   await expect(page.getByRole("heading", { name: /experience behind genjux/i })).toBeVisible();
 });
 
+test("Bento cards keep app previews upright and narrow content readable", async ({ page }) => {
+  await page.goto("/");
+
+  await expect(page.locator('[data-product="nautilus"] .product-artwork')).not.toBeVisible();
+  await expect(page.locator('[data-product="bebilog"] .product-artwork img')).toHaveCSS("transform", "none");
+});
+
 test("home page presents focused Genjux studio content without selected work", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: /studio capabilities/i })).toBeVisible();
