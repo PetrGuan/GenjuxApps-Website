@@ -13,7 +13,6 @@ export type Product = {
   accent: "coral" | "amber";
   assets: {
     icon: string;
-    hero: string;
     appStoreBadge: string;
   };
 };
@@ -33,7 +32,6 @@ export const products: readonly Product[] = [
     accent: "coral",
     assets: {
       icon: "/products/bebilog/app-icon.png",
-      hero: "/products/bebilog/home.png",
       appStoreBadge: "/products/bebilog/app-store-badge.svg",
     },
   },
@@ -51,7 +49,6 @@ export const products: readonly Product[] = [
     accent: "amber",
     assets: {
       icon: "/products/nautilus/app-icon.png",
-      hero: "/products/nautilus/home.jpg",
       appStoreBadge: "/products/nautilus/app-store-badge.svg",
     },
   },

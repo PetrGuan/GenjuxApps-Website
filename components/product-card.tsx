@@ -29,10 +29,6 @@ export default function ProductCard({ product, prominent = false }: ProductCardP
           ))}
         </ul>
       </div>
-      <div className="product-artwork">
-        <div className="artwork-grid" aria-hidden="true" />
-        <img src={product.assets.hero} alt={`${product.name} app screen`} />
-      </div>
       <a href={product.route} className="product-card-link">
         Explore {product.name} <span aria-hidden="true">→</span>
       </a>

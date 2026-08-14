@@ -1966,6 +1966,41 @@ body::before {
   color: #fff;
 }
 
+/* Copy-only product cards. */
+.precision-product-grid {
+  align-items: start;
+}
+
+.precision-product-entry .product-card,
+.precision-product-entry[data-product="bebilog"] .product-card,
+.precision-product-entry[data-product="nautilus"] .product-card {
+  height: auto;
+  min-height: 0;
+  grid-template: 1fr / 1fr;
+}
+
+.precision-product-entry .product-card::before {
+  display: none;
+}
+
+.precision-product-entry .product-card-copy,
+.precision-product-entry .product-card:hover .product-card-copy,
+.precision-product-entry .product-card:focus-within .product-card-copy {
+  opacity: 1;
+  transform: none;
+}
+
+.precision-product-entry .capability-tags {
+  margin-top: 1.75rem;
+  padding-top: 0;
+}
+
+.precision-product-entry .product-card:hover {
+  border-color: var(--line);
+  background: #12161b;
+  box-shadow: none;
+}
+
 /* Product cards: text first, full un-cropped preview on intent. */
 .precision-product-entry .product-card,
 .precision-product-entry[data-product="bebilog"] .product-card,
@@ -2029,6 +2064,10 @@ body::before {
   transform: none;
 }
 
+.precision-product-grid {
+  align-items: start;
+}
+
 .precision-product-entry .product-card:hover .product-card-link,
 .precision-product-entry .product-card:focus-within .product-card-link {
   opacity: 0;
@@ -2085,4 +2124,24 @@ body::before {
     min-height: 34rem;
     grid-template-rows: auto minmax(15rem, 20rem);
   }
+}
+
+/* Final copy-only layout overrides. */
+.precision-product-grid {
+  align-items: start;
+}
+
+.precision-product-entry .product-card,
+.precision-product-entry[data-product="bebilog"] .product-card,
+.precision-product-entry[data-product="nautilus"] .product-card {
+  height: auto;
+  min-height: 0;
+  grid-template: 1fr / 1fr;
+}
+
+.precision-product-entry .product-card-copy,
+.precision-product-entry .product-card:hover .product-card-copy,
+.precision-product-entry .product-card:focus-within .product-card-copy {
+  opacity: 1;
+  transform: none;
 }

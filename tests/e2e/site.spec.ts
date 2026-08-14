@@ -9,23 +9,11 @@ test("Dark Precision portal presents categorized Bento products", async ({ page 
   await expect(page.getByRole("heading", { name: /experience behind genjux/i })).toBeVisible();
 });
 
-test("product cards reveal complete previews on hover", async ({ page }) => {
+test("product cards use natural copy-only layouts", async ({ page }) => {
   await page.goto("/");
 
-  const bebilogBox = await page.locator('[data-product="bebilog"] .product-card').boundingBox();
-  const nautilusBox = await page.locator('[data-product="nautilus"] .product-card').boundingBox();
-  const bebilogCard = page.locator('[data-product="bebilog"] .product-card');
-  const bebilogArtwork = page.locator('[data-product="bebilog"] .product-artwork');
-
-  expect(bebilogBox).not.toBeNull();
-  expect(nautilusBox).not.toBeNull();
-  expect(Math.abs(bebilogBox!.width - nautilusBox!.width)).toBeLessThanOrEqual(1);
-  expect(Math.abs(bebilogBox!.height - nautilusBox!.height)).toBeLessThanOrEqual(1);
-  await expect(bebilogArtwork).toHaveCSS("opacity", "0");
-  await expect(bebilogArtwork.locator("img")).toHaveCSS("object-fit", "contain");
-
-  await bebilogCard.hover();
-  await expect(bebilogArtwork).toHaveCSS("opacity", "1");
+  await expect(page.locator(".precision-product-grid")).toHaveCSS("align-items", "start");
+  await expect(page.locator(".product-artwork")).toHaveCount(0);
 });
 
 test("contact panel uses a restrained tonal surface", async ({ page }) => {
