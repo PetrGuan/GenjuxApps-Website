@@ -1,9 +1,12 @@
+export type ProductCategory = "Productivity" | "Utilities";
+
 export type Product = {
   slug: "bebilog" | "nautilus";
   name: string;
   route: "/apps/bebilog" | "/apps/nautilus/index.html";
   appStoreUrl: string;
   platform: "Native iOS" | "Native iOS & iPadOS";
+  category: ProductCategory;
   tagline: string;
   description: string;
   capabilities: readonly string[];
@@ -22,6 +25,7 @@ export const products: readonly Product[] = [
     route: "/apps/bebilog",
     appStoreUrl: "https://apps.apple.com/us/app/bebilog-baby-tracker/id6759827652",
     platform: "Native iOS",
+    category: "Utilities",
     tagline: "Baby tracking, made calm.",
     description:
       "A privacy-first baby tracker for feeding, sleep, growth, vaccines, and everyday care — with on-device intelligence that turns quick notes into useful records.",
@@ -39,6 +43,7 @@ export const products: readonly Product[] = [
     route: "/apps/nautilus/index.html",
     appStoreUrl: "https://apps.apple.com/us/app/nautilus-tech-news-reader/id6787639053",
     platform: "Native iOS & iPadOS",
+    category: "Productivity",
     tagline: "A quieter way to read Hacker News.",
     description:
       "A native reading room for Hacker News, with on-device thread summaries, private briefings, offline reading, Story Rules, and Radar watchlists.",
