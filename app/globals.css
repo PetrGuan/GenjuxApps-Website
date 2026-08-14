@@ -1966,6 +1966,75 @@ body::before {
   color: #fff;
 }
 
+/* Product cards: text first, full un-cropped preview on intent. */
+.precision-product-entry .product-card,
+.precision-product-entry[data-product="bebilog"] .product-card,
+.precision-product-entry[data-product="nautilus"] .product-card {
+  grid-template-rows: 1fr;
+}
+
+.precision-product-entry .product-card-copy {
+  position: relative;
+  z-index: 1;
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.precision-product-entry .product-artwork,
+.precision-product-entry[data-product="nautilus"] .product-artwork {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: grid;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.precision-product-entry .product-artwork img,
+.precision-product-entry[data-product="bebilog"] .product-artwork img,
+.precision-product-entry[data-product="bebilog"] .product-card:hover .product-artwork img {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  object-fit: contain;
+  transform: none;
+}
+
+.precision-product-entry .product-card:hover .product-artwork,
+.precision-product-entry .product-card:focus-within .product-artwork {
+  opacity: 1;
+}
+
+.precision-product-entry .product-card:hover .product-card-copy,
+.precision-product-entry .product-card:focus-within .product-card-copy {
+  opacity: 0;
+  transform: translateY(-0.5rem);
+}
+
+.precision-product-entry .product-card-link {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  color: transparent !important;
+  font-size: 0;
+  opacity: 0;
+  transform: none;
+}
+
+.precision-product-entry .product-card:hover .product-card-link,
+.precision-product-entry .product-card:focus-within .product-card-link {
+  opacity: 0;
+  transform: none;
+}
+
 /* Equal-footprint product cards. */
 .precision-product-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
