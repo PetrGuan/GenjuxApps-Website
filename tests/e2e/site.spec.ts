@@ -9,11 +9,23 @@ test("Dark Precision portal presents categorized Bento products", async ({ page 
   await expect(page.getByRole("heading", { name: /experience behind genjux/i })).toBeVisible();
 });
 
-test("Bento cards keep app previews upright and narrow content readable", async ({ page }) => {
+test("product cards are equal-sized and keep app previews upright", async ({ page }) => {
   await page.goto("/");
 
-  await expect(page.locator('[data-product="nautilus"] .product-artwork')).not.toBeVisible();
+  const bebilogBox = await page.locator('[data-product="bebilog"] .product-card').boundingBox();
+  const nautilusBox = await page.locator('[data-product="nautilus"] .product-card').boundingBox();
+
+  expect(bebilogBox).not.toBeNull();
+  expect(nautilusBox).not.toBeNull();
+  expect(Math.abs(bebilogBox!.width - nautilusBox!.width)).toBeLessThanOrEqual(1);
+  expect(Math.abs(bebilogBox!.height - nautilusBox!.height)).toBeLessThanOrEqual(1);
   await expect(page.locator('[data-product="bebilog"] .product-artwork img')).toHaveCSS("transform", "none");
+});
+
+test("contact panel uses a restrained tonal surface", async ({ page }) => {
+  await page.goto("/");
+
+  await expect(page.locator(".studio-contact-panel")).toHaveCSS("background-color", "rgb(19, 24, 30)");
 });
 
 test("home page presents focused Genjux studio content without selected work", async ({ page }) => {

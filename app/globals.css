@@ -1870,3 +1870,150 @@ body::before {
     flex-direction: column;
   }
 }
+
+/* Quiet graphite palette: color directs attention, never sells it. */
+:root {
+  --void: #0e1114;
+  --surface: #12161b;
+  --surface-strong: #181d23;
+  --ink: #e3e7ec;
+  --ink-muted: #a4acb8;
+  --line: #29323d;
+  --blue: #7187a3;
+  --violet: #b8c3d2;
+}
+
+body {
+  background: #0e1114;
+}
+
+body::before {
+  opacity: 0.22;
+  background-image:
+    linear-gradient(to right, rgba(164, 172, 184, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(164, 172, 184, 0.055) 1px, transparent 1px);
+}
+
+.site-header {
+  background: rgba(14, 17, 20, 0.92);
+}
+
+.site-footer {
+  background: #11151a;
+}
+
+.precision-filter {
+  background: #12161b;
+}
+
+.precision-filter-button:hover,
+.precision-filter-button[aria-pressed="true"] {
+  border-color: #46576a;
+  background: #293442;
+  color: var(--ink);
+}
+
+.product-card {
+  background: #12161b;
+}
+
+.product-card[data-accent="coral"]::before,
+.product-card[data-accent="amber"]::before {
+  background: linear-gradient(90deg, transparent, rgba(203, 213, 225, 0.17), transparent);
+}
+
+.product-card:hover {
+  border-color: #536273;
+  background: #151a20;
+  box-shadow: 0 0 1.1rem rgba(113, 135, 163, 0.1);
+}
+
+.product-artwork {
+  background: #0d1116;
+}
+
+.capability-tags li,
+.studio-tags li {
+  background: #171c22;
+}
+
+.precision-studio-rail .studio-section-heading .eyebrow {
+  color: #aebcd0;
+}
+
+.precision-studio-rail .studio-contact-panel {
+  border-color: #3f4c5a;
+  background-color: #13181e;
+  background-image: linear-gradient(135deg, rgba(184, 195, 210, 0.08), transparent 58%);
+}
+
+.precision-studio-rail .studio-contact h2 {
+  color: var(--ink);
+}
+
+.precision-studio-rail .studio-contact .eyebrow {
+  color: #aebcd0;
+}
+
+.precision-studio-rail .studio-contact-link {
+  border-color: #4b5a6a;
+  background: #202832;
+  color: var(--ink);
+}
+
+.precision-studio-rail .studio-contact-link:hover {
+  background: #293442;
+  color: #fff;
+}
+
+/* Equal-footprint product cards. */
+.precision-product-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  min-height: 0;
+}
+
+.precision-product-entry,
+.precision-product-entry[data-product="bebilog"] {
+  grid-column: auto;
+}
+
+.precision-product-entry .product-card,
+.precision-product-entry[data-product="bebilog"] .product-card,
+.precision-product-entry[data-product="nautilus"] .product-card {
+  height: clamp(36rem, 48vw, 42rem);
+  min-height: 0;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(0, 1fr) minmax(13rem, 18rem);
+}
+
+.precision-product-entry .product-artwork,
+.precision-product-entry[data-product="nautilus"] .product-artwork {
+  display: grid;
+  min-height: 0;
+  border-top: 1px solid var(--line);
+  border-left: 0;
+}
+
+.precision-product-entry .product-artwork img,
+.precision-product-entry[data-product="bebilog"] .product-artwork img,
+.precision-product-entry[data-product="bebilog"] .product-card:hover .product-artwork img {
+  width: auto;
+  max-width: 82%;
+  max-height: calc(100% - 1.5rem);
+  transform: none;
+}
+
+@media (max-width: 820px) {
+  .precision-product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .precision-product-entry .product-card,
+  .precision-product-entry[data-product="bebilog"] .product-card,
+  .precision-product-entry[data-product="nautilus"] .product-card {
+    height: auto;
+    min-height: 34rem;
+    grid-template-rows: auto minmax(15rem, 20rem);
+  }
+}
