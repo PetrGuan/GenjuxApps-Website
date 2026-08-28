@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { motion } from "framer-motion";
+import { withBasePath } from "@/lib/site-paths";
 
 export default function PhoneMockup() {
   return (
@@ -25,7 +26,7 @@ export default function PhoneMockup() {
 
           {/* Screenshot — offset up to overlap behind Dynamic Island like real iPhone */}
           <img
-            src="/apps/bebilog/images/screenshot-home.png"
+            src={withBasePath("/apps/bebilog/images/screenshot-home.png")}
             alt="Bebilog app home screen"
             className="absolute inset-0 w-full h-full object-cover"
           />

@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import LanguageToggle from "./LanguageToggle";
 import { APP_STORE_URL } from "@/components/bebilog/data";
+import { withBasePath } from "@/lib/site-paths";
 
 export default function Nav() {
   const t = useTranslations("nav");
@@ -27,12 +28,11 @@ export default function Nav() {
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2">
           {/* Product pages intentionally use a document navigation to leave the isolated route group. */}
-          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-          <a href="/" aria-label="Back to Genjux" className="text-xs text-white/50 transition-colors hover:text-white">
+          <a href={withBasePath("/")} aria-label="Back to Genjux" className="text-xs text-white/50 transition-colors hover:text-white">
             ← Genjux
           </a>
           <span aria-hidden="true" className="text-white/20">/</span>
-          <Image src="/apps/bebilog/images/app-icon.png" alt="Bebilog" width={28} height={28} className="rounded-lg" />
+          <Image src={withBasePath("/apps/bebilog/images/app-icon.png")} alt="Bebilog" width={28} height={28} className="rounded-lg" />
           <span className="text-white font-bold text-base">Bebilog</span>
         </div>
         <div className="flex items-center gap-6">

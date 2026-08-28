@@ -25,7 +25,11 @@ npm run test:e2e
 
 ## Deployment
 
-The project uses Next.js static export, so deploy the generated `out/` directory to a static host such as GitHub Pages, Cloudflare Pages, or Vercel.
+Pushes to `main` automatically build and deploy the static export through GitHub Actions to GitHub Pages:
+
+<https://petrguan.github.io/GenjuxApps-Website/>
+
+The workflow sets the repository base path and writes the generated site to `out/`. The regular `npm run build` command remains suitable for root-domain hosts; `npm run build:pages` prepares copied static product pages for a configured `NEXT_PUBLIC_BASE_PATH`.
 
 ## Product routes
 

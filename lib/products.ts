@@ -1,9 +1,11 @@
+import { withBasePath } from "@/lib/site-paths";
+
 export type ProductCategory = "Games" | "Productivity" | "Utilities";
 
 export type Product = {
   slug: "bebilog" | "nautilus" | "pixel-wonders";
   name: string;
-  route: "/apps/bebilog" | "/apps/nautilus/index.html" | "/apps/pixel-wonders/index.html";
+  route: string;
   appStoreUrl?: string;
   platform: "iPhone game" | "Native iOS" | "Native iOS & iPadOS";
   category: ProductCategory;
@@ -21,7 +23,7 @@ export const products: readonly Product[] = [
   {
     slug: "pixel-wonders",
     name: "Pixel Wonders",
-    route: "/apps/pixel-wonders/index.html",
+    route: withBasePath("/apps/pixel-wonders/index.html"),
     platform: "iPhone game",
     category: "Games",
     tagline: "Observe closely. Paint from memory.",
@@ -30,13 +32,13 @@ export const products: readonly Product[] = [
     capabilities: ["Observe", "Paint from memory", "Collect species"],
     accent: "moss",
     assets: {
-      icon: "/apps/pixel-wonders/assets/app-icon.png",
+      icon: withBasePath("/apps/pixel-wonders/assets/app-icon.png"),
     },
   },
   {
     slug: "bebilog",
     name: "Bebilog",
-    route: "/apps/bebilog",
+    route: withBasePath("/apps/bebilog"),
     appStoreUrl: "https://apps.apple.com/us/app/bebilog-baby-tracker/id6759827652",
     platform: "Native iOS",
     category: "Utilities",
@@ -46,14 +48,14 @@ export const products: readonly Product[] = [
     capabilities: ["On-device Smart Log", "12 record types", "Private by design"],
     accent: "coral",
     assets: {
-      icon: "/products/bebilog/app-icon.png",
-      appStoreBadge: "/products/bebilog/app-store-badge.svg",
+      icon: withBasePath("/products/bebilog/app-icon.png"),
+      appStoreBadge: withBasePath("/products/bebilog/app-store-badge.svg"),
     },
   },
   {
     slug: "nautilus",
     name: "Nautilus",
-    route: "/apps/nautilus/index.html",
+    route: withBasePath("/apps/nautilus/index.html"),
     appStoreUrl: "https://apps.apple.com/us/app/nautilus-tech-news-reader/id6787639053",
     platform: "Native iOS & iPadOS",
     category: "Productivity",
@@ -63,8 +65,8 @@ export const products: readonly Product[] = [
     capabilities: ["On-device AI", "Private Briefing", "Offline reading"],
     accent: "amber",
     assets: {
-      icon: "/products/nautilus/app-icon.png",
-      appStoreBadge: "/products/nautilus/app-store-badge.svg",
+      icon: withBasePath("/products/nautilus/app-icon.png"),
+      appStoreBadge: withBasePath("/products/nautilus/app-store-badge.svg"),
     },
   },
 ];

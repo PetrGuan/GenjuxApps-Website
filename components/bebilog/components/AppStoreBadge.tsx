@@ -2,6 +2,7 @@
 
 import { useLocale } from "next-intl";
 import { APP_STORE_URL } from "@/components/bebilog/data";
+import { withBasePath } from "@/lib/site-paths";
 
 type Props = {
   className?: string;
@@ -10,7 +11,9 @@ type Props = {
 // Official Apple "Download on the App Store" badge, localized per active locale.
 export default function AppStoreBadge({ className = "h-11" }: Props) {
   const locale = useLocale();
-  const src = locale === "zh" ? "/apps/bebilog/images/app-store-badge-zh.svg" : "/apps/bebilog/images/app-store-badge-en.svg";
+  const src = withBasePath(
+    locale === "zh" ? "/apps/bebilog/images/app-store-badge-zh.svg" : "/apps/bebilog/images/app-store-badge-en.svg",
+  );
 
   return (
     <a href={APP_STORE_URL} target="_blank" rel="noopener noreferrer" className="inline-flex">
