@@ -3,16 +3,16 @@ import { withBasePath } from "@/lib/site-paths";
 export type ProductCategory = "Games" | "Productivity" | "Utilities";
 
 export type Product = {
-  slug: "bebilog" | "nautilus" | "pixel-wonders";
+  slug: "bebilog" | "lumadio" | "nautilus" | "pixel-wonders";
   name: string;
   route: string;
   appStoreUrl?: string;
-  platform: "iPhone game" | "Native iOS" | "Native iOS & iPadOS";
+  platform: "iPhone game" | "Native iOS" | "Native iOS & iPadOS" | "Native macOS";
   category: ProductCategory;
   tagline: string;
   description: string;
   capabilities: readonly string[];
-  accent: "amber" | "coral" | "moss";
+  accent: "amber" | "coral" | "moss" | "violet";
   assets: {
     icon: string;
     appStoreBadge?: string;
@@ -20,6 +20,21 @@ export type Product = {
 };
 
 export const products: readonly Product[] = [
+  {
+    slug: "lumadio",
+    name: "Lumadio",
+    route: withBasePath("/apps/lumadio"),
+    platform: "Native macOS",
+    category: "Utilities",
+    tagline: "Displays and app audio, together.",
+    description:
+      "A focused menu bar app for display controls, per-app audio, and scenes that bring your whole Mac setup back in one action.",
+    capabilities: ["Display control", "Per-app audio", "Scenes & Shortcuts"],
+    accent: "violet",
+    assets: {
+      icon: withBasePath("/apps/lumadio/icon.svg"),
+    },
+  },
   {
     slug: "pixel-wonders",
     name: "Pixel Wonders",

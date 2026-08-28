@@ -5,6 +5,7 @@ test("product catalogue presents only its available apps", async ({ page }) => {
 
   await expect(page.getByRole("heading", { name: /who makes software/i })).toBeVisible();
   await expect(page.locator(".product-grid")).toBeVisible();
+  await expect(page.getByRole("link", { name: /discover lumadio/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /discover bebilog/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /discover nautilus/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /discover pixel wonders/i })).toBeVisible();
@@ -18,6 +19,20 @@ test("Bebilog card opens the complete English Bebilog site", async ({ page }) =>
   await expect(page).toHaveURL(/\/apps\/bebilog$/);
   await expect(page.getByRole("heading", { name: /baby tracking/i })).toBeVisible();
   await expect(page.getByRole("navigation", { name: "Primary navigation" })).not.toBeVisible();
+});
+
+test("Lumadio exposes its product and App Review support pages", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("link", { name: /discover lumadio/i }).click();
+
+  await expect(page).toHaveURL(/\/apps\/lumadio$/);
+  await expect(page.getByRole("heading", { name: /your displays/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Privacy", exact: true })).toHaveAttribute("href", "/apps/lumadio/privacy");
+  await expect(page.getByRole("link", { name: "Terms", exact: true })).toHaveAttribute("href", "/apps/lumadio/terms");
+
+  await page.goto("/apps/lumadio/support");
+  await expect(page.getByRole("heading", { name: /how can we help/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /email support/i })).toHaveAttribute("href", /mailto:hello@genjux\.com/);
 });
 
 test("the home page exposes all primary landmark destinations", async ({ page }) => {

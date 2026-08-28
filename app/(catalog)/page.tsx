@@ -15,8 +15,8 @@ export default function HomePage() {
             See the collection <span aria-hidden="true">↓</span>
           </a>
         </div>
-        <p className="catalog-count" aria-label="Three available products">
-          <span>03</span> RELEASES
+        <p className="catalog-count" aria-label="Four available products">
+          <span>04</span> RELEASES
         </p>
       </section>
       <ProductMatrix />

@@ -6,7 +6,7 @@ export default function ProductMatrix() {
     <section className="product-collection page-shell" id="products" aria-labelledby="products-title">
       <div className="product-collection-heading">
         <p className="catalog-kicker">THE COLLECTION</p>
-        <h2 id="products-title">Three releases. Three different worlds.</h2>
+        <h2 id="products-title">Four releases. Four different worlds.</h2>
         <p>Choose the one that fits the day in front of you.</p>
       </div>
       <div className="product-grid">

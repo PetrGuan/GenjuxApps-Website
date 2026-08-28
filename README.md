@@ -4,6 +4,7 @@ The public product catalogue for Genjux software.
 
 ## Products
 
+- **Lumadio** — one menu bar for display controls, per-app audio, and reusable Mac scenes.
 - **Bebilog** — a private baby tracker for iOS, with on-device Smart Log, everyday care records, and insights.
 - **Nautilus** — a quiet native reader for Hacker News on iOS and iPadOS, with on-device summaries, private briefings, and offline reading.
 - **Pixel Wonders** — a nature observation and pixel-painting game for iPhone.
@@ -33,6 +34,10 @@ The workflow sets the repository base path and writes the generated site to `out
 
 ## Product routes
 
+- `/apps/lumadio` — Lumadio’s product site.
+- `/apps/lumadio/privacy` — Lumadio’s privacy policy.
+- `/apps/lumadio/support` — Lumadio support and troubleshooting.
+- `/apps/lumadio/terms` — Lumadio’s terms of use.
 - `/apps/bebilog` — Bebilog’s English site.
 - `/apps/bebilog/en` and `/apps/bebilog/zh` — Bebilog locale routes.
 - `/apps/nautilus/index.html` — Nautilus’s original static site.
