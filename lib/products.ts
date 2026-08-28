@@ -1,23 +1,38 @@
-export type ProductCategory = "Productivity" | "Utilities";
+export type ProductCategory = "Games" | "Productivity" | "Utilities";
 
 export type Product = {
-  slug: "bebilog" | "nautilus";
+  slug: "bebilog" | "nautilus" | "pixel-wonders";
   name: string;
-  route: "/apps/bebilog" | "/apps/nautilus/index.html";
-  appStoreUrl: string;
-  platform: "Native iOS" | "Native iOS & iPadOS";
+  route: "/apps/bebilog" | "/apps/nautilus/index.html" | "/apps/pixel-wonders/index.html";
+  appStoreUrl?: string;
+  platform: "iPhone game" | "Native iOS" | "Native iOS & iPadOS";
   category: ProductCategory;
   tagline: string;
   description: string;
   capabilities: readonly string[];
-  accent: "coral" | "amber";
+  accent: "amber" | "coral" | "moss";
   assets: {
     icon: string;
-    appStoreBadge: string;
+    appStoreBadge?: string;
   };
 };
 
 export const products: readonly Product[] = [
+  {
+    slug: "pixel-wonders",
+    name: "Pixel Wonders",
+    route: "/apps/pixel-wonders/index.html",
+    platform: "iPhone game",
+    category: "Games",
+    tagline: "Observe closely. Paint from memory.",
+    description:
+      "A quiet nature game about observing pixels, painting from memory, and collecting the story of each species.",
+    capabilities: ["Observe", "Paint from memory", "Collect species"],
+    accent: "moss",
+    assets: {
+      icon: "/apps/pixel-wonders/assets/app-icon.png",
+    },
+  },
   {
     slug: "bebilog",
     name: "Bebilog",

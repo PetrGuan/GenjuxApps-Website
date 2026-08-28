@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/apps/pixel-wonders/">
+  <meta name="description" content="A transparent inventory of data used by Pixel Wonders and the Apple services it integrates.">
+  <meta name="theme-color" content="#173f35">
+  <title>Data Practices — Pixel Wonders</title>
+  <link rel="icon" href="assets/app-icon.png">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body class="document-page">
+  <a class="skip-link" href="data-practices.html#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="index.html"><img src="assets/app-icon.png" alt="" width="44" height="44"><span>Pixel Wonders</span></a>
+    <nav aria-label="Primary navigation"><a href="index.html">Home</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a></nav>
+  </header>
+  <main id="main" class="data-page">
+    <header class="page-intro">
+      <p class="eyebrow">Data inventory · August 2026</p>
+      <h1>Where information goes,<br>without the fine print.</h1>
+      <p>This inventory is written to make the app’s actual data flows easy to inspect. The full legal explanation is in the <a href="privacy.html">Privacy Policy</a>.</p>
+    </header>
+
+    <section class="data-flow" aria-labelledby="flow-title">
+      <h2 id="flow-title">Three places information can exist</h2>
+      <div class="flow-grid">
+        <article>
+          <span class="flow-id">A</span>
+          <h3>Your iPhone</h3>
+          <p>Progress, attempts, unlocks, preferences, streaks, and local entitlement state.</p>
+          <strong class="status status--local">Stays local</strong>
+        </article>
+        <article>
+          <span class="flow-id">B</span>
+          <h3>Apple services</h3>
+          <p>Game Center identity and achievements; App Store purchase and signed transaction records; optional device backups.</p>
+          <strong class="status status--apple">Handled by Apple</strong>
+        </article>
+        <article>
+          <span class="flow-id">C</span>
+          <h3>Genjux</h3>
+          <p>No app account, gameplay database, advertising profile, analytics dashboard, or payment details.</p>
+          <strong class="status status--none">Not collected by us</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="matrix-section" aria-labelledby="matrix-title">
+      <div class="section-heading"><p class="eyebrow">Complete inventory</p><h2 id="matrix-title">Data practice matrix</h2></div>
+      <div class="table-wrap" tabindex="0" aria-label="Scrollable data practice table">
+        <table>
+          <thead><tr><th scope="col">Information</th><th scope="col">Purpose</th><th scope="col">Location / recipient</th><th scope="col">Developer server?</th><th scope="col">Your control</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Game progress and attempts</th><td>Save and resume play</td><td>Local app storage</td><td>No</td><td>Clear All Progress; delete app</td></tr>
+            <tr><th scope="row">Accessibility and play preferences</th><td>Apply your chosen experience</td><td>Local app storage</td><td>No</td><td>Change settings; delete app</td></tr>
+            <tr><th scope="row">Game Center display name and sign-in state</th><td>Show Game Center status</td><td>Provided by Apple at runtime</td><td>No</td><td>Manage Game Center in iOS</td></tr>
+            <tr><th scope="row">Achievement ID and completion</th><td>Sync achievements</td><td>Apple Game Center</td><td>No</td><td>Manage Game Center in iOS</td></tr>
+            <tr><th scope="row">Purchase transaction and entitlement</th><td>Buy, unlock, and restore optional content</td><td>Apple App Store / StoreKit</td><td>No</td><td>Apple purchase tools; Restore Purchases</td></tr>
+            <tr><th scope="row">Payment details</th><td>App Store billing</td><td>Apple only</td><td>No; not visible to us</td><td>Manage Apple Account</td></tr>
+            <tr><th scope="row">Device backup copy</th><td>Device backup and restore</td><td>Apple or your computer, depending on settings</td><td>No</td><td>Manage backup settings</td></tr>
+            <tr><th scope="row">Support email</th><td>Answer a request</td><td>Genjux support mailbox</td><td>Not an app data flow</td><td>Request deletion</td></tr>
+            <tr><th scope="row">Website request logs</th><td>Deliver and secure this site</td><td>GitHub Pages</td><td>No Pixel Wonders web server</td><td>See GitHub privacy controls</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="no-list" aria-labelledby="never-title">
+      <p class="eyebrow">Deliberate absences</p>
+      <h2 id="never-title">Pixel Wonders does not contain</h2>
+      <div><span>Advertising SDKs</span><span>Cross-app tracking</span><span>Behavioral analytics</span><span>Developer accounts</span><span>Location collection</span><span>Camera or microphone access</span><span>Contact or photo access</span><span>A developer backend</span></div>
+    </section>
+
+    <section class="policy-note">
+      <h2>About App Store privacy labels</h2>
+      <p>Apple defines “collection” under its own App Store Connect rules. Apple services can process information independently of the developer. This page describes the app’s implementation and does not replace the privacy disclosures displayed by Apple on the App Store.</p>
+      <a class="button" href="privacy.html">Read the full policy</a>
+    </section>
+  </main>
+  <footer class="site-footer compact"><p>© 2026 Genjux</p><div class="footer-links"><a href="/">Back to Genjux</a><a href="index.html">Home</a><a href="support.html">Support</a><a href="privacy.html">Privacy Policy</a></div></footer>
+</body>
+</html>

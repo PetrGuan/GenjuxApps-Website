@@ -1,11 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import SiteHeader from "@/components/site-header";
 
-it("renders each studio route", () => {
+it("links directly to each product in the catalogue", () => {
   render(<SiteHeader />);
 
-  expect(screen.getByRole("link", { name: "Products" })).toHaveAttribute("href", "/#products");
-  expect(screen.getByRole("link", { name: "About" })).toHaveAttribute("href", "/about");
-  expect(screen.getByRole("link", { name: "Changelog" })).toHaveAttribute("href", "/changelog");
-  expect(screen.getByRole("link", { name: "Contact" })).toHaveAttribute("href", "/contact");
+  expect(screen.getByRole("link", { name: "Bebilog" })).toHaveAttribute("href", "/#bebilog");
+  expect(screen.getByRole("link", { name: "Nautilus" })).toHaveAttribute("href", "/#nautilus");
+  expect(screen.getByRole("link", { name: "Pixel Wonders" })).toHaveAttribute("href", "/#pixel-wonders");
 });

@@ -13,8 +13,8 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Genjux — Independent Apps",
-  description: "Private, native, human-centered software for Apple platforms.",
+  title: "Genjux — Software",
+  description: "Software products by Genjux.",
 };
 
 export const viewport: Viewport = {

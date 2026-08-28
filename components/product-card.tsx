@@ -3,22 +3,20 @@
 import type { Product } from "@/lib/products";
 
 type ProductCardProps = {
+  index: number;
   product: Product;
-  prominent?: boolean;
 };
 
-export default function ProductCard({ product, prominent = false }: ProductCardProps) {
+export default function ProductCard({ index, product }: ProductCardProps) {
   return (
-    <article
-      className={`product-card ${prominent ? "product-card--prominent" : ""}`}
-      data-accent={product.accent}
-    >
+    <article className="product-card" data-accent={product.accent}>
+      <p className="product-index">0{index}</p>
       <div className="product-card-copy">
         <div className="product-identity">
           <img src={product.assets.icon} alt="" className="product-icon" />
           <div>
-            <p className="eyebrow">{product.platform}</p>
-            <h2>{product.name}</h2>
+            <p className="product-platform">{product.platform}</p>
+            <h3>{product.name}</h3>
           </div>
         </div>
         <p className="product-tagline">{product.tagline}</p>
@@ -30,7 +28,7 @@ export default function ProductCard({ product, prominent = false }: ProductCardP
         </ul>
       </div>
       <a href={product.route} className="product-card-link">
-        Explore {product.name} <span aria-hidden="true">→</span>
+        Discover {product.name} <span aria-hidden="true">→</span>
       </a>
     </article>
   );
