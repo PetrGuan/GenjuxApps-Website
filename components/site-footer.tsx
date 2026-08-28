@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { products } from "@/lib/products";
 
 export default function SiteFooter() {
@@ -8,9 +7,9 @@ export default function SiteFooter() {
         <p>© 2026 Genjux Apps</p>
         <div className="footer-links" aria-label="Product links">
           {products.map((product) => (
-            <Link href={product.route} key={product.slug}>
+            <a href={product.route} key={product.slug}>
               {product.name}
-            </Link>
+            </a>
           ))}
         </div>
         <p>A growing catalogue</p>
