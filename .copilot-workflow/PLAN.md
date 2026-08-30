@@ -2,33 +2,30 @@
 
 ## Problem
 
-The current homepage interleaves product discovery with studio capabilities, experience, open-source work, a portrait, and contact material. The site should become a product-only catalogue.
+The Lumadio product is present after the latest website update, but its catalogue and product pages still use an outdated SVG mark instead of the current application icon.
 
 ## Proposed approach
 
-Create a focused catalogue homepage with a new product showroom visual system. Keep the Bebilog and Nautilus product pages and their download paths intact, while removing personal and studio-information routes, components, navigation, content data, and tests.
+Import Lumadio's current 1024×1024 AppIcon asset and use it for every Lumadio icon surface in this site.
 
 ## Files likely involved
 
-- `app/(catalog)/page.tsx`
-- `app/(catalog)/layout.tsx`
-- `app/globals.css`
-- `components/site-header.tsx`
-- `components/site-footer.tsx`
-- `components/product-matrix.tsx`
-- `components/product-card.tsx`
-- related tests and `README.md`
+- `public/apps/lumadio/app-icon.png`
+- `public/apps/lumadio/icon.svg`
+- `lib/products.ts`
+- `components/lumadio/lumadio-site.tsx`
+- `tests/components/lumadio-site.test.tsx`
 
 ## Implementation steps
 
-1. Replace the homepage and shared shell with product-only catalogue content.
-2. Remove personal/studio routes, components, data, and navigation.
-3. Update the visual system, metadata, documentation, and tests.
+1. Pull the current website changes.
+2. Copy the current Lumadio AppIcon from the Lumadio source project.
+3. Replace all product and page references, remove the obsolete SVG, and validate the export.
 
 ## Validation
 
-Run the targeted component tests, lint, and static production build.
+Run Lumadio component tests, lint, and the static build.
 
 ## Risks and open questions
 
-The existing Bebilog detail site shares the global stylesheet, so catalogue styles must be scoped to avoid changing its visual design.
+None.

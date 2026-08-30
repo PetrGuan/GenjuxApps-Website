@@ -32,7 +32,7 @@ export const products: readonly Product[] = [
     capabilities: ["Display control", "Per-app audio", "Scenes & Shortcuts"],
     accent: "violet",
     assets: {
-      icon: withBasePath("/apps/lumadio/icon.svg"),
+      icon: withBasePath("/apps/lumadio/app-icon.png"),
     },
   },
   {

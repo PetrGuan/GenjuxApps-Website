@@ -24,7 +24,7 @@ const supportEmail = "hello@genjux.com";
 export function LumadioLogo({ compact = false }: { compact?: boolean }) {
   return (
     <span className="lumadio-brand">
-      <Image src={withBasePath("/apps/lumadio/icon.svg")} alt="" width={compact ? 28 : 34} height={compact ? 28 : 34} />
+      <Image src={withBasePath("/apps/lumadio/app-icon.png")} alt="" width={compact ? 28 : 34} height={compact ? 28 : 34} />
       <span>Lumadio</span>
     </span>
   );
@@ -70,7 +70,7 @@ function ProductMockup() {
     <div className="lumadio-visual" aria-label="Illustration of the Lumadio menu bar interface">
       <div className="lumadio-orbit lumadio-orbit-one" /><div className="lumadio-orbit lumadio-orbit-two" />
       <div className="lumadio-menu-window">
-        <div className="lumadio-window-bar"><span className="lumadio-window-title"><Image src={withBasePath("/apps/lumadio/icon.svg")} alt="" width={25} height={25} />Lumadio</span><span className="lumadio-live"><i /> Active</span></div>
+      <div className="lumadio-window-bar"><span className="lumadio-window-title"><Image src={withBasePath("/apps/lumadio/app-icon.png")} alt="" width={25} height={25} />Lumadio</span><span className="lumadio-live"><i /> Active</span></div>
         <div className="lumadio-scene-strip"><span>SCENE</span><div><button className="active">Focus</button><button>Movie</button><button>Night</button></div></div>
         <div className="lumadio-control-section">
           <div className="lumadio-section-label"><span><MonitorUp size={15} /> DISPLAYS</span><small>2 CONNECTED</small></div>
@@ -135,7 +135,7 @@ export function LumadioHome() {
         <div className="lumadio-price-card"><div className="lumadio-price-main"><span>LUMADIO PRO</span><div><strong>$4.99</strong><small>one-time purchase</small></div><p>Lifetime access to Lumadio Pro through a non-consumable in-app purchase.</p><span className="lumadio-primary-button">Available at launch</span></div><div className="lumadio-price-features"><strong>Pro includes</strong><ul><li><Check /> Unlimited scenes and scene shortcuts</li><li><Check /> Per-app routing, Solo, pan, and normalization</li><li><Check /> XDR enhancement and Face Light</li><li><Check /> Presentation and display automations</li><li><Check /> Advanced Apple Shortcuts actions</li></ul><small>Price shown in USD. Local App Store pricing and taxes may vary.</small></div></div>
       </section>
 
-      <section className="lumadio-final-cta"><div className="lumadio-shell"><Image src={withBasePath("/apps/lumadio/icon.svg")} alt="Lumadio app icon" width={82} height={82} /><p>YOUR MAC, IN HARMONY</p><h2>One menu bar.<br />Fewer detours.</h2><span className="lumadio-primary-button">Coming to the Mac App Store <ArrowRight size={17} /></span></div></section>
+      <section className="lumadio-final-cta"><div className="lumadio-shell"><Image src={withBasePath("/apps/lumadio/app-icon.png")} alt="Lumadio app icon" width={82} height={82} /><p>YOUR MAC, IN HARMONY</p><h2>One menu bar.<br />Fewer detours.</h2><span className="lumadio-primary-button">Coming to the Mac App Store <ArrowRight size={17} /></span></div></section>
       <LumadioFooter />
     </main>
   );

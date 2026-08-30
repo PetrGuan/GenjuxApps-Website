@@ -5,6 +5,10 @@ it("presents truthful product, pricing, privacy, and support information", () =>
   render(<LumadioHome />);
 
   expect(screen.getByRole("heading", { name: /your displays/i })).toBeInTheDocument();
+  expect(screen.getByAltText("Lumadio app icon")).toHaveAttribute(
+    "src",
+    expect.stringContaining(encodeURIComponent("/apps/lumadio/app-icon.png")),
+  );
   expect(screen.getByText(/\$4\.99/)).toBeInTheDocument();
   expect(screen.getByText(/no subscription/i)).toBeInTheDocument();
   expect(screen.getByRole("link", { name: "Privacy" })).toHaveAttribute("href", "/apps/lumadio/privacy");
