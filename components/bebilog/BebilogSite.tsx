@@ -35,7 +35,7 @@ type BebilogSiteProps = {
 export default function BebilogSite({ locale }: BebilogSiteProps) {
   return (
     <div className="bebilog-site" lang={locale}>
-      <NextIntlClientProvider locale={locale} messages={bebilogMessages[locale]}>
+      <NextIntlClientProvider locale={locale} messages={bebilogMessages[locale]} timeZone="UTC">
         <main className="min-h-screen bg-[#0a0a0a]">
           <Nav />
           <Hero />

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import CatalogLayout from "@/app/(catalog)/layout";
+import CatalogLayout from "@/app/(english)/(catalog)/layout";
 
 it("keeps the catalogue shell around product content", () => {
   render(<CatalogLayout>Product content</CatalogLayout>);

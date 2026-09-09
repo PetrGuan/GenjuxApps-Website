@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<base href="/apps/nautilus/" />
 <title>Nautilus — a quiet, beautiful reading room for Hacker News</title>
 <meta name="description" content="Nautilus is a free, native iOS reader for Hacker News. On-device AI thread summaries, a private briefing, Story Rules, Radar watchlists, offline reading, and hand-tuned Editions — no ads, no tracking, no account required." />
 <meta property="og:title" content="Nautilus — a quiet, beautiful reading room for Hacker News" />
@@ -10,6 +11,10 @@
 <meta property="og:image" content="assets/icon-512.png" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
+<link rel="canonical" href="index.html" />
+<link rel="alternate" hreflang="en" href="index.html" />
+<link rel="alternate" hreflang="zh-Hans" href="../../zh/apps/nautilus/index.html" />
+<link rel="alternate" hreflang="x-default" href="index.html" />
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
 <link rel="apple-touch-icon" href="assets/icon-180.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -48,12 +53,12 @@
   ::selection{background:var(--spec-accent);color:#1a1206}
 
   /* ---------- Nav ---------- */
-  nav.top{padding:30px 0;display:flex;align-items:center;justify-content:space-between}
+  nav.top{padding:30px 0;display:flex;align-items:center;justify-content:space-between;gap:20px}
   .brand{display:flex;align-items:center;gap:12px;font-family:"Fraunces",serif;font-weight:600;font-size:19px;letter-spacing:-.01em}
   .brand img{width:30px;height:30px;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.5)}
   .back-genjux{color:var(--spec-ink-soft);font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.04em;text-decoration:none;transition:color .2s}
   .back-genjux:hover{color:var(--spec-accent)}
-  .navlinks{display:flex;gap:30px;font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.04em}
+  .navlinks{display:flex;gap:30px;margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.04em}
   .navlinks a{color:var(--spec-ink-soft);text-decoration:none;transition:color .2s}
   .navlinks a:hover{color:var(--spec-accent)}
   @media (max-width:760px){.navlinks{display:none}}
@@ -235,6 +240,8 @@
   .sticky-cta .store-badge{height:34px}
   @media (max-width:520px){.sticky-cta span{display:none}}
 </style>
+<link rel="stylesheet" href="../../site-language.css" />
+<script src="../../site-language.js" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -247,6 +254,10 @@
       <a href="#underhood">Under the Hood</a>
       <a href="#pricing">Pricing</a>
       <a href="https://apps.apple.com/us/app/nautilus-tech-news-reader/id6787639053">App Store ↗</a>
+    </div>
+    <div class="site-language-switcher" role="group" aria-label="Site language">
+      <a data-site-locale="en" hreflang="en" href="index.html" aria-current="page">EN</a>
+      <a data-site-locale="zh" hreflang="zh-Hans" href="../../zh/apps/nautilus/index.html">中文</a>
     </div>
   </nav>
 

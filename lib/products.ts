@@ -3,11 +3,11 @@ import { withBasePath } from "@/lib/site-paths";
 export type ProductCategory = "Games" | "Productivity" | "Utilities";
 
 export type Product = {
-  slug: "bebilog" | "lumadio" | "nautilus" | "pixel-wonders";
+  slug: "bebilog" | "lumadio" | "nautilus" | "neowriter" | "pixel-wonders";
   name: string;
   route: string;
   appStoreUrl?: string;
-  platform: "iPhone game" | "Native iOS" | "Native iOS & iPadOS" | "Native macOS";
+  platform: "iPhone game" | "Native iOS" | "Native iOS & iPadOS" | "Native macOS" | "Native macOS, iOS & iPadOS";
   category: ProductCategory;
   tagline: string;
   description: string;
@@ -24,6 +24,7 @@ export const products: readonly Product[] = [
     slug: "lumadio",
     name: "Lumadio",
     route: withBasePath("/apps/lumadio"),
+    appStoreUrl: "https://apps.apple.com/us/app/lumadio-monitor-app-audio/id6806239533",
     platform: "Native macOS",
     category: "Utilities",
     tagline: "Displays and app audio, together.",
@@ -82,6 +83,21 @@ export const products: readonly Product[] = [
     assets: {
       icon: withBasePath("/products/nautilus/app-icon.png"),
       appStoreBadge: withBasePath("/products/nautilus/app-store-badge.svg"),
+    },
+  },
+  {
+    slug: "neowriter",
+    name: "NeoWriter",
+    route: withBasePath("/apps/neowriter"),
+    platform: "Native macOS, iOS & iPadOS",
+    category: "Productivity",
+    tagline: "Protect your words. Find your flow.",
+    description:
+      "Draft-first protection, native writing and reading, and optional on-device encryption for cloud vaults and backups. For Mac, iPhone, and iPad.",
+    capabilities: ["Draft protection", "Fluid writing & reading", "Encrypted cloud vaults"],
+    accent: "amber",
+    assets: {
+      icon: withBasePath("/apps/neowriter/app-icon.png"),
     },
   },
 ];

@@ -1,0 +1,51 @@
+.lumadio-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lumadio-nav-actions .site-language-switcher {
+  flex: none;
+}
+
+.lumadio-site:lang(zh-Hans),
+.lumadio-site[data-locale="zh"] {
+  font-family: var(--font-inter), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+.lumadio-site[data-locale="zh"] .lumadio-hero h1,
+.lumadio-site[data-locale="zh"] .lumadio-manifesto h2,
+.lumadio-site[data-locale="zh"] .lumadio-section-heading h2,
+.lumadio-site[data-locale="zh"] .lumadio-scenes-copy h2,
+.lumadio-site[data-locale="zh"] .lumadio-final-cta h2,
+.lumadio-site[data-locale="zh"] .lumadio-legal header h1 {
+  letter-spacing: -0.045em;
+}
+
+@media (max-width: 640px) {
+  .lumadio-nav {
+    gap: 10px;
+  }
+
+  .lumadio-nav-actions {
+    gap: 7px;
+  }
+
+  .lumadio-site .lumadio-nav-cta {
+    padding-inline: 9px;
+  }
+
+  .lumadio-nav-actions .site-language-switcher {
+    gap: 2px;
+  }
+
+  .lumadio-nav-actions .site-language-switcher a {
+    padding-inline: 5px;
+  }
+}
+
+@media (max-width: 340px) {
+  .lumadio-nav > a .lumadio-brand > span:last-child {
+    display: none;
+  }
+}

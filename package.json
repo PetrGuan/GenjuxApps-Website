@@ -7,9 +7,9 @@
     "node": ">=22"
   },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "build:pages": "next build && node scripts/prepare-pages.mjs",
+    "dev": "node scripts/prepare-localized-static.mjs && next dev",
+    "build": "node scripts/prepare-localized-static.mjs && next build && node scripts/prepare-main-site.mjs",
+    "build:pages": "npm run build && node scripts/prepare-pages.mjs",
     "start": "npx serve@14 out",
     "lint": "eslint .",
     "test": "vitest run",
@@ -19,11 +19,14 @@
   "dependencies": {
     "@swc/helpers": "^0.5.23",
     "framer-motion": "^12.38.0",
+    "gray-matter": "^4.0.3",
     "lucide-react": "^1.29.0",
     "next": "^16.2.4",
     "next-intl": "^4.13.5",
     "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "react-dom": "^19.2.4",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.2",

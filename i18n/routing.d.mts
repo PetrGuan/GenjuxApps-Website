@@ -1,0 +1,10 @@
+export type SiteLocale = "en" | "zh";
+export const locales: readonly SiteLocale[];
+export const defaultLocale: "en";
+export function withBasePath(path: string): string;
+export function stripBasePath(path: string): string;
+export function pathLocale(path: string): SiteLocale;
+export function englishPath(path: string): string;
+export function localePath(path: string, locale: SiteLocale): string;
+export function localizedHref(path: string, locale: SiteLocale): string;
+export function htmlLanguage(locale: SiteLocale): "en" | "zh-Hans";

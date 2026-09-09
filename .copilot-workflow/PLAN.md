@@ -1,31 +1,40 @@
 # Plan
 
-## Problem
+## Confirmed behavior
 
-The Lumadio product is present after the latest website update, but its catalogue and product pages still use an outdated SVG mark instead of the current application icon.
+- English is the default; Simplified Chinese is selected explicitly, not from
+  browser language or geolocation.
+- Preserve existing English URLs. Chinese equivalents use `/zh/...`.
+- Remember the selection locally across the main site and all product pages.
+- Chinese blog pages retain an English article when no Chinese translation is
+  available, with a visible untranslated-content notice.
+- Localize navigation, content, accessibility labels, metadata, product summaries,
+  legal/support pages, and existing static product documents. Keep real screenshots,
+  brand names, public contacts, currencies, and App Store region URLs intact.
 
-## Proposed approach
+## Approach
 
-Import Lumadio's current 1024×1024 AppIcon asset and use it for every Lumadio icon surface in this site.
+Use explicit locale props in shared renderers and build both language versions
+statically. English and Chinese root layouts provide the correct document language
+without request headers, middleware, or locale negotiation. Existing English routes
+remain in an English route group; Chinese routes share translated renderers.
 
-## Files likely involved
+One routing helper handles locale prefixes, legacy Bebilog locale URLs, and the
+deployment base path. One small browser script remembers manual choices and uses
+declared alternate links to restore a preference. It does not translate the DOM,
+detect browser language, or upload preferences for analytics. Hosting still
+receives the ordinary requested page URL.
 
-- `public/apps/lumadio/app-icon.png`
-- `public/apps/lumadio/icon.svg`
-- `lib/products.ts`
-- `components/lumadio/lumadio-site.tsx`
-- `tests/components/lumadio-site.test.tsx`
+Reuse next-intl and existing Bebilog translations. Existing plain-HTML product
+pages retain their designs and gain deterministic, build-time Chinese translations,
+the same preference mechanism, and localized links to the rest of the site.
 
-## Implementation steps
+Add a site-wide global not-found document only as required by Next's documented
+multiple-root-layout architecture. All original product URLs and legal documents
+remain reachable.
 
-1. Pull the current website changes.
-2. Copy the current Lumadio AppIcon from the Lumadio source project.
-3. Replace all product and page references, remove the obsolete SVG, and validate the export.
+## Validation and boundaries
 
-## Validation
-
-Run Lumadio component tests, lint, and the static build.
-
-## Risks and open questions
-
-None.
+Build root-domain and repository-base-path exports and inspect localized page
+coverage, alternate URLs, language markers, and internal links. Do not run tests,
+add UI/E2E tests, change native app projects, deploy, commit, or push.

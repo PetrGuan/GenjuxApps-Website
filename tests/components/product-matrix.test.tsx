@@ -8,5 +8,6 @@ it("presents each available product without empty categories", () => {
   expect(screen.getByRole("link", { name: /discover bebilog/i })).toBeInTheDocument();
   expect(screen.getByRole("link", { name: /discover nautilus/i })).toBeInTheDocument();
   expect(screen.getByRole("link", { name: /discover pixel wonders/i })).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: /discover neowriter/i })).toHaveAttribute("href", "/apps/neowriter");
   expect(screen.queryByRole("button")).not.toBeInTheDocument();
 });

@@ -67,12 +67,12 @@
 <header>
   <h1>Copilot Workflow Dashboard</h1>
   <div class="meta">
-    <div>Status: <span class="badge">approved</span></div>
+    <div>Status: <span class="badge">ready-for-review</span></div>
     <div>Project: <code>GenjuxApps-Website</code></div>
     <div>Project root: <code>/Users/petr/Documents/GitHub/GenjuxApps-Website</code></div>
     <div>Workflow directory: <code>/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow</code></div>
     <div>Storage mode: <code>project</code></div>
-    <div>Updated: <code>2026-08-30T01:03:06Z</code></div>
+    <div>Updated: <code>2026-09-09T03:51:27Z</code></div>
   </div>
 </header>
 <main>
@@ -80,89 +80,177 @@
 <h2>Request</h2>
 <pre># Request
 
-更新 Lumadio 产品资料，尤其是 app icon 图片。源项目位于 ~/Documents/GitHub/Lumadio。
+GenjuxApps 默认语言是英语，也支持中文，由用户选择；每个 App 网页同样默认英语，用户可选择中文。
+
+## Confirmed choices
+
+- 中文使用简体中文；保留英文原网址，中文使用 `/zh/...`。
+- 记住用户语言选择，在主站与各 App 页面之间保持一致。
+- 没有中文译文的博客文章保留英文原文，并明确标注“暂无中文译文”。
+- 不根据浏览器语言自动选择中文；首次访问仍默认英语。
 
 ## Submitted
 
-2026-08-30T00:56:10Z
+2026-09-09T02:12:47Z
 </pre>
 </section>
 <section class="card">
 <h2>Plan</h2>
 <pre># Plan
 
-## Problem
+## Confirmed behavior
 
-The Lumadio product is present after the latest website update, but its catalogue and product pages still use an outdated SVG mark instead of the current application icon.
+- English is the default; Simplified Chinese is selected explicitly, not from
+  browser language or geolocation.
+- Preserve existing English URLs. Chinese equivalents use `/zh/...`.
+- Remember the selection locally across the main site and all product pages.
+- Chinese blog pages retain an English article when no Chinese translation is
+  available, with a visible untranslated-content notice.
+- Localize navigation, content, accessibility labels, metadata, product summaries,
+  legal/support pages, and existing static product documents. Keep real screenshots,
+  brand names, public contacts, currencies, and App Store region URLs intact.
 
-## Proposed approach
+## Approach
 
-Import Lumadio's current 1024×1024 AppIcon asset and use it for every Lumadio icon surface in this site.
+Use explicit locale props in shared renderers and build both language versions
+statically. English and Chinese root layouts provide the correct document language
+without request headers, middleware, or locale negotiation. Existing English routes
+remain in an English route group; Chinese routes share translated renderers.
 
-## Files likely involved
+One routing helper handles locale prefixes, legacy Bebilog locale URLs, and the
+deployment base path. One small browser script remembers manual choices and uses
+declared alternate links to restore a preference. It does not translate the DOM,
+detect browser language, or upload preferences for analytics. Hosting still
+receives the ordinary requested page URL.
 
-- `public/apps/lumadio/app-icon.png`
-- `public/apps/lumadio/icon.svg`
-- `lib/products.ts`
-- `components/lumadio/lumadio-site.tsx`
-- `tests/components/lumadio-site.test.tsx`
+Reuse next-intl and existing Bebilog translations. Existing plain-HTML product
+pages retain their designs and gain deterministic, build-time Chinese translations,
+the same preference mechanism, and localized links to the rest of the site.
 
-## Implementation steps
+Add a site-wide global not-found document only as required by Next's documented
+multiple-root-layout architecture. All original product URLs and legal documents
+remain reachable.
 
-1. Pull the current website changes.
-2. Copy the current Lumadio AppIcon from the Lumadio source project.
-3. Replace all product and page references, remove the obsolete SVG, and validate the export.
+## Validation and boundaries
 
-## Validation
-
-Run Lumadio component tests, lint, and the static build.
-
-## Risks and open questions
-
-None.
+Build root-domain and repository-base-path exports and inspect localized page
+coverage, alternate URLs, language markers, and internal links. Do not run tests,
+add UI/E2E tests, change native app projects, deploy, commit, or push.
 </pre>
 </section>
 <section class="card">
 <h2>Implementation</h2>
 <pre># Implementation
 
+Implemented site-wide English/Simplified-Chinese support. Ready for review.
+
 ## Summary
 
-Updated Lumadio to use the current application icon from the Lumadio macOS project.
+- English remains the first-visit default, including when the browser's locale is
+  Chinese. No browser-language or geolocation negotiation was added.
+- Existing English URLs remain unchanged. Chinese equivalents use `/zh/...`.
+- Every canonical main-site and in-repository product HTML page has an EN / 中文
+  control, localized content/accessibility labels, and language-alternate links.
+- The user's explicit selection is remembered in local browser storage across
+  Next-rendered and static product pages. Switching preserves query and fragment.
+- Added complete Chinese main-site, Lumadio, NeoWriter, Nautilus, and Pixel Wonders
+  content, including their existing in-repository legal/support pages. Reused
+  Bebilog's Chinese messages and unified its language control.
+- Chinese blog pages show the English original with a visible untranslated-content
+  notice when no published Chinese translation exists. The body retains its actual
+  content-language marker. Chinese About content supports the same explicit fallback.
+- Brand names, public contacts, real screenshot pixels, currencies, and App Store
+  region URLs remain unchanged. Separately hosted external policies/services keep
+  their own language handling rather than having guessed locale URLs.
 
 ## Files changed
 
-- Added `public/apps/lumadio/app-icon.png` from Lumadio's 1024×1024 AppIcon asset.
-- Updated the catalogue card, Lumadio navigation, menu-bar illustration, and closing call to action to use the PNG.
-- Removed the obsolete `public/apps/lumadio/icon.svg`.
-- Added a component assertion for the rendered app icon source.
+- `app/(english)/`: existing English routes moved into a route group without URL changes.
+- `app/(chinese)/zh/`: Chinese static route renderer and localized RSS endpoints.
+- `app/global-not-found.tsx`, `components/root-document.tsx`: correct document
+  languages across separate roots and a small bilingual unmatched-route page.
+- `components/catalog/`, `components/neowriter/`, `components/lumadio/`: shared
+  explicit-locale renderers, localized copy, metadata, and product shells.
+- Shared navigation, cards, blog, social, and Bebilog language components.
+- `i18n/routing.mjs`, declarations, page-route registry, catalogue translations,
+  Lumadio messages, and static-product dictionaries.
+- `public/site-language.js` and `.css`: shared language control/preference runtime.
+- `scripts/prepare-localized-static.mjs`: strict, deterministic jsdom generation
+  of six Chinese static HTML pages into ignored `public/zh/`.
+- Static English product sources: language controls/alternates and the relevant
+  browser-preference privacy disclosures.
+- Content/RSS helpers, optional translation data, post/announcement language markers.
+- Build index preparation, npm dev/build hooks, README, and existing/new unit assertions.
+
+The existing next-intl and jsdom dependencies were reused; no dependencies were
+added. The installed Next.js documented `globalNotFound` option is enabled because
+multiple root layouts cannot share the former top-level not-found layout.
+
+### Content maintenance
+
+Chinese blog translations live under `content/blog/zh/` with matching English slug
+and publication date. Draft/future English originals cannot be published by a
+translation. `content/about.zh.md` holds the Chinese introduction.
+Announcements can provide `translations.zh`; supporter group labels can use
+`groupZh`. Missing owned-content translations are identified, not fabricated.
+
+Shared assets stay at their original paths. Static dictionaries fail generation
+when translations are missing or stale, rather than silently leaving English text
+in a Chinese UI. Locale helpers prevent duplicate deployment prefixes and preserve
+media URLs. Legacy `/apps/bebilog/en` and `/apps/bebilog/zh` remain usable and lead
+to their canonical English/Chinese equivalents.
 
 ## Validation
 
-- Targeted Lumadio and catalogue component tests pass.
-- ESLint passes.
-- Static production export builds successfully.
+Successful builds:
+
+```bash
+SITE_ORIGIN=http://127.0.0.1:3100 npm run build
+SITE_ORIGIN=https://petrguan.github.io NEXT_PUBLIC_BASE_PATH=/GenjuxApps-Website npm run build:pages
+```
+
+Both configurations generated 54 Next static outputs plus the existing/static
+product copies. Inspected 46 canonical English/Chinese HTML pages across the
+framework and static sites for document language and matching language-switch
+targets. Base-path inspection found no unprefixed local image/script/stylesheet
+URLs. The final build restores root-hosted output and root-hosted generated
+Chinese static files for the current local preview.
+
+Using an isolated browser with a Chinese browser locale, the first English URL
+remained English. Manual Chinese selection preserved query/fragment, persisted
+across Lumadio, NeoWriter, Nautilus, and Pixel Wonders, and switched back to
+English correctly. Both legacy Bebilog locale URLs reached the intended canonical
+counterpart. Desktop/mobile layouts were inspected; Bebi's existing entry
+animations were allowed to settle before capture.
+
+No test runner or linter was executed. Unit assertions were added/updated for
+locale routing, content fallback, metadata, and UI bindings for the owner to run.
+Vitest's server-only marker is mapped to a test-only no-op for isolated helper
+coverage; production server-only boundaries are unchanged.
+
+No native app project was modified, and no new persistent server was started.
+The already-requested local preview remains available.
 
 ## Blockers
+None for the requested in-repository pages. This task does not translate external
+destinations (for example App Store pages or separately hosted Bebi policies) or
+alter text embedded inside the owner's real app screenshots.
 
-None.
+No commits, pushes, or deployments were performed.
 </pre>
 </section>
 <section class="card">
 <h2>Review</h2>
 <pre># Review
 
-## Verdict
+No review has been recorded yet.
 
-Approved.
+## Verdict
 
 ## Findings
 
-No correctness, static-resource, or product-rendering issues were found in the Lumadio app-icon update.
-
 ## Required changes
-
-None.
+Pending independent review of the bilingual routing, translated content, and language preference behavior.
 </pre>
 </section>
 <section class="card">
@@ -267,6 +355,131 @@ Append-only workflow events generated by `copilot-flow`.
 - workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
 
 ## [2026-08-30T01:03:06Z] status | ready-for-review -&gt; approved
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-07T02:42:13Z] request | approved -&gt; new-request
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-07T02:45:20Z] status | new-request -&gt; planning
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-07T02:50:37Z] status | planning -&gt; ready-for-implementation
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-07T02:55:36Z] status | ready-for-implementation -&gt; planning
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-07T02:58:56Z] status | planning -&gt; ready-for-implementation
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-07T03:01:12Z] status | ready-for-implementation -&gt; implementing
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-07T03:38:27Z] status | implementing -&gt; ready-for-review
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-07T05:20:45Z] status | ready-for-review -&gt; implementing
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-07T05:26:52Z] status | implementing -&gt; ready-for-review
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-09T00:21:51Z] request | ready-for-review -&gt; new-request
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-09T00:23:27Z] status | new-request -&gt; planning
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-09T00:24:45Z] status | planning -&gt; implementing
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-09T00:33:27Z] status | implementing -&gt; ready-for-review
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-09T00:51:02Z] status | ready-for-review -&gt; implementing
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-09T00:55:10Z] status | implementing -&gt; ready-for-review
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-09T01:09:31Z] status | ready-for-review -&gt; implementing
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-09T01:21:33Z] status | implementing -&gt; ready-for-review
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-09T01:34:35Z] status | ready-for-review -&gt; implementing
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-09T01:44:45Z] status | implementing -&gt; ready-for-review
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-09T01:58:08Z] request | ready-for-review -&gt; new-request
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-09T01:58:52Z] status | new-request -&gt; implementing
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-09T02:02:17Z] status | implementing -&gt; ready-for-review
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-09T02:12:47Z] request | ready-for-review -&gt; new-request
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-09T02:32:04Z] status | new-request -&gt; implementing
+
+- project: `GenjuxApps-Website`
+- workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`
+
+## [2026-09-09T03:51:27Z] status | implementing -&gt; ready-for-review
 
 - project: `GenjuxApps-Website`
 - workflow_dir: `/Users/petr/Documents/GitHub/GenjuxApps-Website/.copilot-workflow`

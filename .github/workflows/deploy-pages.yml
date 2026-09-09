@@ -38,6 +38,7 @@ jobs:
       - name: Build static site
         run: npm run build:pages
         env:
+          SITE_ORIGIN: https://petrguan.github.io
           NEXT_PUBLIC_BASE_PATH: /GenjuxApps-Website
 
       - name: Upload Pages artifact

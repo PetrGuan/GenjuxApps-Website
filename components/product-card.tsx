@@ -1,35 +1,31 @@
-/* eslint-disable @next/next/no-img-element */
-
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import type { Product } from "@/lib/products";
+import { categoryLabel, localizeProduct, platformLabel } from "@/lib/localized-products";
+import { catalogT } from "@/i18n/catalog";
+import type { SiteLocale } from "@/i18n/routing.mjs";
+import styles from "@/app/(english)/(catalog)/catalog.module.css";
 
 type ProductCardProps = {
-  index: number;
+  index?: number;
   product: Product;
+  locale?: SiteLocale;
 };
 
-export default function ProductCard({ index, product }: ProductCardProps) {
+export default function ProductCard({ product: source, locale = "en" }: ProductCardProps) {
+  const product = localizeProduct(source, locale);
   return (
-    <article className="product-card" data-accent={product.accent}>
-      <p className="product-index">0{index}</p>
-      <div className="product-card-copy">
-        <div className="product-identity">
-          <img src={product.assets.icon} alt="" className="product-icon" />
-          <div>
-            <p className="product-platform">{product.platform}</p>
-            <h3>{product.name}</h3>
-          </div>
+    <a href={product.route} className={styles.productCard} aria-label={catalogT(locale)("common.discover", { name: product.name })}>
+      <Image src={product.assets.icon} alt="" width={88} height={88} className={styles.productIcon} />
+      <div className={styles.productCopy}>
+        <h3 className={styles.productTitle}>{product.name}</h3>
+        <p className={styles.productTagline}>{product.tagline}</p>
+        <div className={styles.badges}>
+          <span className={`${styles.badge} ${styles.platformBadge}`}>{platformLabel(product.platform, locale)}</span>
+          <span className={styles.badge}>{categoryLabel(product.category, locale)}</span>
         </div>
-        <p className="product-tagline">{product.tagline}</p>
-        <p className="product-description">{product.description}</p>
-        <ul className="capability-tags" aria-label={`${product.name} capabilities`}>
-          {product.capabilities.map((capability) => (
-            <li key={capability}>{capability}</li>
-          ))}
-        </ul>
       </div>
-      <a href={product.route} className="product-card-link">
-        Discover {product.name} <span aria-hidden="true">→</span>
-      </a>
-    </article>
+      <ArrowUpRight size={17} className={styles.cardArrow} aria-hidden="true" />
+    </a>
   );
 }

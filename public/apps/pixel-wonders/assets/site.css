@@ -59,6 +59,7 @@ h3 { font-size: 1.35rem; }
   justify-content: space-between;
   border-bottom: 1px solid var(--line);
 }
+.header-actions { display: flex; align-items: center; gap: clamp(0.75rem, 2vw, 1.25rem); }
 .brand {
   display: inline-flex;
   align-items: center;
@@ -252,7 +253,8 @@ details p { max-width: 850px; padding: 0 0 1.5rem 2rem; }
 }
 
 @media (max-width: 600px) {
-  .site-header { align-items: flex-start; padding: 1rem 0; gap: 1rem; }
+  .site-header { align-items: flex-start; flex-wrap: wrap; padding: 1rem 0; gap: 1rem; }
+  .header-actions { width: 100%; align-items: flex-start; justify-content: space-between; }
   .brand span { display: none; }
   .site-header nav { padding-top: 0.8rem; }
   .hero h1 { font-size: clamp(3.2rem, 17vw, 5rem); }
